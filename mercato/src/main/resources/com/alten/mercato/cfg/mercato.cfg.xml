@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+  <session-factory>
+
+    <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+    <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>    
+    <property name="hibernate.connection.url">jdbc:oracle:thin:@10.211.55.4:1521:XE</property>
+    <property name="hibernate.connection.username">system</property>
+    <property name="hibernate.connection.password">3234insa</property>
+    <property name="hibernate.query.substitutions">true 1, false 0</property>
+
+    <property name="hibernate.hbm2ddl.auto">update</property>
+
+    <property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+
+	<!-- logging properties -->
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.use_sql_comments">true</property>
+    
+    <mapping resource="jbpm.pvm.typedefs.hbm.xml" />
+    <mapping resource="jbpm.pvm.wire.hbm.xml" />
+    <mapping resource="jbpm.pvm.definition.hbm.xml" />
+    <mapping resource="jbpm.pvm.execution.hbm.xml" />
+    <mapping resource="jbpm.pvm.variable.hbm.xml" />
+    <mapping resource="jbpm.pvm.job.hbm.xml" />
+    <mapping resource="jbpm.pvm.history.hbm.xml" />
+    <mapping resource="jbpm.task.hbm.xml" />
+    <mapping resource="jbpm.jpdl.hbm.xml" />
+
+  </session-factory>
+  
+</hibernate-configuration>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- ************************************************************************************************************* 
+										     Configuration Hibernate SessionFactory
+	 ************************************************************************************************************* -->
+	 <bean id="mercatoSF"  
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:com/alten/mercato/cfg/mercato.cfg.xml</value>
+		</property>
+	</bean>
+	
+	<!-- ************************************************************************************************************* 
+													DAOs declaration
+	 ************************************************************************************************************* -->	
+<!--	<context:component-scan base-package="com.alten.mercato.server.controller">-->
+<!--		<context:include-filter type="annotation" expression="org.springframwork.stereotype.Service"/>-->
+<!--	</context:component-scan>-->
+	
+	<!-- ************************************************************************************************************* 
+													Pojo store
+	 ************************************************************************************************************* -->	
+	 
+	  <bean id="pojoStore" class="net.sf.gilead.core.store.stateful.HttpSessionProxyStore" >
+        <property name="persistenceUtil" ref="persistenceUtilMercato" />
+     </bean> 
+     
+     <!--     <bean id="pojoStore" class="net.sf.gilead.core.store.stateless.StatelessProxyStore" /> -->
+
+   	<bean id="persistenceUtilMercato" class="net.sf.gilead.core.hibernate.HibernateUtil">
+      	<property name="sessionFactory" ref="mercatoSF"/>
+   	</bean>
+   	
+   	<bean id="hbmMercato" class="net.sf.gilead.core.PersistentBeanManager">
+        <property name="persistenceUtil" ref="persistenceUtilMercato" />
+        <property name="proxyStore" ref="pojoStore" />        
+    </bean>
+     
+     
+</beans>
