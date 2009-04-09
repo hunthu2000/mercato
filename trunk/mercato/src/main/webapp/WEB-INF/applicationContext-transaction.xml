@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	  http://www.springframework.org/schema/aop 
+	  http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	  http://www.springframework.org/schema/tx 
+	  http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	  http://www.springframework.org/schema/context 
+	  http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!-- *************************************************************************************************************
+                                                Transactions
+     ************************************************************************************************************* -->
+     
+ 	<bean id="mercatoTM" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+ 		<property name="sessionFactory">
+ 			<ref bean="mercatoSF"/>
+ 		</property>
+ 	</bean>
+	
+	<!-- *************************************************************************************************************
+                                                Transaction injections
+     ************************************************************************************************************* -->
+     
+     <tx:advice id="txMercato" transaction-manager="mercatoTM">
+     	<tx:attributes>
+     		<tx:method name="save*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.exception"/>
+     		<tx:method name="*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.exception"/>
+     	</tx:attributes>
+     </tx:advice>
+</beans>

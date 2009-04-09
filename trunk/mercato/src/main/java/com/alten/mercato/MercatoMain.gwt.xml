@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<inherits name="com.google.gwt.user.User"/>
+	<inherits name="com.google.gwt.core.Core"/>
+    <inherits name="com.google.gwt.user.History"/>
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	
+	<extend-property name="locale" values="en_US"/>
+	
+	
+<!--	<inherits name="org.gwtwidgets.WidgetLibrary"/>-->
+	<!-- Inherit the smartGwt Toolkit library configuration -->
+    <inherits name="com.smartgwt.SmartGwt"/>
+    <inherits name="net.sf.gilead.Adapter4Gwt15"/>
+    <inherits name="org.gwtwidgets.WidgetLibrary"/>
+    
+	<inherits name="com.smartclient.theme.enterprise.EnterpriseResources"/>    
+    <inherits name="com.smartclient.theme.silverwave.SilverWaveResources"/>    
+    <inherits name="com.smartclient.theme.fleet.FleetResources"/>
+  
+	<!-- Specify the app entry point class.                   -->
+	<entry-point class="com.alten.mercato.client.MercatoMain"/>
+  	
+  	<source path="client"/>
+  	
+</module>
