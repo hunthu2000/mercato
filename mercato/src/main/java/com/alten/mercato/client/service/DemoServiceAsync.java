@@ -5,8 +5,9 @@ package com.alten.mercato.client.service;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+
 /**
- * @author huagechen
+ * @author Huage Chen
  *
  */
 public interface DemoServiceAsync {
