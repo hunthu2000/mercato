@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="Util" table="UTIL" schema="SYSTEM">
+        <id name="utilId" type="long">
+            <column name="UTIL_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="personne" class="Personne" fetch="select">
+            <column name="UTIL_PER_ID" precision="10" scale="0" />
+        </many-to-one>
+        <property name="utilLogin" type="string">
+            <column name="UTIL_LOGIN" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="utilPassword" type="string">
+            <column name="UTIL_PASSWORD" length="50" not-null="true" />
+        </property>
+        <set name="utilRoles" inverse="true">
+            <key>
+                <column name="URO_UTIL_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="UtilRole" />
+        </set>
+    </class>
+</hibernate-mapping>
