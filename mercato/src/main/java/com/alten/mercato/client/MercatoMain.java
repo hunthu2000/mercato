@@ -22,8 +22,9 @@ import com.smartgwt.client.widgets.tree.TreeGrid;
 import com.smartgwt.client.widgets.tree.TreeGridField;
 import com.smartgwt.client.widgets.tree.TreeNode;
 
+
 /**
- * @author huagechen
+ * @author Huage Chen
  *
  */
 public class MercatoMain implements EntryPoint {
