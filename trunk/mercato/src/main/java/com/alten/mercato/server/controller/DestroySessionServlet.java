@@ -16,8 +16,7 @@ import org.springframework.stereotype.Service;
 /**
  * Servlet implementation that logs the current user out  to upload 
 
- * @author huagechen
- *
+ * @author Huage Chen
  */
 @Service("DestroySessionController")
 public class DestroySessionServlet extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet{
