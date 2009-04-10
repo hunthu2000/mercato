@@ -13,6 +13,9 @@
     <property name="hibernate.connection.username">system</property>
     <property name="hibernate.connection.password">3234insa</property>
     <property name="hibernate.query.substitutions">true 1, false 0</property>
+    <property name="hibernate.show_sql">true</property>
+	<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+	<property name="hibernate.connection.release_mode">after_transaction</property>   
 
     <property name="hibernate.hbm2ddl.auto">update</property>
 
@@ -22,6 +25,9 @@
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.use_sql_comments">true</property>
     
+    <!-- Mapping -->
+    
+    <!-- jBPM -->
     <mapping resource="jbpm.pvm.typedefs.hbm.xml" />
     <mapping resource="jbpm.pvm.wire.hbm.xml" />
     <mapping resource="jbpm.pvm.definition.hbm.xml" />
@@ -31,6 +37,14 @@
     <mapping resource="jbpm.pvm.history.hbm.xml" />
     <mapping resource="jbpm.task.hbm.xml" />
     <mapping resource="jbpm.jpdl.hbm.xml" />
+    
+    <!-- Mercato -->
+    <mapping resource="com/alten/mercato/cfg/hbm/Departement.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/Personne.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/Role.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/TypePersonne.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/Util.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/UtilRole.hbm.xml" />
 
   </session-factory>
   
