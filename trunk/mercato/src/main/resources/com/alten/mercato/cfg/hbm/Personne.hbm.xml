@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="Personne" table="PERSONNE" schema="SYSTEM">
+        <id name="perId" type="long">
+            <column name="PER_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="departement" class="Departement" fetch="select">
+            <column name="PER_DEP_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="typePersonne" class="TypePersonne" fetch="select">
+            <column name="PER_TYPES_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="perNom" type="string">
+            <column name="PER_NOM" length="50" not-null="true" />
+        </property>
+        <property name="perPrenom" type="string">
+            <column name="PER_PRENOM" length="50" not-null="true" />
+        </property>
+        <property name="perMatricule" type="string">
+            <column name="PER_MATRICULE" length="10" not-null="true" unique="true" />
+        </property>
+        <property name="perTrigramme" type="string">
+            <column name="PER_TRIGRAMME" length="20" />
+        </property>
+        <set name="departements" inverse="true">
+            <key>
+                <column name="DEP_PER_ID_DD" precision="10" scale="0" />
+            </key>
+            <one-to-many class="Departement" />
+        </set>
+        <set name="utils" inverse="true">
+            <key>
+                <column name="UTIL_PER_ID" precision="10" scale="0" />
+            </key>
+            <one-to-many class="Util" />
+        </set>
+    </class>
+</hibernate-mapping>

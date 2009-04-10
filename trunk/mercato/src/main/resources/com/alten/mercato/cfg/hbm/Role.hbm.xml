@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="Role" table="ROLE" schema="SYSTEM">
+        <id name="roleId" type="long">
+            <column name="ROLE_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="roleLib" type="string">
+            <column name="ROLE_LIB" length="100" not-null="true" unique="true" />
+        </property>
+        <set name="utilRoles" inverse="true">
+            <key>
+                <column name="URO_ROLE_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="UtilRole" />
+        </set>
+    </class>
+</hibernate-mapping>
