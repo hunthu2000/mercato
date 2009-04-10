@@ -22,9 +22,15 @@
 	<!-- ************************************************************************************************************* 
 													DAOs declaration
 	 ************************************************************************************************************* -->	
-<!--	<context:component-scan base-package="com.alten.mercato.server.controller">-->
-<!--		<context:include-filter type="annotation" expression="org.springframwork.stereotype.Service"/>-->
-<!--	</context:component-scan>-->
+	<context:component-scan base-package="com.alten.mercato.server.dao">
+	   <context:include-filter type="annotation"
+            expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	
+	<context:component-scan base-package="com.alten.mercato.server.controller">
+       <context:include-filter type="annotation"
+            expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
 	
 	<!-- ************************************************************************************************************* 
 													Pojo store

@@ -108,6 +108,14 @@
 		</auth-constraint>
 	</security-constraint>
 	
+	<security-role>
+        <role-name>DD</role-name>
+    </security-role>
+    
+    <security-role>
+        <role-name>RH</role-name>
+    </security-role>
+    
 	<!-- Errors page -->
 	<error-page>
 		<error-code>500</error-code>
