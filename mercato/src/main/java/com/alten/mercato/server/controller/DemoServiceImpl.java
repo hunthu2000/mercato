@@ -9,13 +9,16 @@ import org.gwtwidgets.server.spring.ServletUtils;
 
 import com.alten.mercato.client.service.DemoService;
 
+/**
+ * @author Huage Chen
+ */
+
 @Service("demoController")
 public class DemoServiceImpl  implements DemoService  {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7456556302462988435L;
+
+	
+	// log4j
 	private Log log  = LogFactory.getLog(getClass());
 	
 	public String getString() {
