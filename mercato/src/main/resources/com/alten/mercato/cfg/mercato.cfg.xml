@@ -11,7 +11,7 @@
     <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>    
     <property name="hibernate.connection.url">jdbc:oracle:thin:@10.211.55.4:1521:XE</property>
     <property name="hibernate.connection.username">system</property>
-    <property name="hibernate.connection.password">3234insa</property>
+    <property name="hibernate.connection.password">autruche</property>
     
     
     <property name="hibernate.show_sql">true</property>
