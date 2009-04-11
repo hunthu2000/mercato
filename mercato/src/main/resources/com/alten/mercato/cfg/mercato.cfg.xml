@@ -18,6 +18,7 @@
 	<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 	<property name="hibernate.connection.release_mode">after_transaction</property>   
 
+
 	<!--
     <property name="hibernate.hbm2ddl.auto">update</property>
 	<property name="hibernate.query.substitutions">true 1, false 0</property>
