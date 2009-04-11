@@ -3,12 +3,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1 -->
 <hibernate-mapping>
-    <class name="Departement" table="DEPARTEMENT" schema="SYSTEM">
+    <class name="com.alten.mercato.server.model.Departement" table="DEPARTEMENT">
         <id name="depId" type="long">
             <column name="DEP_ID" precision="10" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="personne" class="Personne" fetch="select">
+        <many-to-one name="personne" class="com.alten.mercato.server.model.Personne" fetch="select">
             <column name="DEP_PER_ID_DD" precision="10" scale="0" />
         </many-to-one>
         <property name="depLib" type="string">
@@ -18,7 +18,7 @@
             <key>
                 <column name="PER_DEP_ID" precision="10" scale="0" not-null="true" />
             </key>
-            <one-to-many class="Personne" />
+            <one-to-many class="com.alten.mercato.server.model.Personne" />
         </set>
     </class>
 </hibernate-mapping>

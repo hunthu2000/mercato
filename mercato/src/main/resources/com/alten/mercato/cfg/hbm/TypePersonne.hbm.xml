@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1 -->
 <hibernate-mapping>
-    <class name="TypePersonne" table="TYPE_PERSONNE" schema="SYSTEM">
+    <class name="com.alten.mercato.server.model.TypePersonne" table="TYPE_PERSONNE">
         <id name="tpersId" type="long">
             <column name="TPERS_ID" precision="10" scale="0" />
             <generator class="assigned" />
@@ -18,7 +18,7 @@
             <key>
                 <column name="PER_TYPES_ID" precision="10" scale="0" not-null="true" />
             </key>
-            <one-to-many class="Personne" />
+            <one-to-many class="com.alten.mercato.server.model.Personne" />
         </set>
     </class>
 </hibernate-mapping>
