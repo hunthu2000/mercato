@@ -3,12 +3,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1 -->
 <hibernate-mapping>
-    <class name="Util" table="UTIL" schema="SYSTEM">
+    <class name="com.alten.mercato.server.model.Util" table="UTIL">
         <id name="utilId" type="long">
             <column name="UTIL_ID" precision="10" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="personne" class="Personne" fetch="select">
+        <many-to-one name="personne" class="com.alten.mercato.server.model.Personne" fetch="select">
             <column name="UTIL_PER_ID" precision="10" scale="0" />
         </many-to-one>
         <property name="utilLogin" type="string">
@@ -21,7 +21,7 @@
             <key>
                 <column name="URO_UTIL_ID" precision="10" scale="0" not-null="true" />
             </key>
-            <one-to-many class="UtilRole" />
+            <one-to-many class="com.alten.mercato.server.model.UtilRole" />
         </set>
     </class>
 </hibernate-mapping>
