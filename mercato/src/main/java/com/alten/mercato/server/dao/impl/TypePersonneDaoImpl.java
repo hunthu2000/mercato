@@ -11,15 +11,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.alten.mercato.server.dao.home.DepartementDaoHome;
+import com.alten.mercato.server.dao.home.TypePersonneDaoHome;
 import com.alten.mercato.server.dao.interf.DepartementDao;
+import com.alten.mercato.server.dao.interf.TypePersonneDao;
 
 /**
  * @author Huage Chen
  *
  */
 @Repository("TypePersonneMercatoDao")
-public class TypePersonneDaoImpl extends DepartementDaoHome implements
-		DepartementDao {
+public class TypePersonneDaoImpl extends TypePersonneDaoHome implements
+		TypePersonneDao {
 	private static final Log log = LogFactory.getLog(TypePersonneDaoImpl.class);
 
 	@Autowired

@@ -30,7 +30,7 @@
      <tx:advice id="txMercato" transaction-manager="mercatoTM">
      	<tx:attributes>
      		<tx:method name="save*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.exception"/>
-     		<tx:method name="*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.exception"/>
+     		<tx:method name="*" propagation="REQUIRED" read-only="true" rollback-for="java.lang.exception"/>
      	</tx:attributes>
      </tx:advice>
 </beans>
