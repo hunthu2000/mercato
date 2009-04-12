@@ -25,4 +25,6 @@ public interface UtilDao {
 	public Util findById(long id);
 
 	public List<Util> findByExample(Util instance);
+	
+	public List<Util> getUserByLogin(String login);
 }

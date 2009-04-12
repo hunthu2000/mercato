@@ -10,16 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.alten.mercato.server.dao.home.DepartementDaoHome;
-import com.alten.mercato.server.dao.interf.DepartementDao;
+import com.alten.mercato.server.dao.home.RoleDaoHome;
+import com.alten.mercato.server.dao.interf.RoleDao;
 
 /**
  * @author Huage Chen
  *
  */
 @Repository("RoleMercatoDao")
-public class RoleDaoImpl extends DepartementDaoHome implements
-		DepartementDao {
+public class RoleDaoImpl extends RoleDaoHome implements
+		RoleDao {
 	private static final Log log = LogFactory.getLog(RoleDaoImpl.class);
 
 	@Autowired

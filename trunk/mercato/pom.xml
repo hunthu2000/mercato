@@ -14,6 +14,10 @@
 	<inceptionYear>2009</inceptionYear>
 
 	<description>The demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges</description>
+	<issueManagement>
+		<system>Google code</system>
+		<url>http://code.google.com/p/mercato/issues/list</url>
+	</issueManagement>
 
 	<developers>
 		<developer>
@@ -29,6 +33,10 @@
 			</roles>
 		</developer>
 	</developers>
+	<scm>
+		<developerConnection>Huage Chen</developerConnection>
+		<url>https://mercato.googlecode.com/svn/trunk/mercato</url>
+	</scm>
 
 
 	<organization>
