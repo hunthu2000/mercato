@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="loanMoneyProcess" xmlns="http://jbpm.org/4/jpdl">
+   <start g="274,16,48,48" name="start">
+      <transition g="15,-11" name="init Loan" to="Filling loan request"/>
+   </start>
+   <task assignee="requestor" g="204,96,187,52" name="Filling loan request">
+      <transition to="Checking request" name=""/>
+   </task>
+   <task assignee="department director" g="194,180,208,52" name="Checking request">
+      <transition to="Department director decision" name=""/>
+   </task>
+   <exclusive g="159,344,48,48" name="Amount decision">
+      <transition to="Deciding by manager" name=""/>
+      <transition to="Transiting money " name=""/>
+   </exclusive>
+   <end g="684,513,48,48" name="end"/>
+   <task assignee="manager" g="16,420,141,52" name="Deciding by manager">
+      <transition to="Manager decision" name=""/>
+   </task>
+   <task assignee="financial department" g="289,424,177,52" name="Transiting money ">
+      <transition to="end" name=""/>
+   </task>
+   <exclusive g="62,508,48,48" name="Manager decision">
+      <transition to="Transiting money " name=""/>
+      <transition to="end" name=""/>
+   </exclusive>
+   <exclusive g="274,264,48,48" name="Department director decision">
+      <transition to="Amount decision" name=""/>
+      <transition g="-5,-18" name="refused" to="end"/>
+   </exclusive>
+</process>

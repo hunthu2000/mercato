@@ -8,12 +8,12 @@
 	<groupId>com.alten</groupId>
 	<artifactId>mercato</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Mercato Demonstrator</name>
 	<url>http://www.alten.com</url>
 	<inceptionYear>2009</inceptionYear>
 
-	<description>The demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges</description>
+	<description>The demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges.</description>
 	<issueManagement>
 		<system>Google code</system>
 		<url>http://code.google.com/p/mercato/issues/list</url>
@@ -29,10 +29,36 @@
 			<timezone>+1</timezone>
 			<roles>
 				<role>Architect</role>
-				<role>Developer</role>
+				<role>Lead Developer</role>
+				<role>Manager</role>
 			</roles>
 		</developer>
+		<developer>
+			<email>jsanchez@alten.fr</email>
+			<name>Julien Sanchez</name>
+			<organization>DSI Alten</organization>
+			<id>jsanchez</id>
+			<organizationUrl>http://www.alten.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Supervisor</role>
+			</roles>
+		</developer>
+		<developer>
+			<email>guy.caplat@insa-lyon.fr</email>
+			<name>Guy Caplat</name>
+			<organization>INSA de Lyon, Department of Computer Science</organization>
+			<id>gcaplat</id>
+			<organizationUrl>http://www.insa-lyon.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Advisor</role>
+			</roles>
+		</developer>
+		
 	</developers>
+	<contributors>
+	</contributors>
 	<scm>
 		<developerConnection>Huage Chen</developerConnection>
 		<url>https://mercato.googlecode.com/svn/trunk/mercato</url>
@@ -415,6 +441,7 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!--  loggers -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>

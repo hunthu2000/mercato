@@ -1,6 +1,6 @@
 <projectDescription>
   <name>mercato</name>
-  <comment>The demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges</comment>
+  <comment>The demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

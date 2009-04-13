@@ -2,17 +2,13 @@ package com.alten.mercato.server.dao.home;
 // Generated 2009-4-10 15:33:20 by Hibernate Tools 3.2.4.CR1
 
 import java.util.List;
-import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.alten.mercato.server.model.Util;
-
-
-import static org.hibernate.criterion.Example.create;
 
 /**
  * Home object for domain model class Util.
