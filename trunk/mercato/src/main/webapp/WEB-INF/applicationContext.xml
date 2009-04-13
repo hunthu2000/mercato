@@ -88,7 +88,7 @@
 
 	<bean id="commandService" class="org.jbpm.pvm.internal.spring.SpringCommandService"
 		scope="singleton">
-		<property name="transactionManager" ref="txMercato" />
+		<property name="transactionManager" ref="mercatoTM" />
 		<property name="environmentFactory" ref="environmentFactory" />
 	</bean>
 

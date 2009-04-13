@@ -1,5 +1,4 @@
 package com.alten.mercato.server.dao.home;
-// default package
 // Generated 2009-4-10 15:33:20 by Hibernate Tools 3.2.4.CR1
 
 import java.util.List;

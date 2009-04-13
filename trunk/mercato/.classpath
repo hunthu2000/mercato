@@ -155,7 +155,7 @@
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-simple/1.5.6/slf4j-simple-1.5.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/smartgwt/smartgwt/1.0b3-SNAPSHOT/smartgwt-1.0b3-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/smartgwt/smartgwt-skins/1.0b3-SNAPSHOT/smartgwt-skins-1.0b3-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/springframework/spring/2.5.6/spring-2.5.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring/2.5.6/spring-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring/2.5.6/spring-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-agent/2.5.6/spring-agent-2.5.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/2.5.6/spring-aop-2.5.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-aspects/2.5.6/spring-aspects-2.5.6.jar"/>
