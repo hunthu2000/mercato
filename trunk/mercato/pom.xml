@@ -111,7 +111,7 @@
   			<id>mesir-repo</id>
     		<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
 		</repository>
-		<repository>
+		<!-- <repository>
         	<id>jboss</id>
         	<url>http://repository.jboss.com/maven2</url>
             <releases>
@@ -120,8 +120,8 @@
             </releases>
             <snapshots>
             	<enabled>false</enabled>
-            </snapshots>
- 		</repository>
+            </snapshots> 
+ 		</repository> -->
 	</repositories>
 	
 	<dependencyManagement>
@@ -250,11 +250,23 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
 			<version>${spring.version}</version>
+			<exclusions>
+          		<exclusion>
+            		<groupId>commons-logging</groupId>
+            		<artifactId>commons-logging</artifactId>
+          		</exclusion>
+        	</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
+			<exclusions>
+          		<exclusion>
+            		<groupId>commons-logging</groupId>
+            		<artifactId>commons-logging</artifactId>
+          		</exclusion>
+        	</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
