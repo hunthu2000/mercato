@@ -121,17 +121,16 @@
   <classpathentry kind="var" path="M2_REPO/org/jboss/security/jbosssx/2.0.2.SP2/jbosssx-2.0.2.SP2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/ws/jbossws-spi/1.0.3.GA/jbossws-spi-1.0.3.GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/jbossxb/2.0.0.GA/jbossxb-2.0.0.GA.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-api/4.0.0-Alpha2/jbpm-api-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-db/4.0.0-Alpha2/jbpm-db-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-enterprise/4.0.0-Alpha2/jbpm-enterprise-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-enterprise-config/4.0.0-Alpha2/jbpm-enterprise-config-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-jpdl/4.0.0-Alpha2/jbpm-jpdl-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-jpdl-config/4.0.0-Alpha2/jbpm-jpdl-config-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-log/4.0.0-Alpha2/jbpm-log-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-pvm/4.0.0-Alpha2/jbpm-pvm-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-spi/4.0.0-Alpha2/jbpm-spi-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-test-base/4.0.0-Alpha2/jbpm-test-base-4.0.0-Alpha2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-test-db/4.0.0-Alpha2/jbpm-test-db-4.0.0-Alpha2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-api/4.0.0-Beta1/jbpm-api-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-enterprise/4.0.0-Beta1/jbpm-enterprise-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-enterprise-config/4.0.0-Beta1/jbpm-enterprise-config-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-jpdl/4.0.0-Beta1/jbpm-jpdl-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-log/4.0.0-Beta1/jbpm-log-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-pvm/4.0.0-Beta1/jbpm-pvm-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-spi/4.0.0-Beta1/jbpm-spi-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-spi-config/4.0.0-Beta1/jbpm-spi-config-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-test-base/4.0.0-Beta1/jbpm-test-base-4.0.0-Beta1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-test-db/4.0.0-Beta1/jbpm-test-db-4.0.0-Beta1.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.5.6/jcl-over-slf4j-1.5.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mortbay/jetty/jetty/6.1.10/jetty-6.1.10.jar"/>
