@@ -13,7 +13,7 @@
 	<url>http://www.alten.com</url>
 	<inceptionYear>2009</inceptionYear>
 
-	<description>The demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges.</description>
+	<description>This is the demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges.</description>
 	<issueManagement>
 		<system>Google code</system>
 		<url>http://code.google.com/p/mercato/issues/list</url>
@@ -136,7 +136,7 @@
 		<spring.integration.version>1.0.1.RELEASE</spring.integration.version>
 		<gilead.version>1.2.2</gilead.version>
 		<platform>mac</platform>
-		<jbpm4.version>4.0.0-Alpha2</jbpm4.version>
+		<jbpm4.version>4.0.0-Beta1</jbpm4.version>
 	</properties>
 
 	<dependencies>
@@ -366,11 +366,11 @@
     		<artifactId>jbpm-pvm</artifactId>
     		<version>${jbpm4.version}</version>
 		</dependency>
-		<dependency>
+	<!-- <dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-db</artifactId>
     		<version>${jbpm4.version}</version>
-		</dependency>
+		</dependency>  -->	
 		<dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-api</artifactId>
@@ -386,11 +386,11 @@
     		<artifactId>jbpm-enterprise</artifactId>
     		<version>${jbpm4.version}</version>
 		</dependency>
-		<dependency>
+	<!-- <dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-jpdl-config</artifactId>
     		<version>${jbpm4.version}</version>
-		</dependency>
+		</dependency>  -->	
 		<dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-jpdl</artifactId>
@@ -406,6 +406,13 @@
     		<artifactId>jbpm-spi</artifactId>
     		<version>${jbpm4.version}</version>
 		</dependency>
+		
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-spi-config</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+		
 		<dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-test-base</artifactId>
