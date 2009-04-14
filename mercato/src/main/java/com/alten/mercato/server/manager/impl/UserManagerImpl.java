@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import org.jbpm.Deployment;
+import org.jbpm.Execution;
 import org.jbpm.ExecutionService;
 import org.jbpm.JbpmException;
 import org.jbpm.RepositoryService;
@@ -53,16 +54,14 @@ public class UserManagerImpl implements UserManager {
 		
 			
 			logger.info("Deploying the repositoryService process");
+			/*
 			Deployment deployment = repositoryService.createDeployment();
-			File file = new File("/Users/huagechen/Documents/workspace/mercato/src/main/resources/com/alten/mercato/jpdl/process.jpdl.xml");
-			//deployment.addFile(file);
-			deployment.addResourceFromClasspath("com/alten/mercato/jpdl/process.jpdl.xml");
-			logger.debug(file.getPath());
-			//deployment.setFileType("*.jpdl.xml", "jpdl");
-			deployment.deploy();
+			deployment.addResourceFromClasspath("com/alten/mercato/jpdl/stateSequence.jpdl.xml");
+			deployment.deploy();*/
 			
 			logger.info("Starting process...");
-			//Execution execution = executionService.startProcessInstanceByKey("StateChoice");
+			Execution execution = executionService.startProcessInstanceByKey("StateSequence");
+			logger.info("Process started.");
 			if (lstUtil!=null) {
 				if (lstUtil.size()>0) {
 				
