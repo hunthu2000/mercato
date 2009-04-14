@@ -58,7 +58,7 @@
 		scope="prototype">
 		<property name="deployers">
 			<list>
-				<bean class="org.jbpm.jpdl.internal.repository.JpdlDeployer"
+				<bean class="com.alten.mercato.jbpm.jpdl.internal.repository.CustomJpdlDeployer"
 					scope="prototype" />
 			</list>
 		</property>
