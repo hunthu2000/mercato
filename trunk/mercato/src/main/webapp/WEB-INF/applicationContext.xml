@@ -107,6 +107,10 @@
 	<bean id="historyService" class="org.jbpm.pvm.internal.svc.HistoryServiceImpl"
 		scope="singleton">
 	</bean>
+	
+	<bean id="managementService" class="org.jbpm.pvm.internal.svc.ManagementServiceImpl"
+		scope="singleton">
+	</bean>
 
 	<bean id="taskService" class="org.jbpm.pvm.internal.svc.TaskServiceImpl"
 		scope="singleton">
