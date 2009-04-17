@@ -1,7 +1,6 @@
-// default package
-// Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1
-
 package com.alten.mercato.server.model;
+
+// Generated 2009-4-17 15:31:30 by Hibernate Tools 3.2.4.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +12,6 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class TypePersonne extends LightEntity implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5119444147310370412L;
 	private long tpersId;
 	private String tpersCode;
 	private String tpersLib;
