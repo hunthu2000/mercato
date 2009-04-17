@@ -133,7 +133,6 @@
 	<properties>
 		<gwtVersion>1.5.3</gwtVersion>
 		<spring.version>2.5.6</spring.version>
-		<spring.integration.version>1.0.1.RELEASE</spring.integration.version>
 		<gilead.version>1.2.2</gilead.version>
 		<platform>mac</platform>
 		<jbpm4.version>4.0.0-Beta1</jbpm4.version>
@@ -311,7 +310,11 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-
+		<dependency>
+   			<groupId>org.springframework</groupId>
+    		<artifactId>spring-test</artifactId>
+    		<version>${spring.version}</version>
+		</dependency> 
 		<!-- jetty -->
 		<dependency>
 			<groupId>jetty</groupId>
@@ -378,11 +381,6 @@
     		<artifactId>jbpm-pvm</artifactId>
     		<version>${jbpm4.version}</version>
 		</dependency>
-	<!-- <dependency>
-    		<groupId>org.jbpm.jbpm4</groupId>
-    		<artifactId>jbpm-db</artifactId>
-    		<version>${jbpm4.version}</version>
-		</dependency>  -->	
 		<dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-api</artifactId>
@@ -398,11 +396,7 @@
     		<artifactId>jbpm-enterprise</artifactId>
     		<version>${jbpm4.version}</version>
 		</dependency>
-	<!-- <dependency>
-    		<groupId>org.jbpm.jbpm4</groupId>
-    		<artifactId>jbpm-jpdl-config</artifactId>
-    		<version>${jbpm4.version}</version>
-		</dependency>  -->	
+
 		<dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-jpdl</artifactId>
@@ -438,7 +432,20 @@
     		<scope>runtime</scope>
 		</dependency>
 		
-		<!--  oracle --> 
+		<!-- needed only for jbpm4.0.0alpha2 -->
+		<!--  
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-db</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>	
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-jpdl-config</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>  -->	
+		
+		<!--  oracle driver--> 
 		<dependency>
     		<groupId>com.oracle</groupId>
     		<artifactId>ojdbc14</artifactId>
@@ -447,12 +454,6 @@
 		
 		<!--  test -->
 		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.1</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
