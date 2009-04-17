@@ -1,5 +1,6 @@
 package com.alten.mercato.server.model;
-// Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1
+
+// Generated 2009-4-17 15:31:30 by Hibernate Tools 3.2.4.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,10 +12,6 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class Util extends LightEntity implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2221322550238358576L;
 	private long utilId;
 	private Personne personne;
 	private String utilLogin;

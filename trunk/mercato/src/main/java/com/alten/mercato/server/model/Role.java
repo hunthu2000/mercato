@@ -1,5 +1,6 @@
 package com.alten.mercato.server.model;
-// Generated 2009-4-10 12:28:00 by Hibernate Tools 3.2.4.CR1
+
+// Generated 2009-4-17 15:31:30 by Hibernate Tools 3.2.4.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,10 +12,6 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class Role extends LightEntity implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 197216491859817931L;
 	private long roleId;
 	private String roleLib;
 	private Set<UtilRole> utilRoles = new HashSet<UtilRole>(0);
