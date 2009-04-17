@@ -2,13 +2,14 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-<type-mapping>
-	<sql-type jdbc-type="VARCHAR" hibernate-type="string"></sql-type>
-</type-mapping>
-<table-filter match-schema="SYSTEM" match-name="UTIL_ROLE"/>
-  <table-filter match-schema="SYSTEM" match-name="UTIL"/>
-  <table-filter match-schema="SYSTEM" match-name="TYPE_PERSONNE"/>
-  <table-filter match-schema="SYSTEM" match-name="ROLE"/>
-  <table-filter match-schema="SYSTEM" match-name="PERSONNE"/>
-  <table-filter match-schema="SYSTEM" match-name="DEPARTEMENT"/>
+	<type-mapping>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"></sql-type>
+	</type-mapping>
+	<table-filter match-schema="SYSTEM" match-name="UTIL_ROLE" />
+	<table-filter match-schema="SYSTEM" match-name="UTIL" />
+	<table-filter match-schema="SYSTEM" match-name="TYPE_PERSONNE" />
+	<table-filter match-schema="SYSTEM" match-name="ROLE" />
+	<table-filter match-schema="SYSTEM" match-name="PERSONNE" />
+	<table-filter match-schema="SYSTEM" match-name="DEPARTEMENT" />
+	<table-filter match-name="TRANSFERT" match-schema="HUAGE"></table-filter>
 </hibernate-reverse-engineering>
