@@ -222,7 +222,7 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-dao/2.0-m4/spring-dao-2.0-m4.jar" sourcepath="M2_REPO/org/springframework/spring-dao/2.0-m4/spring-dao-2.0-m4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-hibernate3/2.0-m4/spring-hibernate3-2.0-m4.jar" sourcepath="M2_REPO/org/springframework/spring-hibernate3/2.0-m4/spring-hibernate3-2.0-m4-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/2.0-m4/spring-jdbc-2.0-m4.jar" sourcepath="M2_REPO/org/springframework/spring-jdbc/2.0-m4/spring-jdbc-2.0-m4-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/2.5.6/spring-test-2.5.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/2.5.6/spring-test-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-test/2.5.6/spring-test-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-tomcat-weaver/2.5.6/spring-tomcat-weaver-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-tomcat-weaver/2.5.6/spring-tomcat-weaver-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/2.5.6/spring-web-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-web/2.5.6/spring-web-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-webmvc/2.5.6/spring-webmvc-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-webmvc/2.5.6/spring-webmvc-2.5.6-sources.jar"/>
