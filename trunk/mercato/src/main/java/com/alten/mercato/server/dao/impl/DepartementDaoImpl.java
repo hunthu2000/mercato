@@ -17,7 +17,7 @@ import com.alten.mercato.server.dao.interf.DepartementDao;
  * @author Huage Chen
  *
  */
-@Repository("DepartementMercatoDao")
+@Repository("departementDao")
 public class DepartementDaoImpl extends DepartementDaoHome implements
 		DepartementDao {
 	private static final Log log = LogFactory.getLog(DepartementDaoImpl.class);

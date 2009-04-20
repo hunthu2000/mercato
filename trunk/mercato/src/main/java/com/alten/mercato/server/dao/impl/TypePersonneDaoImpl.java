@@ -19,7 +19,7 @@ import com.alten.mercato.server.dao.interf.TypePersonneDao;
  * @author Huage Chen
  *
  */
-@Repository("TypePersonneMercatoDao")
+@Repository("typePersonneDao")
 public class TypePersonneDaoImpl extends TypePersonneDaoHome implements
 		TypePersonneDao {
 	private static final Log log = LogFactory.getLog(TypePersonneDaoImpl.class);

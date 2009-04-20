@@ -9,6 +9,10 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class UtilRole extends LightEntity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8290782976225435608L;
 	private long uroId;
 	private Role role;
 	private Util util;

@@ -9,12 +9,21 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class Transfert extends LightEntity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6966133960313497382L;
 	private long transId;
-	private Long transExecId;
+	private long transExecId;
 	private long transDepEntrId;
 	private long transDepConsulId;
 
 	public Transfert() {
+	}
+	
+	public Transfert(long transDepEntrId, long transDepConsulId) {
+		this.transDepEntrId = transDepEntrId;
+		this.transDepConsulId = transDepConsulId;
 	}
 
 	public Transfert(long transId, long transDepEntrId, long transDepConsulId) {
@@ -23,7 +32,7 @@ public class Transfert extends LightEntity implements java.io.Serializable {
 		this.transDepConsulId = transDepConsulId;
 	}
 
-	public Transfert(long transId, Long transExecId, long transDepEntrId,
+	public Transfert(long transId, long transExecId, long transDepEntrId,
 			long transDepConsulId) {
 		this.transId = transId;
 		this.transExecId = transExecId;
@@ -39,11 +48,11 @@ public class Transfert extends LightEntity implements java.io.Serializable {
 		this.transId = transId;
 	}
 
-	public Long getTransExecId() {
+	public long getTransExecId() {
 		return this.transExecId;
 	}
 
-	public void setTransExecId(Long transExecId) {
+	public void setTransExecId(long transExecId) {
 		this.transExecId = transExecId;
 	}
 

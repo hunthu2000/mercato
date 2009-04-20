@@ -24,4 +24,10 @@ public interface PersonneDao {
 	public Personne findById(long id);
 	
 	public List<Personne> findByExample(Personne instance);
+	
+	/**
+	 * @param departmentId
+	 * @return
+	 */
+	public List<Personne> findConsultantsByDepartmentId(long departmentId);
 }

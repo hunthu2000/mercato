@@ -3,7 +3,12 @@
  */
 package com.alten.mercato.client;
 
+import java.util.List;
+
 import com.alten.mercato.client.service.DemoService;
+import com.alten.mercato.client.service.PersonService;
+import com.alten.mercato.client.ui.framework.widget.CustomWaitDialog;
+import com.alten.mercato.server.model.Personne;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -30,30 +35,9 @@ import com.smartgwt.client.widgets.tree.TreeNode;
 public class MercatoMain implements EntryPoint {
 
 	public void onModuleLoad() {
-		SC.say("Hello Mercato");
-
-		Canvas canvas = new Canvas();
-		DynamicForm df = new DynamicForm();
-		df.setIsGroup(true);
-		df.setGroupTitle("Personne");
-		df.setNumCols(2);
-		df.setCellPadding(5);
-
-		ButtonItem cancel = new ButtonItem("Annuler");
-		cancel.addClickHandler(new ClickHandler() {
-
-			public void onClick(ClickEvent event) {
-				SC.say("Test cancel");
-			}
-		});
-
-		ButtonItem nouveau = new ButtonItem("Nouveau");
-		nouveau.addClickHandler(new ClickHandler() {
-
-			public void onClick(ClickEvent event) {
-				SC.say("Test nouveau");
-			}
-		});
+		// loadingMsg
+		
+		
 		
 		ButtonItem logout = new ButtonItem("Logout");
 		logout.addClickHandler(new ClickHandler() {
@@ -76,14 +60,12 @@ public class MercatoMain implements EntryPoint {
 			
 		});
 
-		cancel.setEndRow(false);
-		nouveau.setStartRow(false);
 
 		TreeGrid treeGrid = new TreeGrid();
 		treeGrid.setWidth(300);
 		treeGrid.setHeight(400);
 
-		TreeGridField field = new TreeGridField("Name", "Tree from local data");
+		TreeGridField field = new TreeGridField("Name", "My department");
 		field.setCanSort(false);
 
 		treeGrid.setFields(field);
@@ -107,6 +89,8 @@ public class MercatoMain implements EntryPoint {
 		treeGrid.setFolderIcon("icons/16/person.png");
 
 		treeGrid.setData(tree);
+		
+		Canvas canvas = new Canvas();
 		canvas.addChild(treeGrid);
 		
 		
@@ -115,37 +99,13 @@ public class MercatoMain implements EntryPoint {
 		paneLinkLogout.setContents("<a href=\"/mercato/destroySession\">Logout</a>");
 		paneLinkLogout.setHeight(20);
 	
-		df.setFields(cancel, nouveau, logout);
 		Canvas canvasLogout = new Canvas();
 		canvasLogout.addChild(paneLinkLogout);
 		
-		Canvas canvas1 = new Canvas();
-		canvas1.addChild(df);
 
 		final Label quoteText = new Label();
 		
-		/*
-		Timer timer = new Timer() {
-
-			public void run() {
-				// create an async callback to handle the result:
-				AsyncCallback<String> callback = new AsyncCallback<String>() {
-
-					public void onFailure(Throwable t) {
-						// display error text if we can't get the quote:
-						quoteText.setText("Failed to get a quote");
-					}
-
-					public void onSuccess(String result) {
-						// display the retrieved quote in the label:
-						quoteText.setText(result);
-					}
-				};
-				DemoService.Util.getInstance().getString(callback);
-			}
-		};
-
-		timer.scheduleRepeating(3000);*/
+	
 		
 		AsyncCallback<String> callback = new AsyncCallback<String>() {
 
@@ -161,11 +121,37 @@ public class MercatoMain implements EntryPoint {
 		};
 		DemoService.Util.getInstance().getString(callback);
 		
+		loadListConsultants();
+		
 		RootPanel.get().add(quoteText);
-
 		RootPanel.get().add(canvas); 
-		RootPanel.get().add(canvas1); 
 		RootPanel.get().add(canvasLogout);
+		RootPanel.get("loadingWrapper").getElement().setInnerHTML("");
+	}
+	
+	private void loadListConsultants() {
+
+		final CustomWaitDialog dlg = CustomWaitDialog.getInstance();
+
+		AsyncCallback<List<Personne>> callback = new AsyncCallback<List<Personne>>() {
+
+			public void onSuccess(List<Personne> result) {
+				if (result==null||result.size()==0) {
+					dlg.hide();
+					return;
+				}
+				SC.say(result.size() + " consultants for this dd found");
+				dlg.hide();
+			}
+
+			public void onFailure(Throwable ex) {
+				dlg.hide();
+			}
+		};
+
+		PersonService.Util.getInstance().getConsultantsForDD(callback);
+		// give user a wait message while retrieving datas
+		dlg.show();
 	}
 
 	public static class EmployeeTreeNode extends TreeNode {

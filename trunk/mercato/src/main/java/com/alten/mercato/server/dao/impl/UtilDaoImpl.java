@@ -22,7 +22,7 @@ import com.alten.mercato.server.model.Util;
  * @author Huage Chen
  *
  */
-@Repository("UtilMercatoDao")
+@Repository("utilDao")
 public class UtilDaoImpl extends UtilDaoHome implements
 UtilDao {
 
