@@ -93,6 +93,7 @@ public class RoleDaoHome extends HibernateDaoSupport{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Role> findByExample(Role instance) {
 		log.debug("finding Role instance by example");
 		try {

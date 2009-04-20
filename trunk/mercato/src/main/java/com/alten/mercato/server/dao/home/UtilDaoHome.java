@@ -95,6 +95,7 @@ public class UtilDaoHome extends HibernateDaoSupport{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Util> findByExample(Util instance) {
 		log.debug("finding Util instance by example");
 		try {

@@ -93,6 +93,7 @@ public class TransfertDaoHome extends HibernateDaoSupport{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Transfert> findByExample(Transfert instance) {
 		log.debug("finding Departement instance by example");
 		try {
