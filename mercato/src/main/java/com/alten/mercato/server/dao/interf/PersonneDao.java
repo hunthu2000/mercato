@@ -30,4 +30,10 @@ public interface PersonneDao {
 	 * @return
 	 */
 	public List<Personne> findConsultantsByDepartmentId(long departmentId);
+	
+	/**
+	 * @param departmentId
+	 * @return
+	 */
+	public List<Personne> findConsultantsOfOtherDepartmentByDepartmentId(long departmentId);
 }

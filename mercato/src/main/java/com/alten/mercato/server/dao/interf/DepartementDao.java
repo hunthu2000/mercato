@@ -26,5 +26,7 @@ public interface DepartementDao {
 	public Departement findById(long id);
 	
 	public List<Departement> findByExample(Departement instance);
+	
+	public List<Departement> findOtherDepartmentsByDepartmentID(long departmentId);
 
 }

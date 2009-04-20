@@ -91,6 +91,7 @@ public class TypePersonneDaoHome extends HibernateDaoSupport{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<TypePersonne> findByExample(TypePersonne instance) {
 		log.debug("finding TypePersonne instance by example");
 		try {

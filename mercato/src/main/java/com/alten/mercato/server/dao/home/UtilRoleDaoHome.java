@@ -92,6 +92,7 @@ public class UtilRoleDaoHome extends HibernateDaoSupport{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<UtilRole> findByExample(UtilRole instance) {
 		log.debug("finding UtilRole instance by example");
 		try {
