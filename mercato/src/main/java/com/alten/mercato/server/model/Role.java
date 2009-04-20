@@ -12,6 +12,10 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class Role extends LightEntity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 197216491859817931L;
 	private long roleId;
 	private String roleLib;
 	private Set<UtilRole> utilRoles = new HashSet<UtilRole>(0);

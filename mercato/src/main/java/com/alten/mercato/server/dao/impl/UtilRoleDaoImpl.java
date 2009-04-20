@@ -18,7 +18,7 @@ import com.alten.mercato.server.dao.interf.UtilRoleDao;
  * @author Huage Chen
  *
  */
-@Repository("UtilRoleMercatoDao")
+@Repository("utilRoleDao")
 public class UtilRoleDaoImpl extends UtilRoleDaoHome implements
 	UtilRoleDao {
 	private static final Log log = LogFactory.getLog(UtilRoleDaoImpl.class);

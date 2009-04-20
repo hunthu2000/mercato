@@ -6,9 +6,9 @@
     <class name="com.alten.mercato.server.model.Transfert" table="TRANSFERT" schema="HUAGE">
         <id name="transId" type="long">
             <column name="TRANS_ID" precision="10" scale="0" />
-            <generator class="assigned" />
+            <generator class="sequence" />
         </id>
-        <property name="transExecId" type="java.lang.Long">
+        <property name="transExecId" type="long">
             <column name="TRANS_EXEC_ID" precision="10" scale="0" />
         </property>
         <property name="transDepEntrId" type="long">

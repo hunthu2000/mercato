@@ -12,6 +12,10 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class Util extends LightEntity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2221322550238358576L;
 	private long utilId;
 	private Personne personne;
 	private String utilLogin;

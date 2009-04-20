@@ -12,6 +12,10 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class Departement extends LightEntity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1296114609518130807L;
 	private long depId;
 	private Personne personne;
 	private String depLib;

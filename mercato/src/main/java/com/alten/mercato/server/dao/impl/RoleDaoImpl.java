@@ -17,7 +17,7 @@ import com.alten.mercato.server.dao.interf.RoleDao;
  * @author Huage Chen
  *
  */
-@Repository("RoleMercatoDao")
+@Repository("roleDao")
 public class RoleDaoImpl extends RoleDaoHome implements
 		RoleDao {
 	private static final Log log = LogFactory.getLog(RoleDaoImpl.class);

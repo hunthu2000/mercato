@@ -1,9 +1,7 @@
 package com.alten.mercato.server.manager.impl;
 
-import java.io.File;
 import java.util.List;
 
-import org.jbpm.Deployment;
 import org.jbpm.Execution;
 import org.jbpm.ExecutionService;
 import org.jbpm.JbpmException;
@@ -28,7 +26,7 @@ import com.alten.mercato.server.model.Util;
 public class UserManagerImpl implements UserManager {
 	
 	@Autowired
-	@Qualifier("UtilMercatoDao")
+	@Qualifier("utilDao")
 	private UtilDao utilDao = null;
 	
 	@Autowired
@@ -50,18 +48,9 @@ public class UserManagerImpl implements UserManager {
 	public String getUserName(String login) {
 		
 		try {
+			logger.info("Retrieving user information");
 			List<Util> lstUtil = utilDao.getUserByLogin(login);
 		
-			
-			logger.info("Deploying the repositoryService process");
-			/*
-			Deployment deployment = repositoryService.createDeployment();
-			deployment.addResourceFromClasspath("com/alten/mercato/jpdl/stateSequence.jpdl.xml");
-			deployment.deploy();*/
-			
-			logger.info("Starting process...");
-			Execution execution = executionService.startProcessInstanceByKey("StateSequence");
-			logger.info("Process started.");
 			if (lstUtil!=null) {
 				if (lstUtil.size()>0) {
 				
@@ -74,10 +63,7 @@ public class UserManagerImpl implements UserManager {
 		catch (JbpmException e ){
 			logger.error(e.toString());
 			return null;
-		} /*catch (IOException e) {
-			logger.error(e.toString());
-			return null;
-		}*/
+		}
 		
 	}
 

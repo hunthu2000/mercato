@@ -24,6 +24,8 @@ public class DemoServiceImpl  implements DemoService  {
 	@Qualifier("userManager")
 	private UserManager userManager = null;
 	
+	
+	
 	// log4j
 	Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);
 	
@@ -31,11 +33,10 @@ public class DemoServiceImpl  implements DemoService  {
 		logger.info("Getting string in the controller" );
 		String userInfo = userManager.getUserName(ServletUtils.getRequest().getUserPrincipal().getName());
 		logger.info("user information" + userInfo );
-		return "Mercato GWT user: " + userInfo;
+		return "Welcome mercato user : " + userInfo;
 	}
 
 	public boolean logout() throws Exception{
-		try {
 			HttpSession session = ServletUtils.getRequest().getSession(false);
 			logger.info("Logout request user : session id " + session.getId() + " user " + session.getAttribute("User") );
 			
@@ -43,10 +44,6 @@ public class DemoServiceImpl  implements DemoService  {
 			ServletUtils.getRequest().getSession(false).invalidate();
 			
 			return true;
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);	
-			throw e;
-		}
 	}
 	
 	

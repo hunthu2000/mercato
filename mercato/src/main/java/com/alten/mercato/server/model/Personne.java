@@ -12,6 +12,10 @@ import net.sf.gilead.pojo.java5.LightEntity;
  */
 public class Personne extends LightEntity implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8919650789017796165L;
 	private long perId;
 	private Departement departement;
 	private TypePersonne typePersonne;

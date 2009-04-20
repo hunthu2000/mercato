@@ -22,7 +22,7 @@ import com.alten.mercato.server.model.Transfert;
  * @author Huage Chen
  *
  */
-@Repository("DepartementMercatoDao")
+@Repository("transferDao")
 public class TransfertDaoImpl extends TransfertDaoHome implements
 		TransfertDao {
 	private static final Log log = LogFactory.getLog(TransfertDaoImpl.class);
