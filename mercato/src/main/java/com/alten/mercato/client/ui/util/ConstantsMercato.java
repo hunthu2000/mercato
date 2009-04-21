@@ -50,5 +50,6 @@ public class ConstantsMercato {
 	public static final String ICON_UNDO = "[SKIN]/actions/undo.png";
 	public static final String ICON_DPMT = "silk/chart_organisation.png";
 	public static final String ICON_USER = "icons/16/person.png";
+	public static final String ICON_USER_BLUE = "icons/16/person_blue.png";
 
 }
