@@ -35,16 +35,18 @@ public class PersonDataSource extends DataSource {
 
 		DataSourceTextField label = new DataSourceTextField(KEY_LABEL, "Consultant", 120);
 		
-		DataSourceTextField parent = new DataSourceTextField(KEY_PARENT);
+		/*DataSourceTextField parent = new DataSourceTextField(KEY_PARENT);
 		parent.setHidden(true);
+		parent.setRequired(true);
 		parent.setForeignKey(id+"."+KEY_ID);
+		parent.setRootValue("1");  */
 		
 		DataSourceTextField icon = new DataSourceTextField(KEY_ICON);
 		
 		DataSourceBinaryField obj = new DataSourceBinaryField(KEY_OBJECT, KEY_OBJECT);
 		setClientOnly(true);
 		
-		setFields(personId, label, parent, icon, obj);
+		setFields(personId, label, icon, obj);
 	}
 
 }

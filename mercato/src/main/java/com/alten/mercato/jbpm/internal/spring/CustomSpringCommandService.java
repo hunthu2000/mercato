@@ -16,21 +16,22 @@ import org.springframework.transaction.support.TransactionTemplate;
  */
 public class CustomSpringCommandService implements CommandService {
 
-	  TransactionTemplate transactionTemplate;
-	  EnvironmentFactory environmentFactory;
-	  
-	  public void setEnvironmentFactory(EnvironmentFactory environmentFactory) {
-	    this.environmentFactory = environmentFactory;
-	  }
+	TransactionTemplate transactionTemplate;
+	EnvironmentFactory environmentFactory;
 
-	  public void setTransactionTemplate(HibernateTransactionManager transactionManager) {
-	    this.transactionTemplate = new TransactionTemplate(transactionManager);
-	  }
-	  
-	  public <T> T execute(Command<T> command) {
-	    return (T) transactionTemplate.execute(
-	        new CommandTransactionCallback(command, environmentFactory)
-	    );
-	  }
+	public void setEnvironmentFactory(EnvironmentFactory environmentFactory) {
+		this.environmentFactory = environmentFactory;
+	}
+
+	public void setTransactionTemplate(HibernateTransactionManager transactionManager) {
+		this.transactionTemplate = new TransactionTemplate(transactionManager);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T execute(Command<T> command) {
+		return (T) transactionTemplate.execute(
+				new CommandTransactionCallback(command, environmentFactory)
+		);
+	}
 
 }

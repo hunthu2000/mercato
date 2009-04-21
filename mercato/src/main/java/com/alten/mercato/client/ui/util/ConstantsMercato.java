@@ -3,7 +3,6 @@
  */
 package com.alten.mercato.client.ui.util;
 
-import java.util.Map;
 
 
 /**
@@ -34,7 +33,7 @@ public class ConstantsMercato {
 	public static final String KEY_TITLE = "title";
 	public static final String KEY_TYPE = "type";
 	public static final String KEY_UNIQUE = "unique";
-	public static final String KEY_PARENT = "parent";
+	public static final String KEY_PARENT = "ReportsTo";
 
 	// PATH for icons
 	public static final String ICON_ADD = "[SKIN]/actions/add.png";
@@ -49,5 +48,7 @@ public class ConstantsMercato {
 	public static final String ICON_SEARCH = "[SKIN]/actions/search.png";
 	public static final String ICON_VIEW = "[SKIN]/actions/view.png";
 	public static final String ICON_UNDO = "[SKIN]/actions/undo.png";
+	public static final String ICON_DPMT = "silk/chart_organisation.png";
+	public static final String ICON_USER = "icons/16/person.png";
 
 }
