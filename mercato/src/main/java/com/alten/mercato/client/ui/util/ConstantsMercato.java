@@ -3,6 +3,8 @@
  */
 package com.alten.mercato.client.ui.util;
 
+import com.alten.mercato.server.model.Personne;
+
 
 
 /**
@@ -11,6 +13,8 @@ package com.alten.mercato.client.ui.util;
  */
 public class ConstantsMercato {
 
+	
+	private static Personne currentUser = null;
 	
 	// key for recordDef and store
 	public static final String KEY_AUTHS = "auths";
@@ -23,6 +27,7 @@ public class ConstantsMercato {
 	public static final String KEY_ICON = "icon";
 	public static final String KEY_ID = "id";
 	public static final String KEY_LABEL = "label";
+	public static final String KEY_MATRICULE = "matricule";
 	public static final String KEY_NAME = "name";
 	public static final String KEY_OBJECT = "object";
 	public static final String KEY_PATH = "path";
@@ -51,5 +56,13 @@ public class ConstantsMercato {
 	public static final String ICON_DPMT = "silk/chart_organisation.png";
 	public static final String ICON_USER = "icons/16/person.png";
 	public static final String ICON_USER_BLUE = "icons/16/person_blue.png";
+	
+	public static Personne getCurrentUser() {
+		return ConstantsMercato.currentUser;
+	}
+	
+	public static void initCurrentUser(Personne personne) {
+		ConstantsMercato.currentUser = personne;
+	}
 
 }
