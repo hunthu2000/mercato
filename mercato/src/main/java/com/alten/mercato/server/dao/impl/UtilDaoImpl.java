@@ -34,6 +34,7 @@ UtilDao {
 		super.setSessionFactory(sessionFactory);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Util> getUserByLogin(String login) {
 		if (log.isDebugEnabled()) {
 			log.debug("finding all root Categories instance");

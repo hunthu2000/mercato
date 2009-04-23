@@ -21,6 +21,7 @@ import com.alten.mercato.server.dao.interf.UtilRoleDao;
 @Repository("utilRoleDao")
 public class UtilRoleDaoImpl extends UtilRoleDaoHome implements
 	UtilRoleDao {
+	@SuppressWarnings("unused")
 	private static final Log log = LogFactory.getLog(UtilRoleDaoImpl.class);
 
 	@Autowired
