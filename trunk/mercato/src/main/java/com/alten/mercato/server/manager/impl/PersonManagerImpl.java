@@ -13,11 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.alten.mercato.server.dao.interf.DepartementDao;
 import com.alten.mercato.server.dao.interf.PersonneDao;
-import com.alten.mercato.server.dao.interf.UtilDao;
 import com.alten.mercato.server.manager.interf.PersonManager;
 import com.alten.mercato.server.model.Departement;
 import com.alten.mercato.server.model.Personne;
-import com.alten.mercato.server.model.Util;
 
 /**
  * @author Huage Chen

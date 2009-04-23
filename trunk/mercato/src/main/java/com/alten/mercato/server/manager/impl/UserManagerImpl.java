@@ -3,7 +3,6 @@ package com.alten.mercato.server.manager.impl;
 import java.util.List;
 
 import org.jbpm.ExecutionService;
-import org.jbpm.JbpmException;
 import org.jbpm.RepositoryService;
 import org.jbpm.TaskService;
 import org.slf4j.Logger;

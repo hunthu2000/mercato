@@ -5,17 +5,14 @@ package com.alten.mercato.client;
 
 import java.util.List;
 
-import com.alten.mercato.client.service.DemoService;
 import com.alten.mercato.client.service.PersonService;
 import com.alten.mercato.client.service.UserService;
-import com.alten.mercato.client.ui.framework.widget.CustomWaitDialog;
 import com.alten.mercato.client.ui.util.ConstantsMercato;
 import com.alten.mercato.server.model.Departement;
 import com.alten.mercato.server.model.Personne;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.smartgwt.client.data.DSCallback;
 import com.smartgwt.client.data.DSRequest;
