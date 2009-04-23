@@ -46,7 +46,6 @@ public class UserManagerImpl implements UserManager {
 
 	public String getUserName(String login) {
 		
-		try {
 			logger.info("Retrieving user information");
 			List<Util> lstUtil = utilDao.getUserByLogin(login);
 		
@@ -58,12 +57,24 @@ public class UserManagerImpl implements UserManager {
 				}
 			}
 			return "";
-		}
-		catch (JbpmException e ){
-			logger.error(e.toString());
-			return null;
-		}
-		
 	}
+
+
+	public Personne getUser(String login) {
+		logger.info("Retrieving user information by login " + login);
+		List<Util> lstUtil = utilDao.getUserByLogin(login);
+		
+		if (lstUtil!=null) {
+			if (lstUtil.size()>0) {
+			
+				Personne user = lstUtil.get(0).getPersonne();
+				logger.info("returning user information by login " + login);
+				return user; 
+			}
+		}
+		return null;
+	}
+	
+	
 
 }

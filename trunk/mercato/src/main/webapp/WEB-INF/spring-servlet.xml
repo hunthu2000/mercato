@@ -22,6 +22,7 @@
 			<map>
 				<entry key="/**/demoService.rpc" value-ref="demoService" />
 				<entry key="/**/personService.rpc" value-ref="personService" />
+				<entry key="/**/userService.rpc" value-ref="userService" />
 				<entry key="/**/destroySession" value-ref="DestroySessionController" />
 			</map>
 		</property>
@@ -41,6 +42,11 @@
 	
 	<bean id="personService" class="org.gwtwidgets.server.spring.hb4gwt.HB4GWTRPCServiceExporter">
 		 <property name="service" ref="personController" />
+		 <property name="beanManager" ref="hbmMercato"/>
+	</bean>
+	
+	<bean id="userService" class="org.gwtwidgets.server.spring.hb4gwt.HB4GWTRPCServiceExporter">
+		 <property name="service" ref="userController" />
 		 <property name="beanManager" ref="hbmMercato"/>
 	</bean>
 	
