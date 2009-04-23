@@ -160,7 +160,7 @@ public class MercatoMain implements EntryPoint {
 			}
 		};
 
-		PersonService.Util.getInstance().getConsultantsForDD(callback);
+		PersonService.Util.getInstance().getConsultantsForDD(ConstantsMercato.getCurrentUser().getDepartement().getDepId(),callback);
 		// give user a wait message while retrieving datas
 	}
 	
@@ -291,6 +291,8 @@ public class MercatoMain implements EntryPoint {
 		});
 		
 	}
+	
+	
 	/**
 	 * 
 	 */
@@ -311,7 +313,7 @@ public class MercatoMain implements EntryPoint {
 			}
 		};
 
-		PersonService.Util.getInstance().getOtherDepartmentConsultantsForDD(callback);
+		PersonService.Util.getInstance().getOtherDepartmentConsultantsForDD(ConstantsMercato.getCurrentUser().getDepartement().getDepId(),callback);
 		// give user a wait message while retrieving datas
 	}
 
@@ -336,7 +338,7 @@ public class MercatoMain implements EntryPoint {
 			}
 		};
 
-		PersonService.Util.getInstance().getOtherDepartements(callback);
+		PersonService.Util.getInstance().getOtherDepartements(ConstantsMercato.getCurrentUser().getDepartement().getDepId(),callback);
 		// give user a wait message while retrieving datas
 	}
 

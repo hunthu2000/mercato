@@ -15,10 +15,21 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface PersonServiceAsync {
 
-	public void getConsultantsForDD(AsyncCallback<List<Personne>> callback);
+	/**
+	 * @param depId
+	 * @param callback
+	 */
+	public void getConsultantsForDD(long depId,AsyncCallback<List<Personne>> callback);
 	
-	public void getOtherDepartmentConsultantsForDD(AsyncCallback<List<Personne>> callback);
+	/**
+	 * @param depId
+	 * @param callback
+	 */
+	public void getOtherDepartements(long depId, AsyncCallback<List<Departement>> callback);
 	
-	public void getOtherDepartements(AsyncCallback<List<Departement>> callback);
-
+	/**
+	 * @param depId
+	 * @param callback
+	 */
+	public void getOtherDepartmentConsultantsForDD(long depId, AsyncCallback<List<Personne>> callback);
 }

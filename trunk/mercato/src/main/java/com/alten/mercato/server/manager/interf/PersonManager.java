@@ -15,12 +15,17 @@ public interface PersonManager {
 	 * @param departmentId
 	 * @return
 	 */
-	List<Personne> getConsultantsByDepartmentId(long departmentId);
-	
-	List<Personne> getConsultantsForDD(String login);
-	
-	List<Personne> getOtherDepartmentsConsultants(String login);
-	
-	List<Departement> getOtherDepartments(String login);
+	public List<Personne> getConsultantsByDepartmentId(long departmentId);
 
+	/**
+	 * @param depId
+	 * @return
+	 */
+	public List<Personne> getOtherDepartmentsConsultants(long depId);
+	
+	/**
+	 * @param depId
+	 * @return
+	 */
+	public List<Departement> getOtherDepartments(long depId);
 }

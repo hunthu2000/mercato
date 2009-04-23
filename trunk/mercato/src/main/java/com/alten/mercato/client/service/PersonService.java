@@ -25,10 +25,25 @@ public interface PersonService extends RemoteService {
 		}
 	}
 	
+
+	/**
+	 * @param depId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Personne> getConsultantsForDD(long depId) throws Exception;
 	
-	List<Personne> getConsultantsForDD() throws Exception;
+	/**
+	 * @param depId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Departement> getOtherDepartements(long depId) throws Exception;
 	
-	List<Personne> getOtherDepartmentConsultantsForDD() throws Exception;
-	
-	List<Departement> getOtherDepartements() throws Exception;
+	/**
+	 * @param depId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Personne> getOtherDepartmentConsultantsForDD(long depId) throws Exception;
 }

@@ -32,14 +32,15 @@ public class PersonServiceImpl implements PersonService {
 	@Qualifier("personManager")
 	private PersonManager personManager = null;
 
-	public List<Personne> getConsultantsForDD() throws Exception {
+
+	
+	public List<Personne> getConsultantsForDD(long depId) throws Exception {
 		try {
 
-			String login = ServletUtils.getRequest().getUserPrincipal().getName();
-			logger.info("getting consultants in the department of the director " + login);
-			List<Personne> res = personManager.getConsultantsForDD(login);
+			logger.info("getting consultants in the department " + depId);
+			List<Personne> res = personManager.getConsultantsByDepartmentId(depId);
 
-			logger.info("lazy loading...");
+			logger.info("lazy loading in the list of persons...");
 
 			// lazy loading
 			for (Personne person: res) {
@@ -56,14 +57,25 @@ public class PersonServiceImpl implements PersonService {
 		}
 
 	}
-
-	public List<Departement> getOtherDepartements() throws Exception {
+	
+	
+	/**
+	 * @param depId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Departement> getOtherDepartements(long depId) throws Exception {
 		try {
 
-			String login = ServletUtils.getRequest().getUserPrincipal().getName();
-			logger.info("getting consultants in the department of the director " + login);
-			List<Departement> res = personManager.getOtherDepartments(login);
-
+			logger.info("getting consultants in the department " + depId);
+			List<Departement> res = personManager.getOtherDepartments(depId);
+			
+			
+			logger.info("lazy loading in the department list");
+			
+			for (Departement dpt:res) {
+				dpt.getDepLib();
+			}
 
 			logger.info("returning the result to server");
 
@@ -73,13 +85,15 @@ public class PersonServiceImpl implements PersonService {
 			throw e;
 		}
 	}
-
-	public List<Personne> getOtherDepartmentConsultantsForDD() throws Exception {
+	
+	/* (non-Javadoc)
+	 * @see com.alten.mercato.client.service.PersonService#getOtherDepartmentConsultantsForDD(long)
+	 */
+	public List<Personne> getOtherDepartmentConsultantsForDD(long depId) throws Exception {
 		try {
 
-			String login = ServletUtils.getRequest().getUserPrincipal().getName();
-			logger.info("getting consultants in the department of the director " + login);
-			List<Personne> res = personManager.getOtherDepartmentsConsultants(login);
+			logger.info("getting consultants in the department " + depId);
+			List<Personne> res = personManager.getOtherDepartmentsConsultants(depId);
 
 			logger.info("lazy loading...");
 
@@ -97,5 +111,7 @@ public class PersonServiceImpl implements PersonService {
 			throw e;
 		}
 	}
+	
+	
 
 }
