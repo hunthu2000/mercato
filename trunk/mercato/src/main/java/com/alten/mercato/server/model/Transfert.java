@@ -14,30 +14,30 @@ public class Transfert extends LightEntity implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 6966133960313497382L;
 	private long transId;
-	private long transExecId;
-	private long transDepEntrId;
-	private long transDepConsulId;
+	private String transExecId;
+	private Personne consultant;
+	private Departement depEntr;
 
 	public Transfert() {
 	}
 	
-	public Transfert(long transDepEntrId, long transDepConsulId) {
-		this.transDepEntrId = transDepEntrId;
-		this.transDepConsulId = transDepConsulId;
+	public Transfert(Personne consultant, Departement depEntr) {
+		this.consultant = consultant;
+		this.depEntr = depEntr;
 	}
 
-	public Transfert(long transId, long transDepEntrId, long transDepConsulId) {
+	public Transfert(long transId, Personne consultant, Departement depEntr) {
 		this.transId = transId;
-		this.transDepEntrId = transDepEntrId;
-		this.transDepConsulId = transDepConsulId;
+		this.consultant = consultant;
+		this.depEntr = depEntr;
 	}
 
-	public Transfert(long transId, long transExecId, long transDepEntrId,
+	public Transfert(long transId, String transExecId, Personne consultant, Departement depEntr,
 			long transDepConsulId) {
 		this.transId = transId;
 		this.transExecId = transExecId;
-		this.transDepEntrId = transDepEntrId;
-		this.transDepConsulId = transDepConsulId;
+		this.consultant  = consultant;
+		this.depEntr = depEntr;
 	}
 
 	public long getTransId() {
@@ -48,28 +48,41 @@ public class Transfert extends LightEntity implements java.io.Serializable {
 		this.transId = transId;
 	}
 
-	public long getTransExecId() {
+	public String getTransExecId() {
 		return this.transExecId;
 	}
 
-	public void setTransExecId(long transExecId) {
+	public void setTransExecId(String transExecId) {
 		this.transExecId = transExecId;
 	}
 
-	public long getTransDepEntrId() {
-		return this.transDepEntrId;
+	/**
+	 * @return the consultant
+	 */
+	public Personne getConsultant() {
+		return consultant;
 	}
 
-	public void setTransDepEntrId(long transDepEntrId) {
-		this.transDepEntrId = transDepEntrId;
+	/**
+	 * @param consultant the consultant to set
+	 */
+	public void setConsultant(Personne consultant) {
+		this.consultant = consultant;
 	}
 
-	public long getTransDepConsulId() {
-		return this.transDepConsulId;
+	/**
+	 * @return the depEntr
+	 */
+	public Departement getDepEntr() {
+		return depEntr;
 	}
 
-	public void setTransDepConsulId(long transDepConsulId) {
-		this.transDepConsulId = transDepConsulId;
+	/**
+	 * @param depEntr the depEntr to set
+	 */
+	public void setDepEntr(Departement depEntr) {
+		this.depEntr = depEntr;
 	}
+
 
 }

@@ -8,14 +8,14 @@
             <column name="TRANS_ID" precision="10" scale="0" />
             <generator class="sequence" />
         </id>
-        <property name="transExecId" type="long">
-            <column name="TRANS_EXEC_ID" precision="10" scale="0" />
-        </property>
-        <property name="transDepEntrId" type="long">
-            <column name="TRANS_DEP_ENTR_ID" precision="10" scale="0" not-null="true" />
-        </property>
-        <property name="transDepConsulId" type="long">
+        <many-to-one name="consultant" class="com.alten.mercato.server.model.Personne" fetch="select">
             <column name="TRANS_DEP_CONSUL_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="depEntr" class="com.alten.mercato.server.model.Departement" fetch="select">
+            <column name="TRANS_DEP_ENTR_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="transExecId" type="string">
+            <column name="TRANS_EXEC_ID" length="255"/>
         </property>
     </class>
 </hibernate-mapping>

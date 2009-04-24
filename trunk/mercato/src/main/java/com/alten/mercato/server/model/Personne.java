@@ -25,6 +25,7 @@ public class Personne extends LightEntity implements java.io.Serializable {
 	private String perTrigramme;
 	private Set<Departement> departements = new HashSet<Departement>(0);
 	private Set<Util> utils = new HashSet<Util>(0);
+	private Set<Transfert> transferts = new HashSet<Transfert>(0);
 
 	public Personne() {
 	}
@@ -43,7 +44,7 @@ public class Personne extends LightEntity implements java.io.Serializable {
 	public Personne(long perId, Departement departement,
 			TypePersonne typePersonne, String perNom, String perPrenom,
 			String perMatricule, String perTrigramme,
-			Set<Departement> departements, Set<Util> utils) {
+			Set<Departement> departements, Set<Util> utils, Set<Transfert> transferts) {
 		this.perId = perId;
 		this.departement = departement;
 		this.typePersonne = typePersonne;
@@ -53,6 +54,21 @@ public class Personne extends LightEntity implements java.io.Serializable {
 		this.perTrigramme = perTrigramme;
 		this.departements = departements;
 		this.utils = utils;
+		this.transferts = transferts;
+	}
+
+	/**
+	 * @return the transferts
+	 */
+	public Set<Transfert> getTransferts() {
+		return transferts;
+	}
+
+	/**
+	 * @param transferts the transferts to set
+	 */
+	public void setTransferts(Set<Transfert> transferts) {
+		this.transferts = transferts;
 	}
 
 	public long getPerId() {

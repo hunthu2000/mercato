@@ -24,6 +24,7 @@ public class ConstantsMercato {
 	public static final String KEY_COMMENT = "comment";
 	public static final String KEY_CREATOR = "creator";
 	public static final String KEY_DATE = "date";
+	public static final String KEY_DEPARTMENT = "department";
 	public static final String KEY_ICON = "icon";
 	public static final String KEY_ID = "id";
 	public static final String KEY_LABEL = "label";

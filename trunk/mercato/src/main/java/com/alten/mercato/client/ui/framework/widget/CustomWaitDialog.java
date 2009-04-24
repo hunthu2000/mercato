@@ -6,7 +6,7 @@ import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
 
 /**
- * @author hchen Waiting Dialog
+ * @author Huage Chen Waiting Dialog
  */
 public class CustomWaitDialog extends Window {
 

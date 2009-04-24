@@ -123,7 +123,7 @@ public class MercatoMain implements EntryPoint {
 			System.out.println(user.getPerNom());
 		}
 		
-		toolbar.setContents("Welcome " + user.getPerPrenom() + user.getPerNom() + " This sample application gives you the possibility to transfer consultants between your department and other department under the control of predifined workflows");
+		toolbar.setContents("Welcome " + user.getPerPrenom() + " " + user.getPerNom() + " This sample application let you transfer consultants between your department and other department under the control of the predifined workflows");
 
 		main.addMember(toolbar);
 		main.addMember(hlConsultants);
@@ -161,12 +161,13 @@ public class MercatoMain implements EntryPoint {
 		// give user a wait message while retrieving datas
 	}
 	
+	
 	/**
 	 * 
 	 */
 	private void initMyDepartmentTreeGrid() {
 
-		
+		//define the root nodes
 		Tree tree = new Tree();
 		tree.setModelType(TreeModelType.PARENT);
 		TreeNode rootNode = createRootNode("root", "My department", ConstantsMercato.ICON_DPMT, null);
@@ -174,7 +175,6 @@ public class MercatoMain implements EntryPoint {
 		tree.setRoot(rootNode);
 		rootNodeMyDepartmentConsultants = createRootNode("rootMyDpmt", "My department", ConstantsMercato.ICON_DPMT, null);
 		tree.add(rootNodeMyDepartmentConsultants, rootNode);
-		//rootNodeMyDepartmentConsultants.setCanAcceptDrop(true);
 		tgMyDepartmentConsultants.setData(tree);
 		tree.setNameProperty(ConstantsMercato.KEY_LABEL);
 		tgMyDepartmentConsultants.getData().openAll();
@@ -279,6 +279,8 @@ public class MercatoMain implements EntryPoint {
 					if (treeNode!=null) {
 						TreeNode parent = tgMyDepartmentConsultants.getTree().getParent(treeNode);
 						System.out.println("New parent " + parent.getAttribute(ConstantsMercato.KEY_LABEL));
+						//TODO start the workflow process
+						System.out.println("starting transfer request for consultant " + treeNode.getAttribute(ConstantsMercato.KEY_LABEL) + " from " + treeNode.getAttribute(ConstantsMercato.KEY_DEPARTMENT) + " to " + ConstantsMercato.getCurrentUser().getDepartement().getDepLib() );
 					}
 				}
 				setOtherDepartmentDraggedRecord(null);
@@ -376,6 +378,7 @@ public class MercatoMain implements EntryPoint {
 		node.setAttribute(ConstantsMercato.KEY_LABEL, label);
 		node.setAttribute(ConstantsMercato.KEY_ICON, icon);
 		node.setAttribute(ConstantsMercato.KEY_MATRICULE, "");
+		node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, "");
 		node.setAttribute(ConstantsMercato.KEY_OBJECT, obj);
 		node.setAttribute(ConstantsMercato.KEY_TYPE, "folder");
 		node.setCanDrag(false);
@@ -427,6 +430,7 @@ public class MercatoMain implements EntryPoint {
 			node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER);
 			node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
 			node.setAttribute(ConstantsMercato.KEY_MATRICULE, person.getPerMatricule());
+			node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, person.getDepartement().getDepLib());
 			//TODO set the validation information
 			//node.setAttribute("validation", "Please validate...");
 			
@@ -459,7 +463,7 @@ public class MercatoMain implements EntryPoint {
 			node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER_BLUE);
 			node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
 			node.setAttribute(ConstantsMercato.KEY_MATRICULE, person.getPerMatricule());
-			
+			node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, person.getDepartement().getDepLib());
 			// find the parent for the current node
 			TreeNode parentNode = tree.findById(String.valueOf(person.getDepartement().getDepId()));
 			System.out.println("parent id :" + parentNode.getAttribute(ConstantsMercato.KEY_ID));
@@ -533,9 +537,10 @@ public class MercatoMain implements EntryPoint {
 			setCanReparentNodes(false);
 			//setShowFilterEditor(true);
 			//setFilterOnKeypress(true);
+			
+			// define the tree fields
 			TreeGridField name = new TreeGridField(ConstantsMercato.KEY_LABEL,"Consultant");
 			name.setCanEdit(false);
-			
 			TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Reference Num",100);
 			matricule.setCanEdit(false);
 			TreeGridField validation = new TreeGridField("validation","Validation", 100);

@@ -17,6 +17,7 @@
     <inherits name="com.smartgwt.SmartGwt"/>
     <inherits name="net.sf.gilead.Adapter4Gwt15"/>
     <inherits name="org.gwtwidgets.WidgetLibrary"/>
+
     
     <!-- Inherit the smartGwt skins -->
 	<inherits name="com.smartclient.theme.enterprise.EnterpriseResources"/>    

@@ -22,8 +22,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.alten.mercato.server.dao.interf.DepartementDao;
+import com.alten.mercato.server.dao.interf.PersonneDao;
 import com.alten.mercato.server.dao.interf.TransfertDao;
+import com.alten.mercato.server.exception.MercatoWorkflowException;
 import com.alten.mercato.server.manager.interf.TransferManager;
+import com.alten.mercato.server.model.Departement;
+import com.alten.mercato.server.model.Personne;
 import com.alten.mercato.server.model.Transfert;
 
 /**
@@ -39,10 +44,20 @@ public class TransferManagerImpl implements TransferManager {
 	private static final String KEY_PROCESS_CONTEXT_TRANSFERT_ID = "TransfertId";
 	private static final String VALIDATE_TRANSFER_TRANSITION = "validateTransfer";
 	private static final String CANCEL_TRANSFER_TRANSITION = "cancelTransfer";
+	private static final String KEY_CONTEXT_DD1 = "dd1";
+	private static final String KEY_CONTEXT_DD2 = "dd2";
 
 	@Autowired
-	@Qualifier("transferDao")
-	TransfertDao transferDao = null;
+	@Qualifier("transfertDao")
+	TransfertDao transfertDao = null;
+	
+	@Autowired
+	@Qualifier("personneDao")
+	PersonneDao personneDao = null;
+	
+	@Autowired
+	@Qualifier("departementDao")
+	DepartementDao departementDao = null;
 
 	@Autowired
 	@Qualifier("repositoryService")
@@ -65,13 +80,37 @@ public class TransferManagerImpl implements TransferManager {
 	/* (non-Javadoc)
 	 * @see com.alten.mercato.server.manager.interf.TransferManager#startTransferProcess(long, long)
 	 */
-	public void startTransferProcess(long transDepEntrId, long transDepConsulId) {
+	public Personne startTransferProcess(long transDepEntrId, long transDepConsulId)  throws MercatoWorkflowException{
 
 		try {
+			
+			//retrieve the consultant object
+			Personne consultant = personneDao.findById(transDepConsulId);
+			
+			Departement departement = departementDao.findById(transDepEntrId);
+			
+			//
+			if ((consultant == null) || (departement == null)) {
+				throw new MercatoWorkflowException("Constant id or department id is not correct");
+			}
+			
+			//find the existing transfer assigned to the consult, the list should either be empty 
+			//or contain only past transfers to allow the execution to be started
+			Set<Transfert> setTransfert = consultant.getTransferts();
+			
+			if (setTransfert != null) {
+				for (Transfert trans: setTransfert) {
+					String exeId = trans.getTransExecId();
+					Execution execution = executionService.findExecution(exeId);
+					if (execution != null) {
+						throw new MercatoWorkflowException("Transfer for this consultant is still in progress");
+					}
+				}
+			}
 
 			//create the new transfert object save it to let the database generate automatically the transfert id
-			Transfert transfert = new Transfert(transDepEntrId, transDepConsulId);
-			transferDao.attachDirty(transfert);
+			Transfert transfert = new Transfert(consultant, departement);
+			transfertDao.attachDirty(transfert);
 
 			long transfertId = transfert.getTransId();
 
@@ -79,24 +118,29 @@ public class TransferManagerImpl implements TransferManager {
 
 			// put the transfertId to the process contextVariable map
 			processContextVariables.put(KEY_PROCESS_CONTEXT_TRANSFERT_ID, transfertId);
-
+			processContextVariables.put(KEY_CONTEXT_DD1, departement.getPersonne().getPerId());
+			processContextVariables.put(KEY_CONTEXT_DD2, consultant.getDepartement().getPersonne().getPerId());
+			
 			Execution execution = executionService.startProcessInstanceByKey(KEY_TRANSFER_REQUEST_PROCESS_DEFINITION, processContextVariables);
 
 			//associate the execution id to the transfert object and update the database, from now on we have established the virtual association
 			//between the execution and the transfert object
-			transfert.setTransExecId(execution.getDbid());
-			transferDao.attachDirty(transfert);
+			transfert.setTransExecId(execution.getId());
+			transfertDao.attachDirty(transfert);
+			
+			
+			return consultant;
 		}
 		catch (JbpmException e ){
 			logger.error(e.toString());
-			return;
+			return null;
 		}
 	}
 
 	/* (non-Javadoc)
 	 * @see com.alten.mercato.server.manager.interf.TransferManager#signalAskConsultant(com.alten.mercato.server.model.Transfert, java.lang.String)
 	 */
-	public void signalAskConsultant(Transfert transfert, String assignee) {
+	public void signalAskConsultant(Transfert transfert, String assignee) throws MercatoWorkflowException {
 
 		try {
 			List<Task> taskList = taskService.findAssignedTasks(assignee);
@@ -108,10 +152,10 @@ public class TransferManagerImpl implements TransferManager {
 			Task taskToComplete = null;
 
 			if (taskList.size() > 0) {
-				long transfertId;
+				String transfertId;
 				for (Task task:taskList) {
 					taskVariables = taskService.getVariables(task.getDbid(), variableNames);
-					transfertId = new Long(taskVariables.get(KEY_PROCESS_CONTEXT_TRANSFERT_ID).toString()).longValue();
+					transfertId = taskVariables.get(KEY_PROCESS_CONTEXT_TRANSFERT_ID).toString();
 
 					if ( transfertId == transfert.getTransExecId()) {
 						taskToComplete = task;
@@ -136,7 +180,7 @@ public class TransferManagerImpl implements TransferManager {
 	/* (non-Javadoc)
 	 * @see com.alten.mercato.server.manager.interf.TransferManager#signalValidateTransfer(com.alten.mercato.server.model.Transfert, java.lang.String, boolean)
 	 */
-	public void signalValidateTransfer(Transfert transfert, String assignee, boolean validation) {
+	public void signalValidateTransfer(Transfert transfert, String assignee, boolean validation) throws MercatoWorkflowException{
 		try {
 			List<Task> taskList = taskService.findAssignedTasks(assignee);
 
@@ -147,10 +191,10 @@ public class TransferManagerImpl implements TransferManager {
 			Task taskToComplete = null;
 
 			if (taskList.size() > 0) {
-				long transfertId;
+				String transfertId;
 				for (Task task:taskList) {
 					taskVariables = taskService.getVariables(task.getDbid(), variableNames);
-					transfertId = new Long(taskVariables.get(KEY_PROCESS_CONTEXT_TRANSFERT_ID).toString()).longValue();
+					transfertId = taskVariables.get(KEY_PROCESS_CONTEXT_TRANSFERT_ID).toString();
 
 					if ( transfertId == transfert.getTransExecId()) {
 						taskToComplete = task;

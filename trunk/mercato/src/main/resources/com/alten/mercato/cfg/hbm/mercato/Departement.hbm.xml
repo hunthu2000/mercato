@@ -20,5 +20,11 @@
             </key>
             <one-to-many class="com.alten.mercato.server.model.Personne" />
         </set>
+        <set name="transferts" inverse="true">
+            <key>
+                <column name="TRANS_DEP_ENTR_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.alten.mercato.server.model.Transfert" />
+        </set>
     </class>
 </hibernate-mapping>
