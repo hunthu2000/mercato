@@ -24,7 +24,15 @@
 		Aop : cut points
 		*************************************************************************************************************
 	-->
-	
+	<aop:aspectj-autoproxy />
+    
+	<aop:config>
+		<aop:pointcut id="transferManagerMethods" expression="execution(* com.alten.mercato.server.manager.interf.TransferManager.*(..))"/>
+      <aop:advisor
+            pointcut-ref="transferManagerMethods"
+            advice-ref="txMercato" order="1"/>
+
+	</aop:config>
 	<!--
 		*************************************************************************************************************
 		jBPM beans
@@ -70,8 +78,6 @@
 		<property name="typeConfig" value="jbpm.variable.types.xml" />
 	</bean>
 
-	<bean id="scriptManager" class="org.jbpm.pvm.internal.script.ScriptManager">
-	</bean>
 
 	<bean id="blobStrategy" class="org.jbpm.pvm.internal.lob.BlobStrategyBinary">
 	</bean>
@@ -119,7 +125,11 @@
 
 	<bean id="environmentFactory" class="org.jbpm.pvm.internal.cfg.SpringConfiguration"
 		scope="singleton" />
-
+	
+	<!--  need Java SE 6 to use this bean, on the mac platform, the lastest version of Java SE is 5
+	<bean id="scriptManager" class="org.jbpm.pvm.internal.script.ScriptManager">
+	</bean>-->
+	
 	<bean id="hibernateSessionManager" class="org.jbpm.pvm.internal.spring.HibernateSessionManager"
 		scope="singleton">
 		<property name="sessionFactory" ref="mercatoSF" />
