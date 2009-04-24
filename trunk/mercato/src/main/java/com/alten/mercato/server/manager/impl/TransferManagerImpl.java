@@ -84,17 +84,18 @@ public class TransferManagerImpl implements TransferManager {
 
 		try {
 			
-			//retrieve the consultant object
+			// retrieve the consultant to be transfered
 			Personne consultant = personneDao.findById(transDepConsulId);
 			
+			// retrieve the new department that the consultant is to be entered
 			Departement departement = departementDao.findById(transDepEntrId);
 			
-			//
+			// if one of the two objects is null, the transfer can not be started
 			if ((consultant == null) || (departement == null)) {
 				throw new MercatoWorkflowException("Constant id or department id is not correct");
 			}
 			
-			//find the existing transfer assigned to the consult, the list should either be empty 
+			//find the existing transfer assigned to the consultant, the list should either be empty 
 			//or contain only past transfers to allow the execution to be started
 			Set<Transfert> setTransfert = consultant.getTransferts();
 			
@@ -118,6 +119,8 @@ public class TransferManagerImpl implements TransferManager {
 
 			// put the transfertId to the process contextVariable map
 			processContextVariables.put(KEY_PROCESS_CONTEXT_TRANSFERT_ID, transfertId);
+			
+			// assign dynamically the actors of the workflow
 			processContextVariables.put(KEY_CONTEXT_DD1, departement.getPersonne().getPerId());
 			processContextVariables.put(KEY_CONTEXT_DD2, consultant.getDepartement().getPersonne().getPerId());
 			
