@@ -197,6 +197,7 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		
 		<!-- smartGWT -->
 		<dependency>
 			<groupId>com.smartgwt</groupId>

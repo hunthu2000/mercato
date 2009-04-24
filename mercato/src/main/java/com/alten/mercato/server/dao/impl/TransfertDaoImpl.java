@@ -17,7 +17,7 @@ import com.alten.mercato.server.dao.interf.TransfertDao;
  * @author Huage Chen
  *
  */
-@Repository("transferDao")
+@Repository("transfertDao")
 public class TransfertDaoImpl extends TransfertDaoHome implements
 		TransfertDao {
 	@SuppressWarnings("unused")

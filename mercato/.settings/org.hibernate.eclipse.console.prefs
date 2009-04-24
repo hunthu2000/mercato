@@ -1,4 +1,4 @@
-#Thu Apr 09 20:36:51 CEST 2009
-default.configuration=
+#Thu Apr 23 12:02:44 CEST 2009
+default.configuration=hibernate_mercato
 eclipse.preferences.version=1
 hibernate3.enabled=true

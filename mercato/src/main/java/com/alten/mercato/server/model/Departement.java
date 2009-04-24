@@ -20,6 +20,7 @@ public class Departement extends LightEntity implements java.io.Serializable {
 	private Personne personne;
 	private String depLib;
 	private Set<Personne> personnes = new HashSet<Personne>(0);
+	private Set<Transfert> transferts = new HashSet<Transfert>(0);
 
 	public Departement() {
 	}
@@ -30,12 +31,15 @@ public class Departement extends LightEntity implements java.io.Serializable {
 	}
 
 	public Departement(long depId, Personne personne, String depLib,
-			Set<Personne> personnes) {
+			Set<Personne> personnes, Set<Transfert> transferts) {
 		this.depId = depId;
 		this.personne = personne;
 		this.depLib = depLib;
 		this.personnes = personnes;
+		this.transferts = transferts;
 	}
+
+	
 
 	public long getDepId() {
 		return this.depId;
@@ -67,6 +71,20 @@ public class Departement extends LightEntity implements java.io.Serializable {
 
 	public void setPersonnes(Set<Personne> personnes) {
 		this.personnes = personnes;
+	}
+	
+	/**
+	 * @return the transferts
+	 */
+	public Set<Transfert> getTransferts() {
+		return transferts;
+	}
+
+	/**
+	 * @param transferts the transferts to set
+	 */
+	public void setTransferts(Set<Transfert> transferts) {
+		this.transferts = transferts;
 	}
 
 }

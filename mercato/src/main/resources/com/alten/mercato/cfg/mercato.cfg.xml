@@ -45,7 +45,8 @@
     <mapping resource="com/alten/mercato/cfg/hbm/mercato/TypePersonne.hbm.xml" />
     <mapping resource="com/alten/mercato/cfg/hbm/mercato/Util.hbm.xml" />
     <mapping resource="com/alten/mercato/cfg/hbm/mercato/UtilRole.hbm.xml" />
-
+	<mapping resource="com/alten/mercato/cfg/hbm/mercato/Transfert.hbm.xml" />
+	
   </session-factory>
   
 </hibernate-configuration>

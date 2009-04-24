@@ -3,6 +3,8 @@
  */
 package com.alten.mercato.server.manager.interf;
 
+import com.alten.mercato.server.exception.MercatoWorkflowException;
+import com.alten.mercato.server.model.Personne;
 import com.alten.mercato.server.model.Transfert;
 
 
@@ -19,16 +21,15 @@ public interface TransferManager {
 	 * @param transDepEntrId
 	 * @param transDepConsulId
 	 */
-	public void startTransferProcess(long transDepEntrId, long transDepConsulId);
-	
+	public Personne startTransferProcess(long transDepEntrId, long transDepConsulId) throws MercatoWorkflowException;
 	
 	/**
 	 * @param transfert
 	 * @param assignee
 	 */
-	public void signalAskConsultant(Transfert transfert, String assignee);
+	public void signalAskConsultant(Transfert transfert, String assignee) throws MercatoWorkflowException;
 	
 	
-	public void signalValidateTransfer(Transfert transfert, String assignee, boolean validation);
+	public void signalValidateTransfer(Transfert transfert, String assignee, boolean validation) throws MercatoWorkflowException;
 
 }
