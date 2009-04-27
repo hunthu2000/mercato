@@ -25,6 +25,7 @@ public class ConstantsMercato {
 	public static final String KEY_CREATOR = "creator";
 	public static final String KEY_DATE = "date";
 	public static final String KEY_DEPARTMENT = "department";
+	public static final String KEY_ORIGINAL_DEPARTMENT = "originalDepartment";
 	public static final String KEY_ICON = "icon";
 	public static final String KEY_ID = "id";
 	public static final String KEY_LABEL = "label";
@@ -40,6 +41,7 @@ public class ConstantsMercato {
 	public static final String KEY_TYPE = "type";
 	public static final String KEY_UNIQUE = "unique";
 	public static final String KEY_PARENT = "ReportsTo";
+	public static final String KEY_VALIDATION = "validation";
 
 	// PATH for icons
 	public static final String ICON_ADD = "[SKIN]/actions/add.png";

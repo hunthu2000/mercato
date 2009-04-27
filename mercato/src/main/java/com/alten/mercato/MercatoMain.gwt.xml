@@ -28,6 +28,7 @@
 	<entry-point class="com.alten.mercato.client.MercatoMain"/>
   	
   	<source path="server/model"/>
+  	<source path="server/controller/dto"/>
   	<source path="client"/>
   	
 </module>
