@@ -3,6 +3,7 @@
  */
 package com.alten.mercato.server.manager.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.alten.mercato.server.controller.dto.InfoTransfer;
 import com.alten.mercato.server.dao.interf.DepartementDao;
 import com.alten.mercato.server.dao.interf.PersonneDao;
 import com.alten.mercato.server.dao.interf.TransfertDao;
@@ -64,7 +66,7 @@ public class TransferManagerImpl implements TransferManager {
 	ProcessEngine processEngine;
 
 	public TransferManagerImpl() {
-		processEngine = new Configuration().setResource("jbpm.cfg.xml").buildProcessEngine();
+		processEngine = new Configuration().setResource(JBPM_CONFIG_FILE).buildProcessEngine();
 	}
 
 	/* (non-Javadoc)
@@ -190,6 +192,42 @@ public class TransferManagerImpl implements TransferManager {
 			return;
 		}
 
+	}
+
+	/* (non-Javadoc)
+	 * @see com.alten.mercato.server.manager.interf.TransferManager#getConsultantsWithTransferInfo()
+	 */
+	public List<InfoTransfer> getConsultantsWithTransferInfo() {
+		List<InfoTransfer> res = new ArrayList<InfoTransfer>();
+		
+		logger.info("getting available consultants");
+		List<Personne> lstAvailableConsultants = personneDao.findAllAvailableConsultant();
+		for (Personne personne:lstAvailableConsultants) {
+			res.add(new InfoTransfer(personne, ""));
+		}
+		
+		logger.info("getting consultants who have a current transfer");
+		List<Personne> lstInTransferConsultants = personneDao.findAllConsultantInTransfer();
+		
+		for (Personne personne:lstInTransferConsultants) {
+			//find the execution status for those who have a transfer in process
+			res.add(new InfoTransfer(personne, findExecutionStatus(personne.getTransferCourant().getTransExecId())));
+		}
+		logger.info("returning the prepared list to the controller");
+		return res;
+	}
+	
+	/**
+	 * @param executionId
+	 * @return
+	 */
+	private String findExecutionStatus(String executionId) {
+		logger.info("finding execution status");
+		ExecutionService executionService = processEngine.getExecutionService();
+		Execution execution = executionService.findExecution(executionId);
+		String status = execution.getActivityName();
+		
+		return status;
 	}
 
 

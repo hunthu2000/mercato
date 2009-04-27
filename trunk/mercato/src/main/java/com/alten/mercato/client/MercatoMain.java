@@ -10,6 +10,7 @@ import com.alten.mercato.client.service.TransferService;
 import com.alten.mercato.client.service.UserService;
 import com.alten.mercato.client.ui.framework.widget.CustomWaitDialog;
 import com.alten.mercato.client.ui.util.ConstantsMercato;
+import com.alten.mercato.server.controller.dto.InfoTransfer;
 import com.alten.mercato.server.model.Departement;
 import com.alten.mercato.server.model.Personne;
 import com.google.gwt.core.client.EntryPoint;
@@ -55,6 +56,9 @@ public class MercatoMain implements EntryPoint {
 	private ListGridRecord myDepartmentDraggedRecord = null;
 	private ListGridRecord otherDepartmentDraggedRecord = null;
 	private String myValidatingNodeId = "";
+	private String otherValidatingNodeId = "";
+
+	
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
@@ -101,11 +105,13 @@ public class MercatoMain implements EntryPoint {
 		hlConsultants.setPadding(5);
 
 		initMyDepartmentTreeGrid();
-		loadListConsultantsByRPC();
+		//loadListConsultantsByRPC();
 
 		initOtherDepartmentTreeGrid();
 		loadOtherDepartmentsByRPC();
-		loadOtherDepartmentListConsultantsByRPC();
+		//loadOtherDepartmentListConsultantsByRPC();
+		
+		loadConsultantTransferInfoByRPC();
 
 		hlConsultants.addMember(tgMyDepartmentConsultants);
 		hlConsultants.addMember(tgOtherDepartmentConsultants);
@@ -137,36 +143,25 @@ public class MercatoMain implements EntryPoint {
 		RootPanel.get("loadingWrapper").getElement().setInnerHTML("");
 	}
 
-	/**
-	 * 
-	 */
-	private void loadListConsultantsByRPC() {
 
-
-		AsyncCallback<List<Personne>> callback = new AsyncCallback<List<Personne>>() {
-
-			public void onSuccess(List<Personne> result) {
-				if (result==null||result.size()==0) {
-					return;
-				}
-				System.out.println(result.size() + " consultants for this dd found");
-				createMyConsultantTreeNodes(result);
-			}
-
-			public void onFailure(Throwable ex) {
-			}
-		};
-
-		PersonService.Util.getInstance().getConsultantsForDD(ConstantsMercato.getCurrentUser().getDepartement().getDepId(),callback);
-		// give user a wait message while retrieving datas
-	}
-	
 	
 	/**
 	 * 
 	 */
 	private void initMyDepartmentTreeGrid() {
-
+		// define the tree fields
+		TreeGridField name = new TreeGridField(ConstantsMercato.KEY_LABEL,"Consultant");
+		name.setCanEdit(false);
+		TreeGridField originalDpmt = new TreeGridField(ConstantsMercato.KEY_ORIGINAL_DEPARTMENT,"Current dpmt",80);
+		name.setCanEdit(false);
+		TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Reference Num",100);
+		matricule.setCanEdit(false);
+		TreeGridField validation = new TreeGridField(ConstantsMercato.KEY_VALIDATION,"Validation", 150);
+		validation.setValueMap("Validate", "Cancel");
+		validation.setCanEdit(true);
+		tgMyDepartmentConsultants.setFields(name,originalDpmt,matricule, validation);
+		
+		
 		//define the root nodes
 		Tree tree = new Tree();
 		tree.setModelType(TreeModelType.PARENT);
@@ -215,9 +210,12 @@ public class MercatoMain implements EntryPoint {
 
 			public void onCellDoubleClick(CellDoubleClickEvent event) {
 				ListGridRecord record = tgMyDepartmentConsultants.getSelectedRecord();
+				if (!record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals("Please validate")) {
+					event.cancel();
+					return;
+				}
 				setMyValidatingNodeId(record.getAttribute(ConstantsMercato.KEY_ID));
 				System.out.println("Trying to change " + record.getAttribute(ConstantsMercato.KEY_LABEL));
-				
 			}
 			
 		});
@@ -241,6 +239,16 @@ public class MercatoMain implements EntryPoint {
 	 * 
 	 */
 	private void initOtherDepartmentTreeGrid() {
+		
+		// define the tree fields
+		TreeGridField name = new TreeGridField(ConstantsMercato.KEY_LABEL,"Consultant");
+		name.setCanEdit(false);
+		TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Reference Num",100);
+		matricule.setCanEdit(false);
+		TreeGridField validation = new TreeGridField(ConstantsMercato.KEY_VALIDATION,"Validation", 150);
+		validation.setValueMap("Validate", "Cancel");
+		validation.setCanEdit(true);
+		tgOtherDepartmentConsultants.setFields(name,matricule, validation);
 
 		Tree tree = new Tree();
 		tree.setModelType(TreeModelType.PARENT);
@@ -290,31 +298,55 @@ public class MercatoMain implements EntryPoint {
 			
 		});
 		
+		tgOtherDepartmentConsultants.addCellDoubleClickHandler(new CellDoubleClickHandler() {
+
+			public void onCellDoubleClick(CellDoubleClickEvent event) {
+				ListGridRecord record = tgOtherDepartmentConsultants.getSelectedRecord();
+				if (!record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals("Please validate")) {
+					event.cancel();
+					return;
+				}
+				setOtherValidatingNodeId(record.getAttribute(ConstantsMercato.KEY_ID));
+				System.out.println("Trying to change " + record.getAttribute(ConstantsMercato.KEY_LABEL));
+				
+				
+			}
+			
+		});
+		
+		tgOtherDepartmentConsultants.addCellSavedHandler(new CellSavedHandler() {
+
+			public void onCellSaved(CellSavedEvent event) {
+				TreeNode treeNode = tgOtherDepartmentConsultants.getTree().findById(getOtherValidatingNodeId());
+				System.out.println("validation changed!");
+				if (treeNode != null) {
+					System.out.println("To " + treeNode.getAttribute("validation") + " status.");
+				}
+			}
+			
+		});
+
 	}
 	
 	
-	/**
-	 * 
-	 */
-	private void loadOtherDepartmentListConsultantsByRPC() {
 
+	private void loadConsultantTransferInfoByRPC() {
+		AsyncCallback<List<InfoTransfer>> callback = new AsyncCallback<List<InfoTransfer>>() {
 
-		AsyncCallback<List<Personne>> callback = new AsyncCallback<List<Personne>>() {
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
 
-			public void onSuccess(List<Personne> result) {
-				if (result==null||result.size()==0) {
-					return;
+			public void onSuccess(List<InfoTransfer> result) {
+				if ((result!=null) && (result.size()>0)) {
+					createConsultantTreeNodes(result);
 				}
-				System.out.println(result.size() + " consultants for this dd found");
-				createOtherDepartmentConsultantTreeNodes(result);
+				
 			}
-
-			public void onFailure(Throwable ex) {
-			}
+			
 		};
-
-		PersonService.Util.getInstance().getOtherDepartmentConsultantsForDD(ConstantsMercato.getCurrentUser().getDepartement().getDepId(),callback);
-		// give user a wait message while retrieving datas
+		TransferService.Util.getInstance().getConsultantWithTransferInfo(callback);
 	}
 
 	/**
@@ -367,9 +399,30 @@ public class MercatoMain implements EntryPoint {
 	}
 
 	private void updateRequestedTreeNode(Personne pers) {
-		TreeNode treeNode = tgOtherDepartmentConsultants.getTree().findById(String.valueOf(pers.getPerId()));
-		treeNode.setAttribute(ConstantsMercato.KEY_OBJECT, pers);
-		treeNode.setEnabled(false);
+		Tree treeMyDepartment = tgMyDepartmentConsultants.getTree();
+		
+		TreeNode oldTreeNode = treeMyDepartment.findById(String.valueOf(pers.getPerId()));
+		treeMyDepartment.remove(oldTreeNode);
+		
+		TreeNode parentNode = treeMyDepartment.findById("rootMyDpmt");
+		TreeNode node = new TreeNode();
+		node.setAttribute(ConstantsMercato.KEY_ID, String.valueOf(pers.getPerId()));
+		node.setAttribute(ConstantsMercato.KEY_LABEL, pers.getPerPrenom() + " "+ pers.getPerNom());
+		node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
+		node.setAttribute(ConstantsMercato.KEY_MATRICULE, pers.getPerMatricule());
+		node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER_BLUE);
+		node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, pers.getDepartement().getDepLib());
+		node.setAttribute(ConstantsMercato.KEY_ORIGINAL_DEPARTMENT, pers.getDepartement().getDepLib());
+		node.setAttribute(ConstantsMercato.KEY_VALIDATION, "Waiting for confirmation");
+		node.setAttribute(ConstantsMercato.KEY_OBJECT, pers);
+		node.setCanAcceptDrop(false);
+		node.setIsFolder(false);
+		node.setEnabled(false);
+		
+		treeMyDepartment.add(node, parentNode);
+		tgMyDepartmentConsultants.setData(treeMyDepartment);
+		tgMyDepartmentConsultants.getData().openAll();
+		
 	}
 	
 	private void setMyDepartmentDraggedRecord(ListGridRecord record) {
@@ -402,6 +455,20 @@ public class MercatoMain implements EntryPoint {
 	private void setMyValidatingNodeId(String validatingNodeId) {
 		this.myValidatingNodeId = validatingNodeId;
 	}
+	
+	/**
+	 * @return the otherValidatingNodeId
+	 */
+	private String getOtherValidatingNodeId() {
+		return otherValidatingNodeId;
+	}
+
+	/**
+	 * @param otherValidatingNodeId the otherValidatingNodeId to set
+	 */
+	private void setOtherValidatingNodeId(String otherValidatingNodeId) {
+		this.otherValidatingNodeId = otherValidatingNodeId;
+	}
 
 	private TreeNode createRootNode(String id, String label, String icon, Object obj) {
 		TreeNode node = new TreeNode();
@@ -418,6 +485,63 @@ public class MercatoMain implements EntryPoint {
 	}
 
 
+	private void createConsultantTreeNodes(List<InfoTransfer> infoTransfers) {
+		Tree treeMyDepartment = tgMyDepartmentConsultants.getTree();
+		Tree treeOtherDepartment = tgOtherDepartmentConsultants.getTree();
+		for (InfoTransfer infoTransfer: infoTransfers) {
+			
+			
+			TreeNode node = new TreeNode();
+			node.setAttribute(ConstantsMercato.KEY_ID, String.valueOf(infoTransfer.getPersonne().getPerId()));
+			node.setAttribute(ConstantsMercato.KEY_LABEL, infoTransfer.getPersonne().getPerPrenom() + " "+ infoTransfer.getPersonne().getPerNom());
+			node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
+			node.setAttribute(ConstantsMercato.KEY_MATRICULE, infoTransfer.getPersonne().getPerMatricule());
+			node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, infoTransfer.getPersonne().getDepartement().getDepLib());
+			node.setAttribute(ConstantsMercato.KEY_OBJECT, infoTransfer.getPersonne());
+			node.setCanAcceptDrop(false);
+			node.setIsFolder(false);
+			
+			// Check if it is my departement
+			if (infoTransfer.getPersonne().getDepartement().getDepId() == ConstantsMercato.getCurrentUser().getDepartement().getDepId()) {
+				node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER);
+				
+				// if the personne has no transfer
+				if (infoTransfer.getPersonne().getTransferCourant() == null) {
+					TreeNode parentNode = treeMyDepartment.findById("rootMyDpmt");
+					node.setCanDrag(true);
+					treeMyDepartment.add(node, parentNode);
+				} else {
+					//TODO modify after the introduction of transfer proposal
+					TreeNode parentNode = treeOtherDepartment.findById(String.valueOf(infoTransfer.getPersonne().getTransferCourant().getDepEntr().getDepId()));
+					node.setCanDrag(false);
+					node.setAttribute(ConstantsMercato.KEY_VALIDATION, "Please validate");
+					treeOtherDepartment.add(node, parentNode);
+				}
+			} else {
+				node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER_BLUE);
+				if (infoTransfer.getPersonne().getTransferCourant() == null) {
+					TreeNode parentNode = treeOtherDepartment.findById(String.valueOf(infoTransfer.getPersonne().getDepartement().getDepId()));
+					node.setCanDrag(true);
+					treeOtherDepartment.add(node, parentNode);
+				} else {
+					if (infoTransfer.getPersonne().getTransferCourant().getDepEntr().getDepId() == ConstantsMercato.getCurrentUser().getDepartement().getDepId()) {
+						//TODO modify after the introduction of transfer proposal
+						TreeNode parentNode = treeMyDepartment.findById("rootMyDpmt");
+						node.setAttribute(ConstantsMercato.KEY_ORIGINAL_DEPARTMENT, infoTransfer.getPersonne().getDepartement().getDepLib());
+						node.setAttribute(ConstantsMercato.KEY_VALIDATION, "Waiting for confirmation");
+						node.setCanDrag(false);
+						node.setEnabled(false);
+						treeMyDepartment.add(node, parentNode);
+					}
+				}
+			}
+		}
+
+		tgMyDepartmentConsultants.setData(treeMyDepartment);
+		tgMyDepartmentConsultants.getData().openAll();
+		tgOtherDepartmentConsultants.setData(treeOtherDepartment);
+		tgOtherDepartmentConsultants.getData().openAll();
+	}
 	/**
 	 * Create the department list tree node without the own department
 	 * @param departements
@@ -446,69 +570,6 @@ public class MercatoMain implements EntryPoint {
 	}
 
 
-	/**
-	 * Fill my consultant tree grid with the consultant list
-	 * @param persons
-	 */
-	private void createMyConsultantTreeNodes(List<Personne> persons) {
-
-		Tree tree = tgMyDepartmentConsultants.getTree();
-
-		for (Personne person: persons) {
-			TreeNode node = new TreeNode();
-			node.setAttribute(ConstantsMercato.KEY_ID, String.valueOf(person.getPerId()));
-			node.setAttribute(ConstantsMercato.KEY_LABEL, person.getPerPrenom() + " "+ person.getPerNom());
-			node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER);
-			node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
-			node.setAttribute(ConstantsMercato.KEY_MATRICULE, person.getPerMatricule());
-			node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, person.getDepartement().getDepLib());
-			//TODO set the validation information
-			//node.setAttribute("validation", "Please validate...");
-			
-			// Find my department tree node
-			TreeNode parentNode = tree.findById("rootMyDpmt");
-			node.setAttribute(ConstantsMercato.KEY_OBJECT, person);
-			node.setCanAcceptDrop(false);
-			node.setIsFolder(false);
-			node.setCanDrag(true);
-			tree.add(node, parentNode);
-		}
-
-		tgMyDepartmentConsultants.setData(tree);
-		tgMyDepartmentConsultants.getData().openAll();
-	}
-
-
-	/**
-	 * Fill the other department consultant treeGrid with the consultant list
-	 * @param persons
-	 */
-	private void createOtherDepartmentConsultantTreeNodes(List<Personne> persons) {
-
-		Tree tree = tgOtherDepartmentConsultants.getTree();
-
-		for (Personne person: persons) {
-			TreeNode node = new TreeNode();
-			node.setAttribute(ConstantsMercato.KEY_ID, String.valueOf(person.getPerId()));
-			node.setAttribute(ConstantsMercato.KEY_LABEL, person.getPerPrenom() + " "+ person.getPerNom());
-			node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER_BLUE);
-			node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
-			node.setAttribute(ConstantsMercato.KEY_MATRICULE, person.getPerMatricule());
-			node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, person.getDepartement().getDepLib());
-			// find the parent for the current node
-			TreeNode parentNode = tree.findById(String.valueOf(person.getDepartement().getDepId()));
-			System.out.println("parent id :" + parentNode.getAttribute(ConstantsMercato.KEY_ID));
-			node.setAttribute(ConstantsMercato.KEY_OBJECT, person);
-			node.setIsFolder(false);
-			node.setCanDrag(true);
-			node.setCanAcceptDrop(false);
-
-			tree.add(node, parentNode);
-		}
-
-		tgOtherDepartmentConsultants.setData(tree);
-		tgOtherDepartmentConsultants.getData().openAll();
-	}
 
 	/**
 	 * @param treegrid
@@ -566,16 +627,6 @@ public class MercatoMain implements EntryPoint {
 			setEditByCell(true);
 			setCanReorderRecords(false);
 			setCanReparentNodes(false);
-			
-			// define the tree fields
-			TreeGridField name = new TreeGridField(ConstantsMercato.KEY_LABEL,"Consultant");
-			name.setCanEdit(false);
-			TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Reference Num",100);
-			matricule.setCanEdit(false);
-			TreeGridField validation = new TreeGridField("validation","Validation", 100);
-			validation.setValueMap("Validate", "Cancel");
-			validation.setCanEdit(true);
-			setFields(name,matricule, validation);
 			
 		}  
 		

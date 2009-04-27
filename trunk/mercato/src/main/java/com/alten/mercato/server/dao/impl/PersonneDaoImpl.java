@@ -100,4 +100,96 @@ PersonneDao {
 		}
 	}
 
+
+	@SuppressWarnings("unchecked")
+	public List<Personne> findConsultantInTransferByDepartmentId(
+			long departmentId) {
+		if (log.isDebugEnabled()) {
+			log.debug("finding all consultants who have a transfer in progress in the department " + departmentId);
+		}
+		try {
+			DetachedCriteria criteria = DetachedCriteria.forClass(Personne.class);
+			criteria.add(Restrictions.eq("departement.depId", departmentId));
+			criteria.add(Restrictions.isNotNull("transferCourant"));
+			
+			// get only consultants, omit department director and human resources
+			criteria.createAlias("typePersonne", "tp").add(Restrictions.eq("tp.tpersCode", CODE_CONSULTANT));
+			criteria.addOrder(Order.asc("perNom"));
+			List<Personne> lst = getHibernateTemplate().findByCriteria(criteria);
+			if (null==lst||0==lst.size()) {
+				if (log.isDebugEnabled()) {
+					log.debug("No consultant in the department " + departmentId + " is found" );
+				}
+				return null;
+			}
+			if (log.isDebugEnabled()) {
+				log.debug(""+lst.size()+" person(consultants) instances who have a transfer in progress founded");
+			}
+			return lst;
+		} catch (RuntimeException re) {
+			log.error("finding consultants who have a transfer in progress by department id failed", re);
+			throw re;
+		}
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<Personne> findAllConsultantInTransfer() {
+		if (log.isDebugEnabled()) {
+			log.debug("finding all consultants who have a transfer in progress " );
+		}
+		try {
+			DetachedCriteria criteria = DetachedCriteria.forClass(Personne.class);
+			criteria.add(Restrictions.isNotNull("transferCourant"));
+			
+			// get only consultants, omit department director and human resources
+			criteria.createAlias("typePersonne", "tp").add(Restrictions.eq("tp.tpersCode", CODE_CONSULTANT));
+			criteria.addOrder(Order.asc("perNom"));
+			List<Personne> lst = getHibernateTemplate().findByCriteria(criteria);
+			if (null==lst||0==lst.size()) {
+				if (log.isDebugEnabled()) {
+					log.debug("No consultant in the department is found" );
+				}
+				return null;
+			}
+			if (log.isDebugEnabled()) {
+				log.debug(""+lst.size()+" person(consultants) instances who have a transfer in progress founded");
+			}
+			return lst;
+		} catch (RuntimeException re) {
+			log.error("finding consultants who have a transfer in progress by department id failed", re);
+			throw re;
+		}
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<Personne> findAllAvailableConsultant() {
+		if (log.isDebugEnabled()) {
+			log.debug("finding all consultants who don't have a transfer in progress " );
+		}
+		try {
+			DetachedCriteria criteria = DetachedCriteria.forClass(Personne.class);
+			criteria.add(Restrictions.isNull("transferCourant"));
+			
+			// get only consultants, omit department director and human resources
+			criteria.createAlias("typePersonne", "tp").add(Restrictions.eq("tp.tpersCode", CODE_CONSULTANT));
+			criteria.addOrder(Order.asc("perNom"));
+			List<Personne> lst = getHibernateTemplate().findByCriteria(criteria);
+			if (null==lst||0==lst.size()) {
+				if (log.isDebugEnabled()) {
+					log.debug("No consultant in the department is found" );
+				}
+				return null;
+			}
+			if (log.isDebugEnabled()) {
+				log.debug(""+lst.size()+" person(consultants) instances who don't have a transfer in progress founded");
+			}
+			return lst;
+		} catch (RuntimeException re) {
+			log.error("finding consultants who don't have a transfer in progress by department id failed", re);
+			throw re;
+		}
+	}
+
 }
