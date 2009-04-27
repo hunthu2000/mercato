@@ -17,5 +17,11 @@
         <property name="transExecId" type="string">
             <column name="TRANS_EXEC_ID" length="255"/>
         </property>
+        <set name="personnes" inverse="true">
+            <key>
+                <column name="PER_TRANS_ID" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.alten.mercato.server.model.Personne" />
+        </set>
     </class>
 </hibernate-mapping>

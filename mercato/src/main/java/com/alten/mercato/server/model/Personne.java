@@ -19,10 +19,14 @@ public class Personne extends LightEntity implements java.io.Serializable {
 	private long perId;
 	private Departement departement;
 	private TypePersonne typePersonne;
+	
+	
+
 	private String perNom;
 	private String perPrenom;
 	private String perMatricule;
 	private String perTrigramme;
+	private Transfert transferCourant;
 	private Set<Departement> departements = new HashSet<Departement>(0);
 	private Set<Util> utils = new HashSet<Util>(0);
 	private Set<Transfert> transferts = new HashSet<Transfert>(0);
@@ -42,8 +46,8 @@ public class Personne extends LightEntity implements java.io.Serializable {
 	}
 
 	public Personne(long perId, Departement departement,
-			TypePersonne typePersonne, String perNom, String perPrenom,
-			String perMatricule, String perTrigramme,
+			TypePersonne typePersonne,  String perNom, String perPrenom,
+			String perMatricule, String perTrigramme, Transfert transferCourant,
 			Set<Departement> departements, Set<Util> utils, Set<Transfert> transferts) {
 		this.perId = perId;
 		this.departement = departement;
@@ -52,6 +56,7 @@ public class Personne extends LightEntity implements java.io.Serializable {
 		this.perPrenom = perPrenom;
 		this.perMatricule = perMatricule;
 		this.perTrigramme = perTrigramme;
+		this.transferCourant = transferCourant;
 		this.departements = departements;
 		this.utils = utils;
 		this.transferts = transferts;
@@ -93,6 +98,20 @@ public class Personne extends LightEntity implements java.io.Serializable {
 
 	public void setTypePersonne(TypePersonne typePersonne) {
 		this.typePersonne = typePersonne;
+	}
+	
+	/**
+	 * @return the transferCourant
+	 */
+	public Transfert getTransferCourant() {
+		return transferCourant;
+	}
+
+	/**
+	 * @param transferCourant the transferCourant to set
+	 */
+	public void setTransferCourant(Transfert transferCourant) {
+		this.transferCourant = transferCourant;
 	}
 
 	public String getPerNom() {

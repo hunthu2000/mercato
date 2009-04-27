@@ -1,5 +1,8 @@
 package com.alten.mercato.server.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import net.sf.gilead.pojo.java5.LightEntity;
 
 // Generated 2009-4-17 15:31:30 by Hibernate Tools 3.2.4.CR1
@@ -17,6 +20,7 @@ public class Transfert extends LightEntity implements java.io.Serializable {
 	private String transExecId;
 	private Personne consultant;
 	private Departement depEntr;
+	private Set<Personne> personnes = new HashSet<Personne>(0);
 
 	public Transfert() {
 	}
@@ -33,11 +37,12 @@ public class Transfert extends LightEntity implements java.io.Serializable {
 	}
 
 	public Transfert(long transId, String transExecId, Personne consultant, Departement depEntr,
-			long transDepConsulId) {
+			long transDepConsulId, Set<Personne> personnes) {
 		this.transId = transId;
 		this.transExecId = transExecId;
 		this.consultant  = consultant;
 		this.depEntr = depEntr;
+		this.personnes = personnes;
 	}
 
 	public long getTransId() {
@@ -82,6 +87,20 @@ public class Transfert extends LightEntity implements java.io.Serializable {
 	 */
 	public void setDepEntr(Departement depEntr) {
 		this.depEntr = depEntr;
+	}
+
+	/**
+	 * @return the personnes
+	 */
+	public Set<Personne> getPersonnes() {
+		return personnes;
+	}
+
+	/**
+	 * @param personnes the personnes to set
+	 */
+	public void setPersonnes(Set<Personne> personnes) {
+		this.personnes = personnes;
 	}
 
 

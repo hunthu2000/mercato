@@ -80,7 +80,7 @@ public class DepartementDaoHome extends HibernateDaoSupport{
 	public Departement findById(long id) {
 		log.debug("getting Departement instance with id: " + id);
 		try {
-			Departement instance = (Departement) getHibernateTemplate().get("Departement", id);
+			Departement instance = (Departement) getHibernateTemplate().get(Departement.class, id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {

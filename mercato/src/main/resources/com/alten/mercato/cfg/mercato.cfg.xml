@@ -13,6 +13,7 @@
     <property name="hibernate.connection.username">huage</property>
     <property name="hibernate.connection.password">autruche</property>
     
+    <property name="hibernate.default_schema">Huage</property> 
     
     <property name="hibernate.show_sql">true</property>
 	<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
@@ -31,12 +32,12 @@
     <!-- Mapping -->
     
     <!-- jBPM -->
-    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.repository.hbm.xml" />
-    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.execution.hbm.xml" />
-    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.history.hbm.xml" />
-    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.task.hbm.xml" />
-    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.jpdl.hbm.xml" />
-    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.identity.hbm.xml" />
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.repository.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.execution.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.history.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.task.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.jpdl.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.identity.hbm.xml" />-->
     
     <!-- Mercato -->
     <mapping resource="com/alten/mercato/cfg/hbm/mercato/Departement.hbm.xml" />

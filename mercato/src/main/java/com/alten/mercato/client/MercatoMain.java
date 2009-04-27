@@ -6,7 +6,9 @@ package com.alten.mercato.client;
 import java.util.List;
 
 import com.alten.mercato.client.service.PersonService;
+import com.alten.mercato.client.service.TransferService;
 import com.alten.mercato.client.service.UserService;
+import com.alten.mercato.client.ui.framework.widget.CustomWaitDialog;
 import com.alten.mercato.client.ui.util.ConstantsMercato;
 import com.alten.mercato.server.model.Departement;
 import com.alten.mercato.server.model.Personne;
@@ -53,8 +55,6 @@ public class MercatoMain implements EntryPoint {
 	private ListGridRecord myDepartmentDraggedRecord = null;
 	private ListGridRecord otherDepartmentDraggedRecord = null;
 	private String myValidatingNodeId = "";
-
-	
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
@@ -279,8 +279,9 @@ public class MercatoMain implements EntryPoint {
 					if (treeNode!=null) {
 						TreeNode parent = tgMyDepartmentConsultants.getTree().getParent(treeNode);
 						System.out.println("New parent " + parent.getAttribute(ConstantsMercato.KEY_LABEL));
-						//TODO start the workflow process
+						//start the workflow process
 						System.out.println("starting transfer request for consultant " + treeNode.getAttribute(ConstantsMercato.KEY_LABEL) + " from " + treeNode.getAttribute(ConstantsMercato.KEY_DEPARTMENT) + " to " + ConstantsMercato.getCurrentUser().getDepartement().getDepLib() );
+						startTransferRequestByRPC(ConstantsMercato.getCurrentUser().getDepartement().getDepId(), new Long(treeNode.getAttribute(ConstantsMercato.KEY_ID)).longValue());
 					}
 				}
 				setOtherDepartmentDraggedRecord(null);
@@ -338,9 +339,39 @@ public class MercatoMain implements EntryPoint {
 		};
 
 		PersonService.Util.getInstance().getOtherDepartements(ConstantsMercato.getCurrentUser().getDepartement().getDepId(),callback);
+	}
+	
+	private void startTransferRequestByRPC(long transDepEntrId, long transDepConsulId) {
+		final CustomWaitDialog dlg = CustomWaitDialog.getInstance();
+		
+		AsyncCallback<Personne> callback = new AsyncCallback<Personne>() {
+
+			public void onSuccess(Personne result) {
+				if (result!=null) {
+					dlg.hide();
+					updateRequestedTreeNode(result);
+					return;
+				}
+
+			}
+
+			public void onFailure(Throwable ex) {
+				dlg.hide();
+				SC.say(ex.getMessage());
+			}
+		};
+
+		TransferService.Util.getInstance().startAndAskTransferProcess(transDepEntrId, transDepConsulId, callback);
 		// give user a wait message while retrieving datas
+		dlg.show();
 	}
 
+	private void updateRequestedTreeNode(Personne pers) {
+		TreeNode treeNode = tgOtherDepartmentConsultants.getTree().findById(String.valueOf(pers.getPerId()));
+		treeNode.setAttribute(ConstantsMercato.KEY_OBJECT, pers);
+		treeNode.setEnabled(false);
+	}
+	
 	private void setMyDepartmentDraggedRecord(ListGridRecord record) {
 		myDepartmentDraggedRecord = record;
 	}
@@ -535,8 +566,6 @@ public class MercatoMain implements EntryPoint {
 			setEditByCell(true);
 			setCanReorderRecords(false);
 			setCanReparentNodes(false);
-			//setShowFilterEditor(true);
-			//setFilterOnKeypress(true);
 			
 			// define the tree fields
 			TreeGridField name = new TreeGridField(ConstantsMercato.KEY_LABEL,"Consultant");

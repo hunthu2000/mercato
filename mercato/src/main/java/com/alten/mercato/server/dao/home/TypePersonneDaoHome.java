@@ -78,7 +78,7 @@ public class TypePersonneDaoHome extends HibernateDaoSupport{
 	public TypePersonne findById(long id) {
 		log.debug("getting TypePersonne instance with id: " + id);
 		try {
-			TypePersonne instance = (TypePersonne) getHibernateTemplate().get("TypePersonne", id);
+			TypePersonne instance = (TypePersonne) getHibernateTemplate().get(TypePersonne.class, id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
