@@ -2,9 +2,6 @@ package com.alten.mercato.server.manager.impl;
 
 import java.util.List;
 
-import org.jbpm.ExecutionService;
-import org.jbpm.RepositoryService;
-import org.jbpm.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +24,6 @@ public class UserManagerImpl implements UserManager {
 	@Qualifier("utilDao")
 	private UtilDao utilDao = null;
 	
-	@Autowired
-	@Qualifier("repositoryService")
-	RepositoryService repositoryService = null;
-	
-	
-	@Autowired
-	@Qualifier("executionService")
-	ExecutionService executionService = null;
-	
-	@Autowired
-	@Qualifier("taskService")
-	TaskService taskService = null;
 	
 	Logger logger = LoggerFactory.getLogger(UserManagerImpl.class);
 	

@@ -79,7 +79,7 @@ public class UtilRoleDaoHome extends HibernateDaoSupport{
 	public UtilRole findById(long id) {
 		log.debug("getting UtilRole instance with id: " + id);
 		try {
-			UtilRole instance = (UtilRole) getHibernateTemplate().get("UtilRole", id);
+			UtilRole instance = (UtilRole) getHibernateTemplate().get(UtilRole.class, id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {

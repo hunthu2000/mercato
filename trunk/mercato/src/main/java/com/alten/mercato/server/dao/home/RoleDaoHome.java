@@ -79,8 +79,7 @@ public class RoleDaoHome extends HibernateDaoSupport{
 	public Role findById(long id) {
 		log.debug("getting Role instance with id: " + id);
 		try {
-			Role instance = (Role) getHibernateTemplate().get(
-					"Role", id);
+			Role instance = (Role) getHibernateTemplate().get(Role.class, id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {

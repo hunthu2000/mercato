@@ -80,7 +80,7 @@ public class TransfertDaoHome extends HibernateDaoSupport{
 	public Transfert findById(long id) {
 		log.debug("getting Transfert instance with id: " + id);
 		try {
-			Transfert instance = (Transfert) getHibernateTemplate().get("Transfert", id);
+			Transfert instance = (Transfert) getHibernateTemplate().get(Transfert.class, id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {

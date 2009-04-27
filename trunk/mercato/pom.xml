@@ -136,6 +136,7 @@
 		<gilead.version>1.2.2</gilead.version>
 		<platform>mac</platform>
 		<jbpm4.version>4.0.0-Beta1</jbpm4.version>
+		<juel.version>2.1.0</juel.version>
 	</properties>
 
 	<dependencies>
@@ -398,11 +399,12 @@
     		<version>${jbpm4.version}</version>
 		</dependency>
 
-		<dependency>
-    		<groupId>org.jbpm.jbpm4</groupId>
-    		<artifactId>jbpm-jpdl</artifactId>
-    		<version>${jbpm4.version}</version>
-		</dependency>
+	<!-- remove the dependency due to the cast exception bug in the jpdl deployer, replaced with own code -->
+<!--		<dependency>-->
+<!--    		<groupId>org.jbpm.jbpm4</groupId>-->
+<!--    		<artifactId>jbpm-jpdl</artifactId>-->
+<!--    		<version>${jbpm4.version}</version>-->
+<!--		</dependency>-->
 		<dependency>
     		<groupId>org.jbpm.jbpm4</groupId>
     		<artifactId>jbpm-log</artifactId>
@@ -432,7 +434,41 @@
     		<version>${jbpm4.version}</version>
     		<scope>runtime</scope>
 		</dependency>
+		<dependency>
+    		<groupId>org.jbpm.jbpm4.dependencies.esb</groupId>
+    		<artifactId>jbossesb-rosetta</artifactId>
+    		<version>4.4.0.GA</version>
+		</dependency>
 		
+		<dependency>
+        	<groupId>juel</groupId>
+        	<artifactId>juel</artifactId>
+        	<version>${juel.version}</version>
+      	</dependency>
+      	<dependency>
+        	<groupId>juel</groupId>
+        	<artifactId>juel-engine</artifactId>
+        	<version>${juel.version}</version>
+      	</dependency>
+      	<dependency>
+        	<groupId>juel</groupId>
+        	<artifactId>juel-impl</artifactId>
+        	<version>${juel.version}</version>
+      	</dependency>
+      	
+      	<!-- scripting -->
+      	<dependency>
+			<groupId>org.livetribe</groupId>
+			<artifactId>livetribe-jsr223</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+		
+      	<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- needed only for jbpm4.0.0alpha2 -->
 		<!--  
 		<dependency>

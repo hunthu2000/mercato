@@ -19,27 +19,13 @@
 	-->
 	<context:component-scan base-package="com.alten.mercato.server.manager" />
 
-	<!--
-		*************************************************************************************************************
-		Aop : cut points
-		*************************************************************************************************************
-	-->
-	<aop:aspectj-autoproxy />
-    
-	<aop:config>
-		<aop:pointcut id="transferManagerMethods" expression="execution(* com.alten.mercato.server.manager.interf.TransferManager.*(..))"/>
-      <aop:advisor
-            pointcut-ref="transferManagerMethods"
-            advice-ref="txMercato" order="1"/>
-
-	</aop:config>
-	<!--
+		<!--
 		*************************************************************************************************************
 		jBPM beans
 		*************************************************************************************************************
 
 	-->
-	<bean id="taskDbSession" class="org.jbpm.pvm.internal.hibernate.HibernateTaskDbSession"
+	<!--<bean id="taskDbSession" class="org.jbpm.pvm.internal.hibernate.HibernateTaskDbSession"
 		scope="prototype">
 		<property name="session" ref="session" />
 	</bean>
@@ -77,8 +63,24 @@
 		init-method="init" scope="prototype">
 		<property name="typeConfig" value="jbpm.variable.types.xml" />
 	</bean>
+	
+		--><!--  need Java SE 6 to use this bean, on the mac platform, the lastest version of Java SE is 5-->
+<!--	<bean id="scriptManager" class="org.jbpm.pvm.internal.script.ScriptManager" scope="singleton">-->
+<!--		<property name="defaultExpressionLanguage" value="juel" />-->
+<!--		<property name="defaultScriptLanguage" value="juel" />-->
+<!--		<property name="readContextNames">-->
+<!--			<list>-->
+<!--          		<value>execution</value>-->
+<!--          		<value>environment</value>-->
+<!--          		<value>process-engine</value>-->
+<!--       		</list>-->
+<!--       	</property>-->
+<!--       	<property name="writeContextName" value="" />-->
+<!--	</bean>--><!--
 
 
+	<bean id="scriptManager" class="com.alten.mercato.jbpm.internal.script.CustomScriptManager">
+     </bean>
 	<bean id="blobStrategy" class="org.jbpm.pvm.internal.lob.BlobStrategyBinary">
 	</bean>
 
@@ -126,13 +128,11 @@
 	<bean id="environmentFactory" class="org.jbpm.pvm.internal.cfg.SpringConfiguration"
 		scope="singleton" />
 	
-	<!--  need Java SE 6 to use this bean, on the mac platform, the lastest version of Java SE is 5
-	<bean id="scriptManager" class="org.jbpm.pvm.internal.script.ScriptManager">
-	</bean>-->
+
 	
 	<bean id="hibernateSessionManager" class="org.jbpm.pvm.internal.spring.HibernateSessionManager"
 		scope="singleton">
 		<property name="sessionFactory" ref="mercatoSF" />
 	</bean>
 		
-</beans>
+--></beans>

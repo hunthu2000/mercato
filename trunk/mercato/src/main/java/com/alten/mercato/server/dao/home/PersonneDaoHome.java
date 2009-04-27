@@ -79,7 +79,7 @@ public class PersonneDaoHome extends HibernateDaoSupport{
 	public Personne findById(long id) {
 		log.debug("getting Personne instance with id: " + id);
 		try {
-			Personne instance = (Personne) getHibernateTemplate().get("Personne", id);
+			Personne instance = (Personne) getHibernateTemplate().get(Personne.class, id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {

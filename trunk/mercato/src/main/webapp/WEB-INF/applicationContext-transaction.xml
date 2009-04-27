@@ -22,6 +22,21 @@
  			<ref bean="mercatoSF"/>
  		</property>
  	</bean>
+ 	
+ 	<!--
+		*************************************************************************************************************
+		Aop : cut points
+		*************************************************************************************************************
+	-->
+	<aop:aspectj-autoproxy />
+    
+	<aop:config>
+		<aop:pointcut id="transferManagerMethods" expression="execution(* com.alten.mercato.server.manager.interf.TransferManager.*(..))"/>
+      <aop:advisor
+            pointcut-ref="transferManagerMethods"
+            advice-ref="txMercato" order="1"/>
+
+	</aop:config>
 	
 	<!-- *************************************************************************************************************
                                                 Transaction injections
@@ -32,7 +47,8 @@
      		<tx:method name="save*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.exception"/>
      		<tx:method name="start*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.exception"/>
      		<tx:method name="signal*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.exception"/>
-     		<tx:method name="*" propagation="REQUIRED" read-only="true" rollback-for="java.lang.exception"/>
+     		<tx:method name="init*" read-only="false" propagation="REQUIRED" rollback-for="java.lang.exception"/>
+     		<tx:method name="*" propagation="REQUIRED" read-only="true"/>
      	</tx:attributes>
      </tx:advice>
 </beans>

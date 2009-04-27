@@ -48,9 +48,9 @@ PersonneDao {
 		try {
 			DetachedCriteria criteria = DetachedCriteria.forClass(Personne.class);
 			criteria.add(Restrictions.eq("departement.depId", departmentId));
+			
 			// get only consultants, omit department director and human resources
 			criteria.createAlias("typePersonne", "tp").add(Restrictions.eq("tp.tpersCode", CODE_CONSULTANT));
-			//criteria.add(Restrictions.eq("typePersonne.tpersId", ID_TYPE_CONSULTANT));
 			criteria.addOrder(Order.asc("perNom"));
 			List<Personne> lst = getHibernateTemplate().findByCriteria(criteria);
 			if (null==lst||0==lst.size()) {

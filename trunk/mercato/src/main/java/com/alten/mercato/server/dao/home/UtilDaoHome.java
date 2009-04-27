@@ -82,7 +82,7 @@ public class UtilDaoHome extends HibernateDaoSupport{
 		log.debug("getting Util instance with id: " + id);
 		try {
 			Util instance = (Util) getHibernateTemplate().get(
-					"Util", id);
+					Util.class, id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {

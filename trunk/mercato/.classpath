@@ -166,14 +166,16 @@
   <classpathentry kind="var" path="M2_REPO/org/jboss/aspects/jboss-transaction-aspects/1.0.0.Beta1/jboss-transaction-aspects-1.0.0.Beta1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/integration/jboss-transaction-spi/5.0.0.CR2/jboss-transaction-spi-5.0.0.CR2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/jboss-vfs/2.0.0.CR1/jboss-vfs-2.0.0.CR1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jboss/client/jbossall-client/4.2.2.GA/jbossall-client-4.2.2.GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/cache/jbosscache-core/3.0.0.CR4/jbosscache-core-3.0.0.CR4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/dependencies/esb/jbossesb-rosetta/4.4.0.GA/jbossesb-rosetta-4.4.0.GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/security/jbosssx/2.0.2.SP2/jbosssx-2.0.2.SP2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/jboss/jbossts/jbossts-common/4.4.0.GA/jbossts-common-4.4.0.GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/ws/jbossws-spi/1.0.3.GA/jbossws-spi-1.0.3.GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/jbossxb/2.0.0.GA/jbossxb-2.0.0.GA.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-api/4.0.0-Beta1/jbpm-api-4.0.0-Beta1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-enterprise/4.0.0-Beta1/jbpm-enterprise-4.0.0-Beta1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-enterprise-config/4.0.0-Beta1/jbpm-enterprise-config-4.0.0-Beta1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-jpdl/4.0.0-Beta1/jbpm-jpdl-4.0.0-Beta1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-log/4.0.0-Beta1/jbpm-log-4.0.0-Beta1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-pvm/4.0.0-Beta1/jbpm-pvm-4.0.0-Beta1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jbpm/jbpm4/jbpm-spi/4.0.0-Beta1/jbpm-spi-4.0.0-Beta1.jar"/>
@@ -191,11 +193,15 @@
   <classpathentry kind="var" path="M2_REPO/org/jboss/naming/jnpserver/5.0.0.CR1/jnpserver-5.0.0.CR1.jar"/>
   <classpathentry kind="var" path="M2_REPO/sun-jaxws/jsr181-api/2.1.1/jsr181-api-2.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hibernate/jtidy/r8-20060801/jtidy-r8-20060801.jar"/>
+  <classpathentry kind="var" path="M2_REPO/juel/juel/2.1.0/juel-2.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/juel/juel-engine/2.1.0/juel-engine-2.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/juel/juel-impl/2.1.0/juel-impl-2.1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.4/junit-4.4.jar" sourcepath="M2_REPO/junit/junit/4.4/junit-4.4-sources.jar">
     <attributes>
       <attribute value="jar:file:/Users/huagechen/.m2/repository/junit/junit/4.4/junit-4.4-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/livetribe/livetribe-jsr223/2.0.5/livetribe-jsr223-2.0.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14.jar" sourcepath="M2_REPO/log4j/log4j/1.2.14/log4j-1.2.14-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/mx4j/mx4j-jmx/2.1.1/mx4j-jmx-2.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/oracle/ojdbc14/10.2.0.1.0/ojdbc14-10.2.0.1.0.jar"/>
@@ -226,7 +232,8 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-tomcat-weaver/2.5.6/spring-tomcat-weaver-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-tomcat-weaver/2.5.6/spring-tomcat-weaver-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/2.5.6/spring-web-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-web/2.5.6/spring-web-2.5.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-webmvc/2.5.6/spring-webmvc-2.5.6.jar" sourcepath="M2_REPO/org/springframework/spring-webmvc/2.5.6/spring-webmvc-2.5.6-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0/stax-api-1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/stax/stax/1.2.0/stax-1.2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/stax/stax-api/1.0.1/stax-api-1.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/trove/trove/1.0.2/trove-1.0.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/apache-xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/apache-xerces/xml-apis/2.9.1/xml-apis-2.9.1.jar"/>
