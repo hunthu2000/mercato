@@ -53,10 +53,10 @@ public class MercatoMain implements EntryPoint {
 	
 	public static final String VALIDATE_TRANSFER_TRANSITION = "validateTransfer";
 	public static final String CANCEL_TRANSFER_TRANSITION = "cancelTransfer";
-	public static final String VALIDATION_MSG = "Please validate";
-	public static final String WAITING_MSG = "Waiting for confirmation";
-	public static final String VALIDATE_TRANSFER = "Validate";
-	public static final String CANCEL_TRANSFER = "Cancel";
+	public static final String VALIDATION_MSG = "Veillez décider";
+	public static final String WAITING_MSG = "Attente de décision";
+	public static final String VALIDATE_TRANSFER = "Accepter";
+	public static final String CANCEL_TRANSFER = "Refuser";
 	public static final String INCOMING_VALIDATION = "validateTransfer";
 	public static final String OUTGOING_VALIDATION = "validateTransferProposal";
 	
@@ -68,9 +68,6 @@ public class MercatoMain implements EntryPoint {
 	private ListGridRecord otherDepartmentDraggedRecord = null;
 	private String myValidatingNodeId = "";
 	private String otherValidatingNodeId = "";
-	
-
-	
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
@@ -149,7 +146,7 @@ public class MercatoMain implements EntryPoint {
 			System.out.println(user.getPerNom());
 		}
 		
-		toolbar.setContents("Welcome " + user.getPerPrenom() + " " + user.getPerNom() + ". This sample application let you transfer consultants between your department and other departments under the control of the predefined workflows");
+		toolbar.setContents("Bienvenue " + user.getPerPrenom() + " " + user.getPerNom() + ". Cette application demo vous permet d'effectuer les transferts entre votre département et les autre départements sous le contrôle des workflows prédéfinis.");
 
 		main.addMember(toolbar);
 		main.addMember(hlConsultants);
@@ -172,9 +169,9 @@ public class MercatoMain implements EntryPoint {
 		// define the tree fields
 		TreeGridField name = new TreeGridField(ConstantsMercato.KEY_LABEL,"Consultant");
 		name.setCanEdit(false);
-		TreeGridField originalDpmt = new TreeGridField(ConstantsMercato.KEY_ORIGINAL_DEPARTMENT,"Current dpmt",90);
+		TreeGridField originalDpmt = new TreeGridField(ConstantsMercato.KEY_ORIGINAL_DEPARTMENT,"Dpt. courant",90);
 		name.setCanEdit(false);
-		TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Reference Num",100);
+		TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Matricule",100);
 		matricule.setCanEdit(false);
 		TreeGridField validation = new TreeGridField(ConstantsMercato.KEY_VALIDATION,"Validation", 150);
 		validation.setValueMap(VALIDATE_TRANSFER, CANCEL_TRANSFER);
@@ -188,7 +185,7 @@ public class MercatoMain implements EntryPoint {
 		TreeNode rootNode = createRootNode("root", "My department", ConstantsMercato.ICON_DPMT, null);
 		rootNode.setCanAcceptDrop(false);
 		tree.setRoot(rootNode);
-		rootNodeMyDepartmentConsultants = createRootNode("rootMyDpmt", "My department", ConstantsMercato.ICON_DPMT, null);
+		rootNodeMyDepartmentConsultants = createRootNode("rootMyDpmt", "Mon département", ConstantsMercato.ICON_DPMT, null);
 		tree.add(rootNodeMyDepartmentConsultants, rootNode);
 		tgMyDepartmentConsultants.setData(tree);
 		tree.setNameProperty(ConstantsMercato.KEY_LABEL);
@@ -237,7 +234,7 @@ public class MercatoMain implements EntryPoint {
 			public void onCellDoubleClick(CellDoubleClickEvent event) {
 				ListGridRecord record = tgMyDepartmentConsultants.getSelectedRecord();
 				setMyValidatingNodeId(record.getAttribute(ConstantsMercato.KEY_ID));
-				if (!record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals("Please validate")) {
+				if (!record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals(VALIDATION_MSG)) {
 					event.cancel();
 					SC.say("This consultant has no transfer to validate");
 					return;
@@ -284,7 +281,7 @@ public class MercatoMain implements EntryPoint {
 		// define the tree fields
 		TreeGridField name = new TreeGridField(ConstantsMercato.KEY_LABEL,"Consultant");
 		name.setCanEdit(false);
-		TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Reference Num",100);
+		TreeGridField matricule = new TreeGridField(ConstantsMercato.KEY_MATRICULE, "Matricule",100);
 		matricule.setCanEdit(false);
 		TreeGridField validation = new TreeGridField(ConstantsMercato.KEY_VALIDATION,"Validation", 150);
 		validation.setValueMap(VALIDATE_TRANSFER, CANCEL_TRANSFER);
@@ -293,10 +290,10 @@ public class MercatoMain implements EntryPoint {
 
 		Tree tree = new Tree();
 		tree.setModelType(TreeModelType.PARENT);
-		TreeNode rootNode = createRootNode("root", "Other departments", ConstantsMercato.ICON_DPMT, null);
+		TreeNode rootNode = createRootNode("root", "Autres départements", ConstantsMercato.ICON_DPMT, null);
 		rootNode.setCanAcceptDrop(false);
 		tree.setRoot(rootNode);
-		rootNodeOtherDepartmentConsultants = createRootNode("rootOtherDpmt", "Other departments", ConstantsMercato.ICON_DPMT, null);
+		rootNodeOtherDepartmentConsultants = createRootNode("rootOtherDpmt", "Autres départements", ConstantsMercato.ICON_DPMT, null);
 		rootNodeOtherDepartmentConsultants.setCanAcceptDrop(false);
 		tree.add(rootNodeOtherDepartmentConsultants, rootNode);
 		tree.setNameProperty(ConstantsMercato.KEY_LABEL);
@@ -349,7 +346,7 @@ public class MercatoMain implements EntryPoint {
 				
 				ListGridRecord record = tgOtherDepartmentConsultants.getSelectedRecord();
 				setOtherValidatingNodeId(record.getAttribute(ConstantsMercato.KEY_ID));
-				if (!record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals("Please validate")) {
+				if (!record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals(VALIDATION_MSG)) {
 					event.cancel();
 					SC.say("This consultant has no transfer to validate");
 					return;
@@ -577,7 +574,7 @@ public class MercatoMain implements EntryPoint {
 		node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER_BLUE);
 		node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, pers.getDepartement().getDepLib());
 		node.setAttribute(ConstantsMercato.KEY_ORIGINAL_DEPARTMENT, pers.getDepartement().getDepLib());
-		node.setAttribute(ConstantsMercato.KEY_VALIDATION, "Waiting for confirmation");
+		node.setAttribute(ConstantsMercato.KEY_VALIDATION, WAITING_MSG);
 		node.setAttribute(ConstantsMercato.KEY_OBJECT, pers);
 		node.setCanAcceptDrop(false);
 		node.setIsFolder(false);
@@ -606,7 +603,7 @@ public class MercatoMain implements EntryPoint {
 		node.setAttribute(ConstantsMercato.KEY_MATRICULE, pers.getPerMatricule());
 		node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER);
 		node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, pers.getDepartement().getDepLib());
-		node.setAttribute(ConstantsMercato.KEY_VALIDATION, "Waiting for confirmation");
+		node.setAttribute(ConstantsMercato.KEY_VALIDATION, WAITING_MSG);
 		node.setAttribute(ConstantsMercato.KEY_OBJECT, pers);
 		node.setCanAcceptDrop(false);
 		node.setIsFolder(false);
@@ -698,7 +695,7 @@ public class MercatoMain implements EntryPoint {
 			
 		} else {
 			Tree treeOtherDepartment = tgOtherDepartmentConsultants.getTree();
-			parentNode = treeMyDepartment.findById(String.valueOf(pers.getDepartement().getDepId()));
+			parentNode = treeOtherDepartment.findById(String.valueOf(pers.getDepartement().getDepId()));
 			
 			TreeNode node = new TreeNode();
 			node.setAttribute(ConstantsMercato.KEY_ID, String.valueOf(pers.getPerId()));
