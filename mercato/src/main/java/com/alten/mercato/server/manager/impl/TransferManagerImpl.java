@@ -264,9 +264,10 @@ public class TransferManagerImpl implements TransferManager {
 		}
 
 	}
-
 	
-
+	/* (non-Javadoc)
+	 * @see com.alten.mercato.server.manager.interf.TransferManager#signalValidateTransferProposal(com.alten.mercato.server.model.Transfert, java.lang.String, java.lang.String)
+	 */
 	public Personne signalValidateTransferProposal(Transfert transfert,
 			String assignee, String validation) throws MercatoWorkflowException {
 		try {
