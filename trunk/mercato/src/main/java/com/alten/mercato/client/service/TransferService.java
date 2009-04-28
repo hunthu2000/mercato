@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.alten.mercato.server.controller.dto.InfoTransfer;
 import com.alten.mercato.server.model.Personne;
+import com.alten.mercato.server.model.Transfert;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -30,5 +31,11 @@ public interface TransferService extends RemoteService{
 	 */
 	public Personne startAndAskTransferProcess(long transDepEntrId, long transDepConsulId) throws Exception;
 
+	public Personne validateTransferRequestProcess(Transfert transfert, String validation) throws Exception;
+	
+	public Personne startAndProposeTransferProcess(long transDepEntrId, long transDepConsulId) throws Exception;
+
+	public Personne validateTransferProposalProcess(Transfert transfert, String validation) throws Exception;
+	
 	public List<InfoTransfer> getConsultantWithTransferInfo() throws Exception;
 }
