@@ -14,8 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.alten.mercato.client.service.TransferService;
 import com.alten.mercato.server.controller.dto.InfoTransfer;
+import com.alten.mercato.server.manager.interf.PersonManager;
 import com.alten.mercato.server.manager.interf.TransferManager;
 import com.alten.mercato.server.model.Personne;
+import com.alten.mercato.server.model.Transfert;
 
 /**
  * @author Huage Chen
@@ -23,14 +25,20 @@ import com.alten.mercato.server.model.Personne;
  */
 @Service("transferController")
 public class TransferServiceImpl implements TransferService {
+
 	
-	// log4j
-	Logger logger = LoggerFactory.getLogger(TransferServiceImpl.class);
-	
+
 	@Autowired
 	@Qualifier("transferManager")
 	private TransferManager transferManager = null;
 	
+	@Autowired
+	@Qualifier("personManager")
+	private PersonManager personManager = null;
+	
+	
+	// log4j
+	Logger logger = LoggerFactory.getLogger(TransferServiceImpl.class);
 
 	/* (non-Javadoc)
 	 * @see com.alten.mercato.client.service.TransferService#startAndAskTransferProcess(long, long)
@@ -39,8 +47,8 @@ public class TransferServiceImpl implements TransferService {
 			long transDepConsulId) throws Exception {
 		try {
 			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
-			Personne res = transferManager.startAndAskTransferProcess(transDepEntrId, transDepConsulId, assignee);
-			
+			Personne res = transferManager.startAndAskTransferRequestProcess(transDepEntrId, transDepConsulId, assignee);
+
 			// lazy loading
 			res.getTransferCourant().getDepEntr().getDepLib();
 			return res;
@@ -57,8 +65,8 @@ public class TransferServiceImpl implements TransferService {
 	public List<InfoTransfer> getConsultantWithTransferInfo() throws Exception {
 		try {
 			logger.info("getting the transfer information");
-			List<InfoTransfer> res = transferManager.getConsultantsWithTransferInfo();
-			
+			List<InfoTransfer> res = personManager.getConsultantsWithTransferInfo();
+
 			//lazy loading
 			logger.info("lazy loading");
 			for (InfoTransfer infoTransfer: res) {
@@ -74,5 +82,70 @@ public class TransferServiceImpl implements TransferService {
 			return null;
 		}
 	}
-	
+
+
+	/* (non-Javadoc)
+	 * @see com.alten.mercato.client.service.TransferService#validateTransferProcess(com.alten.mercato.server.model.Transfert, java.lang.String)
+	 */
+	public Personne validateTransferRequestProcess(Transfert transfert, String validation)
+	throws Exception {
+		try {
+
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("completing validation");
+			Personne res = transferManager.signalValidateTransferRequest(transfert, assignee, validation);
+
+			logger.info("lazy loading");
+			// lazy loading
+			res.getDepartement().getDepLib();
+			logger.info("lazy loading finished, returning the transfered consultant  to client side");
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return null;
+		}
+	}
+
+
+	public Personne startAndProposeTransferProcess(long transDepEntrId,
+			long transDepConsulId) throws Exception {
+		try {
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			Personne res = transferManager.startAndAskTransferProposalProcess(transDepEntrId, transDepConsulId, assignee);
+
+			// lazy loading
+			res.getTransferCourant().getDepEntr().getDepLib();
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return null;
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see com.alten.mercato.client.service.TransferService#validateTransferProposalProcess(com.alten.mercato.server.model.Transfert, java.lang.String)
+	 */
+	public Personne validateTransferProposalProcess(Transfert transfert,
+			String validation) throws Exception {
+		try {
+
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("completing validation");
+			Personne res = transferManager.signalValidateTransferProposal(transfert, assignee, validation);
+
+			logger.info("lazy loading");
+			// lazy loading
+			res.getDepartement().getDepLib();
+			logger.info("lazy loading finished, returning the transfered consultant  to client side");
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return null;
+		}
+	}
+
+
+
+
 }

@@ -564,6 +564,7 @@
             			<extended>false</extended>
             			<logTimeZone>GMT</logTimeZone>
           			</requestLog>
+          			
        	    		<!-- 	<scanIntervalSeconds>10</scanIntervalSeconds>
            	    	<webAppSourceDirectory>
                 		${basedir}/target/${artifactId}-${version}

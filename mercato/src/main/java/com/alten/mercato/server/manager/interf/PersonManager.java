@@ -2,6 +2,7 @@ package com.alten.mercato.server.manager.interf;
 
 import java.util.List;
 
+import com.alten.mercato.server.controller.dto.InfoTransfer;
 import com.alten.mercato.server.model.Departement;
 import com.alten.mercato.server.model.Personne;
 
@@ -28,4 +29,9 @@ public interface PersonManager {
 	 * @return
 	 */
 	public List<Departement> getOtherDepartments(long depId);
+	
+	/**
+	 * @return
+	 */
+	public List<InfoTransfer> getConsultantsWithTransferInfo();
 }
