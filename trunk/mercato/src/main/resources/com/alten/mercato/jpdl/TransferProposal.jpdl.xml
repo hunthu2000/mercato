@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="TransferProposal" xmlns="http://jbpm.org/4/jpdl">
+   <start g="275,53,48,48" name="start">
+      <transition g="-137,-16" name="starting transfer" to="propose consultant transfer"/>
+   </start>
+   <task assignee="#{dd1}" g="205,173,191,52" name="propose consultant transfer">
+      	<transition to="validateTransferProposal"/>
+   </task>
+   <task assignee="#{dd2}" g="205,303,196,52" name="validateTransferProposal">
+      	<transition g="-45,-16" name="validateTransfer" to="end"/>
+      	<transition g="-59,-16" name="cancelTransfer" to="cancel"/>
+   </task>
+   <end g="183,436,48,48" name="end"/>
+   <end-cancel g="413,432,48,48" name="cancel"/>
+</process>

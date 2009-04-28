@@ -79,6 +79,9 @@ public class MercatoMain implements EntryPoint {
 		getCurrentUserByRPC();	
 	}
 	
+	/**
+	 * retrieve the current logged person
+	 */
 	private void getCurrentUserByRPC() {
 		AsyncCallback<Personne> callback = new AsyncCallback<Personne>() {
 
@@ -91,6 +94,7 @@ public class MercatoMain implements EntryPoint {
 				if (result != null) {
 					System.out.println(result.getPerNom());
 				}
+				//TODO generate different layout according to the role information 
 				initLayout();
 			}
 		};
@@ -98,7 +102,7 @@ public class MercatoMain implements EntryPoint {
 	}
 
 	/**
-	 * 
+	 * initialize the layout
 	 */
 	private void initLayout() {
 		VLayout main = new VLayout() ;
@@ -112,20 +116,21 @@ public class MercatoMain implements EntryPoint {
 		toolbar.setPadding(5);
 		toolbar.setMargin(5);
 	
-
+		// Consultant treegrids
 		HLayout hlConsultants = new HLayout();  
 		hlConsultants.setWidth(1200);  
 		hlConsultants.setHeight(800);  
 		hlConsultants.setMembersMargin(5);  
 		hlConsultants.setPadding(5);
 
+		// setup the treegrid rootnodes, fields
 		initMyDepartmentTreeGrid();
-		//loadListConsultantsByRPC();
-
 		initOtherDepartmentTreeGrid();
-		loadOtherDepartmentsByRPC();
-		//loadOtherDepartmentListConsultantsByRPC();
 		
+		// load the departments to "other departments treegrid"
+		loadOtherDepartmentsByRPC();
+		
+		// load all consultants information
 		loadConsultantTransferInfoByRPC();
 
 		hlConsultants.addMember(tgMyDepartmentConsultants);
@@ -144,7 +149,7 @@ public class MercatoMain implements EntryPoint {
 			System.out.println(user.getPerNom());
 		}
 		
-		toolbar.setContents("Welcome " + user.getPerPrenom() + " " + user.getPerNom() + ". This sample application let you transfer consultants between your department and other department under the control of the predifined workflows");
+		toolbar.setContents("Welcome " + user.getPerPrenom() + " " + user.getPerNom() + ". This sample application let you transfer consultants between your department and other departments under the control of the predefined workflows");
 
 		main.addMember(toolbar);
 		main.addMember(hlConsultants);
@@ -195,6 +200,11 @@ public class MercatoMain implements EntryPoint {
 				ListGridRecord record = tgMyDepartmentConsultants.getSelectedRecord();
 				
 				if (record.getAttribute(ConstantsMercato.KEY_TYPE).equals("folder")) {
+					event.cancel();
+				}
+				
+				//stop the drag event if the note has the status "validating"
+				if (record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals(VALIDATION_MSG)) {
 					event.cancel();
 				}
 				setMyDepartmentDraggedRecord(tgMyDepartmentConsultants.getSelectedRecord());
@@ -302,6 +312,11 @@ public class MercatoMain implements EntryPoint {
 					event.cancel();
 				}
 				
+				//stop the drag event if the note has the status "validating"
+				if (record.getAttribute(ConstantsMercato.KEY_VALIDATION).equals(VALIDATION_MSG)) {
+					event.cancel();
+				}
+				
 				setOtherDepartmentDraggedRecord(tgOtherDepartmentConsultants.getSelectedRecord());
 			}
 			
@@ -324,7 +339,6 @@ public class MercatoMain implements EntryPoint {
 					}
 				}
 				setOtherDepartmentDraggedRecord(null);
-				
 			}
 			
 		});
@@ -387,14 +401,17 @@ public class MercatoMain implements EntryPoint {
 	 * 
 	 */
 	private void loadConsultantTransferInfoByRPC() {
+		final CustomWaitDialog dlg = CustomWaitDialog.getInstance();
 		AsyncCallback<List<InfoTransfer>> callback = new AsyncCallback<List<InfoTransfer>>() {
 
 			public void onFailure(Throwable arg0) {
+				dlg.hide();
 				SC.say("Error loading consultant information");
 				
 			}
 
 			public void onSuccess(List<InfoTransfer> result) {
+				dlg.hide();
 				if ((result!=null) && (result.size()>0)) {
 					createConsultantTreeNodes(result);
 				}
@@ -403,17 +420,19 @@ public class MercatoMain implements EntryPoint {
 			
 		};
 		TransferService.Util.getInstance().getConsultantWithTransferInfo(callback);
+		dlg.show();
 	}
 
 	/**
 	 * 
 	 */
 	private void loadOtherDepartmentsByRPC() {
-
+		final CustomWaitDialog dlg = CustomWaitDialog.getInstance();
 
 		AsyncCallback<List<Departement>> callback = new AsyncCallback<List<Departement>>() {
 
 			public void onSuccess(List<Departement> result) {
+				dlg.hide();
 				if (result==null||result.size()==0) {
 					return;
 				}
@@ -423,10 +442,14 @@ public class MercatoMain implements EntryPoint {
 			}
 
 			public void onFailure(Throwable ex) {
+				dlg.hide();
+				SC.say("Error loading departments");
 			}
 		};
 
 		PersonService.Util.getInstance().getOtherDepartements(ConstantsMercato.getCurrentUser().getDepartement().getDepId(),callback);
+		// give user a wait message while retrieving datas
+		dlg.show();
 	}
 	
 	/**
@@ -566,6 +589,9 @@ public class MercatoMain implements EntryPoint {
 		
 	}
 	
+	/**
+	 * @param pers
+	 */
 	private void updateOutgoingProposedTreeNode(Personne pers) {
 		Tree treeOtherDepartment = tgOtherDepartmentConsultants.getTree();
 		
@@ -641,6 +667,9 @@ public class MercatoMain implements EntryPoint {
 	}
 	
 	
+	/**
+	 * @param pers
+	 */
 	private void updateIncomingTransferedTreeNode(Personne pers) {
 		Tree treeMyDepartment = tgMyDepartmentConsultants.getTree();
 		
@@ -649,6 +678,25 @@ public class MercatoMain implements EntryPoint {
 		
 		TreeNode parentNode = null;
 		if (pers.getDepartement().getDepId() == ConstantsMercato.getCurrentUser().getDepartement().getDepId()) {
+			
+			parentNode = treeMyDepartment.findById("rootMyDpmt");
+			
+			TreeNode node = new TreeNode();
+			node.setAttribute(ConstantsMercato.KEY_ID, String.valueOf(pers.getPerId()));
+			node.setAttribute(ConstantsMercato.KEY_LABEL, pers.getPerPrenom() + " "+ pers.getPerNom());
+			node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
+			node.setAttribute(ConstantsMercato.KEY_MATRICULE, pers.getPerMatricule());
+			node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER);
+			node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, pers.getDepartement().getDepLib());
+			node.setAttribute(ConstantsMercato.KEY_OBJECT, pers);
+			node.setCanAcceptDrop(false);
+			node.setIsFolder(false);
+		
+			treeMyDepartment.add(node, parentNode);
+			tgMyDepartmentConsultants.setData(treeMyDepartment);
+			tgMyDepartmentConsultants.getData().openAll();
+			
+		} else {
 			Tree treeOtherDepartment = tgOtherDepartmentConsultants.getTree();
 			parentNode = treeMyDepartment.findById(String.valueOf(pers.getDepartement().getDepId()));
 			
@@ -666,24 +714,6 @@ public class MercatoMain implements EntryPoint {
 			treeOtherDepartment.add(node, parentNode);
 			tgOtherDepartmentConsultants.setData(treeOtherDepartment);
 			tgOtherDepartmentConsultants.getData().openAll();
-			
-		} else {
-			parentNode = treeMyDepartment.findById("rootMyDpmt");
-			
-			TreeNode node = new TreeNode();
-			node.setAttribute(ConstantsMercato.KEY_ID, String.valueOf(pers.getPerId()));
-			node.setAttribute(ConstantsMercato.KEY_LABEL, pers.getPerPrenom() + " "+ pers.getPerNom());
-			node.setAttribute(ConstantsMercato.KEY_TYPE, "node");
-			node.setAttribute(ConstantsMercato.KEY_MATRICULE, pers.getPerMatricule());
-			node.setAttribute(ConstantsMercato.KEY_ICON, ConstantsMercato.ICON_USER);
-			node.setAttribute(ConstantsMercato.KEY_DEPARTMENT, pers.getDepartement().getDepLib());
-			node.setAttribute(ConstantsMercato.KEY_OBJECT, pers);
-			node.setCanAcceptDrop(false);
-			node.setIsFolder(false);
-		
-			treeMyDepartment.add(node, parentNode);
-			tgMyDepartmentConsultants.setData(treeMyDepartment);
-			tgMyDepartmentConsultants.getData().openAll();
 		}
 	}
 	/**
@@ -839,6 +869,7 @@ public class MercatoMain implements EntryPoint {
 		tgOtherDepartmentConsultants.setData(treeOtherDepartment);
 		tgOtherDepartmentConsultants.getData().openAll();
 	}
+	
 	/**
 	 * Create the department list tree node without the own department
 	 * @param departements
@@ -865,8 +896,6 @@ public class MercatoMain implements EntryPoint {
 		tgOtherDepartmentConsultants.setData(tree);
 		tgOtherDepartmentConsultants.getData().openAll();
 	}
-
-
 
 	/**
 	 * @param treegrid
@@ -931,6 +960,6 @@ public class MercatoMain implements EntryPoint {
 		public Boolean willAcceptDrop() {
 			return true;
 		}
-
 	}  
+	
 }
