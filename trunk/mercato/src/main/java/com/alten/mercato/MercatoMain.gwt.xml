@@ -10,14 +10,15 @@
 	
 	<extend-property name="locale" values="en_US"/>
 	
+	<!-- Browser supports -->
 	<set-property name="user.agent" value="gecko"/>
+	<set-property name="user.agent" value="safari"/>
+	<set-property name="user.agent" value="opera"/>
 	
-<!--	<inherits name="org.gwtwidgets.WidgetLibrary"/>-->
 	<!-- Inherit the smartGwt Toolkit library configuration -->
     <inherits name="com.smartgwt.SmartGwt"/>
     <inherits name="net.sf.gilead.Adapter4Gwt15"/>
     <inherits name="org.gwtwidgets.WidgetLibrary"/>
-
     
     <!-- Inherit the smartGwt skins -->
 	<inherits name="com.smartclient.theme.enterprise.EnterpriseResources"/>    
@@ -27,6 +28,7 @@
 	<!-- Specify the app entry point class.                   -->
 	<entry-point class="com.alten.mercato.client.MercatoMain"/>
   	
+  	<!-- Client side shared models                  -->
   	<source path="server/model"/>
   	<source path="server/controller/dto"/>
   	<source path="client"/>
