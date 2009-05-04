@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	<display-name>Mercato Demo</display-name>	
+	
+	<context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/applicationContext*.xml /WEB-INF/spring-servlet.xml</param-value>
+    </context-param>
+
+	<!-- Filter -->
+	<filter>
+		<filter-name>Spring character encoding filter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter>
+        <filter-name>HibernateSessionInViewFilterMercato</filter-name>
+        <filter-class>
+            org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+        </filter-class>
+         <init-param>
+            <param-name>singleSession</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>sessionFactoryBeanName</param-name>
+            <param-value>mercatoSF</param-value>
+        </init-param>             
+    </filter> 
+    
+	<!-- Listener -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<display-name>destroySession</display-name>
+		<servlet-name>destroySession</servlet-name>
+		<servlet-class>
+			com.alten.mercato.server.controller.DestroySessionServlet
+		</servlet-class>
+	</servlet>
+
+	<!-- Servlet mappings -->
+	<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>*.rpc</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>destroySession</servlet-name>
+		<url-pattern>/destroySession</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Filter mappings -->
+	<filter-mapping>
+		<filter-name>Spring character encoding filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<filter-mapping>
+		<filter-name>HibernateSessionInViewFilterMercato</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
+	
+	<security-role>
+		<role-name>user</role-name>
+	</security-role>
+
+	<login-config>
+		<realm-name>mercatoAuth</realm-name>
+	</login-config>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Mercato</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>DD</role-name>
+			<role-name>RH</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-role>
+        <role-name>DD</role-name>
+    </security-role>
+    
+    <security-role>
+        <role-name>RH</role-name>
+    </security-role>
+    
+	<!-- Errors page -->
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.do</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.do</location>
+	</error-page>
+	
+	
+	<welcome-file-list>
+		<welcome-file>MercatoMain.html</welcome-file>
+	</welcome-file-list>
+</web-app>

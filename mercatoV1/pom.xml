@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!--
+		GWT-Maven archetype generated POM 
+	-->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.alten</groupId>
+	<artifactId>mercato</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.2-SNAPSHOT</version>
+	<name>Mercato Demonstrator</name>
+	<url>http://www.alten.com</url>
+	<inceptionYear>2009</inceptionYear>
+
+	<description>This is the demonstrator of the future &quot;mercato&quot; web application which allows user to make inter-departments consultant exchanges.</description>
+	<issueManagement>
+		<system>Google code</system>
+		<url>http://code.google.com/p/mercato/issues/list</url>
+	</issueManagement>
+
+	<developers>
+		<developer>
+			<email>hchen@alten.fr</email>
+			<name>Huage Chen</name>
+			<organization>DSI Alten</organization>
+			<id>hchen</id>
+			<organizationUrl>http://www.alten.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Architect</role>
+				<role>Lead Developer</role>
+				<role>Manager</role>
+			</roles>
+		</developer>
+		<developer>
+			<email>jsanchez@alten.fr</email>
+			<name>Julien Sanchez</name>
+			<organization>DSI Alten</organization>
+			<id>jsanchez</id>
+			<organizationUrl>http://www.alten.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Supervisor</role>
+			</roles>
+		</developer>
+		<developer>
+			<email>guy.caplat@insa-lyon.fr</email>
+			<name>Guy Caplat</name>
+			<organization>INSA de Lyon, Department of Computer Science</organization>
+			<id>gcaplat</id>
+			<organizationUrl>http://www.insa-lyon.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Advisor</role>
+			</roles>
+		</developer>
+		
+	</developers>
+	<contributors>
+	</contributors>
+	<scm>
+		<developerConnection>Huage Chen</developerConnection>
+		<url>https://mercato.googlecode.com/svn/trunk/mercato</url>
+	</scm>
+
+
+	<organization>
+		<name>DSI Alten</name>
+		<url>http://www.alten.com/</url>
+	</organization>
+	
+	<!--  include pluginRepository and repository for GWT-Maven -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>gwt-maven-plugins</id>
+			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+          <id>maven2-repository.dev.java.net</id>
+          <name>Java.net Repository for Maven</name>
+          <url>http://download.java.net/maven/2/</url>
+          <layout>default</layout>
+          <releases>
+          	<updatePolicy>daily</updatePolicy>
+          </releases>
+        </repository>
+		
+		<repository>
+			<id>gwt-maven</id>
+			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo/</url>
+		</repository>
+		<repository>
+			<id>smartclient</id>
+			<name>smartclient.com</name>
+			<url>http://www.smartclient.com/smartgwt/maven2</url>
+		</repository>
+		<repository>
+			<id>smartgwtsnap</id>
+			<name>smartgwtsnap.rorschach.de</name>
+			<url>http://smartgwtsnap.rorschach.de</url>
+		</repository>
+		<repository>
+			<id>gilead</id>
+			<name>gileadRepo</name>
+			<url>https://gilead.svn.sourceforge.net/svnroot/gilead/gilead/maven-repo/</url>
+		</repository>
+		<repository>
+  			<id>mesir-repo</id>
+    		<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
+		</repository>
+		<!-- <repository>
+        	<id>jboss</id>
+        	<url>http://repository.jboss.com/maven2</url>
+            <releases>
+            	<enabled>true</enabled>
+            	<updatePolicy>daily</updatePolicy>
+            </releases>
+            <snapshots>
+            	<enabled>false</enabled>
+            </snapshots> 
+ 		</repository> -->
+	</repositories>
+	
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+
+	<!--  convenience to define GWT version in one place -->
+	<properties>
+		<gwtVersion>1.5.3</gwtVersion>
+		<spring.version>2.5.6</spring.version>
+		<gilead.version>1.2.2</gilead.version>
+		<platform>mac</platform>
+		<jbpm4.version>4.0.0-Beta1</jbpm4.version>
+		<juel.version>2.1.0</juel.version>
+	</properties>
+
+	<dependencies>
+	
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jsp_2.0_spec</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_2.4_spec</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		
+		<!-- COMMONS STUFF -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		
+		<!-- gwt -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwtVersion}</version>
+			<classifier>${platform}-libs</classifier>
+			<type>zip</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>${gwtVersion}</version>
+			<classifier>${platform}</classifier>
+			<scope>provided</scope>
+		</dependency>
+		
+		
+		<!-- smartGWT -->
+		<dependency>
+			<groupId>com.smartgwt</groupId>
+			<artifactId>smartgwt</artifactId>
+			<version>1.0b3-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.smartgwt</groupId>
+			<artifactId>smartgwt-skins</artifactId>
+			<version>1.0b3-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- gwt spring -->
+		<dependency>
+			<groupId>net.sf.gwt-widget</groupId>
+			<artifactId>gwt-sl</artifactId>
+			<version>0.1.5b</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.gwt-widget</groupId>
+			<artifactId>gwt-widgets</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+		
+		<!-- gilead -->
+		<dependency>
+			<groupId>net.sf.gilead</groupId>
+			<artifactId>adapter-core</artifactId>
+			<version>${gilead.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.gilead</groupId>
+			<artifactId>adapter4gwt</artifactId>
+			<version>${gilead.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.gilead</groupId>
+			<artifactId>hibernate-util</artifactId>
+			<version>${gilead.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.gilead</groupId>
+			<artifactId>adapter-test</artifactId>
+			<version>${gilead.version}</version>
+		</dependency>
+		
+		<!-- SPRING FRAMEWORK -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+          		<exclusion>
+            		<groupId>commons-logging</groupId>
+            		<artifactId>commons-logging</artifactId>
+          		</exclusion>
+        	</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+          		<exclusion>
+            		<groupId>commons-logging</groupId>
+            		<artifactId>commons-logging</artifactId>
+          		</exclusion>
+        	</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-agent</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tomcat-weaver</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+   			<groupId>org.springframework</groupId>
+    		<artifactId>spring-test</artifactId>
+    		<version>${spring.version}</version>
+		</dependency> 
+		<!-- jetty -->
+		<dependency>
+			<groupId>jetty</groupId>
+			<artifactId>jetty-spring</artifactId>
+			<version>6.0.2</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.mortbay.jetty</groupId>
+    		<artifactId>jetty</artifactId>
+    		<version>6.1.10</version>
+		</dependency>
+
+		<dependency>
+    		<groupId>org.mortbay.jetty</groupId>
+    		<artifactId>jetty-util</artifactId>
+    		<version>6.1H.8</version>
+		</dependency> 
+		
+		<dependency>
+    		<groupId>org.mortbay.jetty</groupId>
+    		<artifactId>jetty-plus</artifactId>
+    		<version>6.1H.8</version>
+		</dependency> 
+		
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty-gwt</artifactId>
+			<version>6.1.2rc5</version>
+		</dependency>
+		
+		<!-- hibernate --> 
+		
+		<dependency> 
+   			<groupId>org.hibernate</groupId> 
+   			<artifactId>hibernate</artifactId> 
+   			<version>3.2.6.ga</version> 
+  		</dependency>
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-annotations</artifactId>
+    		<version>3.4.0.GA</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-tools</artifactId>
+    		<version>3.2.3.GA</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-hibernate3</artifactId>
+    		<version>2.0-m4</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-commons-annotations</artifactId>
+    		<version>3.3.0.ga</version>
+		</dependency>
+		
+		
+		<!-- jbpm -->
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-pvm</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-api</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-enterprise-config</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-enterprise</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+
+	<!-- remove the dependency due to the cast exception bug in the jpdl deployer, replaced with own code -->
+<!--		<dependency>-->
+<!--    		<groupId>org.jbpm.jbpm4</groupId>-->
+<!--    		<artifactId>jbpm-jpdl</artifactId>-->
+<!--    		<version>${jbpm4.version}</version>-->
+<!--		</dependency>-->
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-log</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-spi</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-spi-config</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-test-base</artifactId>
+    		<version>${jbpm4.version}</version>
+    		<scope>runtime</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-test-db</artifactId>
+    		<version>${jbpm4.version}</version>
+    		<scope>runtime</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.jbpm.jbpm4.dependencies.esb</groupId>
+    		<artifactId>jbossesb-rosetta</artifactId>
+    		<version>4.4.0.GA</version>
+		</dependency>
+		
+		<dependency>
+        	<groupId>juel</groupId>
+        	<artifactId>juel</artifactId>
+        	<version>${juel.version}</version>
+      	</dependency>
+      	<dependency>
+        	<groupId>juel</groupId>
+        	<artifactId>juel-engine</artifactId>
+        	<version>${juel.version}</version>
+      	</dependency>
+      	<dependency>
+        	<groupId>juel</groupId>
+        	<artifactId>juel-impl</artifactId>
+        	<version>${juel.version}</version>
+      	</dependency>
+      	
+      	<!-- scripting -->
+      	<dependency>
+			<groupId>org.livetribe</groupId>
+			<artifactId>livetribe-jsr223</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+		
+      	<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- needed only for jbpm4.0.0alpha2 -->
+		<!--  
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-db</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>	
+		<dependency>
+    		<groupId>org.jbpm.jbpm4</groupId>
+    		<artifactId>jbpm-jpdl-config</artifactId>
+    		<version>${jbpm4.version}</version>
+		</dependency>  -->	
+		
+		<!--  oracle driver--> 
+		<dependency>
+    		<groupId>com.oracle</groupId>
+    		<artifactId>ojdbc14</artifactId>
+    		<version>10.2.0.1.0</version>
+		</dependency>
+		
+		<!--  test -->
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!--  loggers -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>	
+		
+		<dependency>  
+			<groupId>org.slf4j</groupId>  
+			<artifactId>slf4j-api</artifactId>  
+			<version>1.5.6</version> 
+		</dependency>
+		
+		<dependency>  
+			<groupId>org.slf4j</groupId>  
+			<artifactId>slf4j-log4j12</artifactId>  
+			<version>1.5.6</version>  
+		</dependency>
+		
+		<dependency>  
+			<groupId>org.slf4j</groupId>  
+			<artifactId>slf4j-simple</artifactId>  
+			<version>1.5.6</version>  
+		</dependency>
+		
+		<dependency>  
+			<groupId>org.slf4j</groupId>  
+			<artifactId>jcl-over-slf4j</artifactId>  
+			<version>1.5.6</version>  
+		</dependency>
+		
+	<!--  	<dependency>
+    		<groupId>org.slf4j</groupId>
+    		<artifactId>slf4j-log4j13</artifactId>
+    		<version>1.0.1</version>
+		</dependency> -->
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+        		<groupId>org.codehaus.mojo</groupId>
+       	 		<artifactId>tomcat-maven-plugin</artifactId>
+        		<version>1.0-beta-1</version>
+        		<configuration>
+        			<server>mercatoServer</server>
+        			<url>http://localhost:8080/mercato</url>
+         			<warFile>${basedir}/target/${artifactId}-${version}.war</warFile>
+      			</configuration>
+     		</plugin>
+     		
+     		<!-- jetty web container plugin -->
+			<plugin>
+		        <groupId>org.mortbay.jetty</groupId>
+	       		<artifactId>maven-jetty-plugin</artifactId>
+	       		<version>6.1.10</version>
+		        <configuration>
+		        	<jettyConfig>${basedir}/src/main/webapp/WEB-INF/jetty.xml</jettyConfig>
+		        	<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+            			<filename>target/yyyy_mm_dd.request.log</filename>
+            			<retainDays>90</retainDays>
+            			<append>true</append>
+            			<extended>false</extended>
+            			<logTimeZone>GMT</logTimeZone>
+          			</requestLog>
+          			
+       	    		<!-- 	<scanIntervalSeconds>10</scanIntervalSeconds>
+           	    	<webAppSourceDirectory>
+                		${basedir}/target/${artifactId}-${version}
+                	</webAppSourceDirectory> -->
+                	<webApp>${basedir}/target/${artifactId}-${version}.war</webApp>
+				</configuration>
+				<dependencies>
+					<!--  oracle -->
+					<dependency>
+    					<groupId>com.oracle</groupId>
+    					<artifactId>ojdbc14</artifactId>
+    					<version>10.2.0.1.0</version>
+					</dependency> 
+				</dependencies>
+			</plugin>
+			
+			
+			<!--  configure the GWT-Maven plugin -->
+			<plugin>
+				<groupId>com.totsp.gwt</groupId>
+				<artifactId>maven-googlewebtoolkit2-plugin</artifactId>
+				<version>2.0-beta26</version>
+				<configuration>
+					<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+					<compileTargets>
+						<value>com.alten.mercato.MercatoMain</value>
+					</compileTargets>
+					<runTarget>${artifactId}/com.alten.mercato.MercatoMain/MercatoMain.html</runTarget>
+					<logLevel>INFO</logLevel>
+					<style>DETAILED</style>
+					<noServer>true</noServer>
+					<port>8080</port>					
+					<extraJvmArgs>-Xmx512m</extraJvmArgs>
+					<gwtVersion>${gwtVersion}</gwtVersion>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>mergewebxml</goal>
+							<!-- <goal>i18n</goal>-->
+							<goal>compile</goal>
+							<!--<goal>test</goal>-->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!--  Use the dependency plugin to unpack gwt-dev-PLATFORM-libs.zip -->
+			<!--
+				(this is a replacement for the old "automatic" mode - useful if you
+				don't have GWT installed already, or you just want a maven way to
+				handle gwt deps)
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>junit</groupId>
+									<artifactId>junit</artifactId>
+									<version>4.4</version>
+									<type>jar</type>
+									<overWrite>false</overWrite>
+									<outputDirectory>
+										${project.build.directory}/alternateLocation
+									</outputDirectory>
+									<destFileName>
+										optional-new-name.jar
+									</destFileName>
+									<includes>
+										**/*.class,**/*.xml
+									</includes>
+									<excludes>**/*test.class</excludes>
+								</artifactItem>
+							</artifactItems>
+							<includes>**/*.java</includes>
+							<excludes>**/*.properties</excludes>
+							<outputDirectory>
+								${project.build.directory}/wars
+							</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!--
+				If you want to use the target/web.xml file mergewebxml produces,
+				tell the war plugin to use it. Also, exclude what you want from the
+				final artifact here.
+			-->
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webXml>target/web.xml</webXml>
+                    <warSourceExcludes>.gwt-tmp/**</warSourceExcludes>                  
+                </configuration>                
+            </plugin>
+
+			<!--  tell the compiler we can use 1.5 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			
+			<!--  copy the application context -->
+			<plugin>                                
+   				<artifactId>maven-antrun-plugin</artifactId>
+      			<executions>
+        			<execution>
+          				<id>applicationContextCopy</id>
+          				<phase>compile</phase>
+          				<configuration>
+            				<tasks>
+             					<copy toDir="${basedir}/target/${artifactId}-${version}/com.alten.mercato.MercatoMain">
+             						<fileset dir="${basedir}/src/main/webapp/">
+                						<include name="**/*.xml"/>
+               						</fileset>
+             					</copy>
+            				</tasks>
+          				</configuration>
+        				<goals>
+          					<goal>run</goal>
+        				</goals>
+      				</execution>
+    			</executions>
+  			</plugin>
+		</plugins>
+	</build>
+
+	<!--  profiles (with activation per platform) -->
+	<profiles>
+		<profile>
+			<id>gwt-dev-windows</id>
+			<properties>
+				<platform>windows</platform>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+		</profile>
+		<profile>
+			<id>gwt-dev-mac</id>
+			<properties>
+				<platform>mac</platform>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+		</profile>
+		<profile>
+			<id>gwt-dev-linux</id>
+			<properties>
+				<platform>linux</platform>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<os>
+					<name>Linux</name>
+				</os>
+			</activation>
+		</profile>
+	</profiles>
+</project>

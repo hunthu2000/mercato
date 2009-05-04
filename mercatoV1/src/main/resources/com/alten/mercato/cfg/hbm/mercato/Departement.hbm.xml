@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2009-4-17 15:31:30 by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.alten.mercato.server.model.Departement" table="DEPARTEMENT" schema="HUAGE">
+        <id name="depId" type="long">
+            <column name="DEP_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="personne" class="com.alten.mercato.server.model.Personne" fetch="select">
+            <column name="DEP_PER_ID_DD" precision="10" scale="0" />
+        </many-to-one>
+        <property name="depLib" type="string">
+            <column name="DEP_LIB" length="20" not-null="true" unique="true" />
+        </property>
+        <set name="personnes" inverse="true">
+            <key>
+                <column name="PER_DEP_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.alten.mercato.server.model.Personne" />
+        </set>
+        <set name="transferts" inverse="true">
+            <key>
+                <column name="TRANS_DEP_ENTR_ID" precision="10" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.alten.mercato.server.model.Transfert" />
+        </set>
+    </class>
+</hibernate-mapping>

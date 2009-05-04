@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2009-4-17 15:31:30 by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.alten.mercato.server.model.Personne" table="PERSONNE" schema="HUAGE">
+        <id name="perId" type="long">
+            <column name="PER_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="departement" class="com.alten.mercato.server.model.Departement" fetch="select">
+            <column name="PER_DEP_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="typePersonne" class="com.alten.mercato.server.model.TypePersonne" fetch="select">
+            <column name="PER_TYPES_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="perNom" type="string">
+            <column name="PER_NOM" length="50" not-null="true" />
+        </property>
+        <property name="perPrenom" type="string">
+            <column name="PER_PRENOM" length="50" not-null="true" />
+        </property>
+        <property name="perMatricule" type="string">
+            <column name="PER_MATRICULE" length="10" not-null="true" unique="true" />
+        </property>
+        <property name="perTrigramme" type="string">
+            <column name="PER_TRIGRAMME" length="20" />
+        </property>
+        <many-to-one name="transferCourant" class="com.alten.mercato.server.model.Transfert" fetch="select">
+            <column name="PER_TRANS_ID" precision="10" scale="0" />
+        </many-to-one>
+        <set name="departements" inverse="true">
+            <key>
+                <column name="DEP_PER_ID_DD" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.alten.mercato.server.model.Departement" />
+        </set>
+        <set name="utils" inverse="true">
+            <key>
+                <column name="UTIL_PER_ID" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.alten.mercato.server.model.Util" />
+        </set>
+        <set name="transferts" inverse="true">
+            <key>
+                <column name="TRANS_DEP_CONSUL_ID" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.alten.mercato.server.model.Transfert" />
+        </set>
+    </class>
+</hibernate-mapping>

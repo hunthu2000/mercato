@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+  <session-factory>
+
+    <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+    <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>    
+    <property name="hibernate.connection.url">jdbc:oracle:thin:@10.211.55.4:1521:XE</property>
+    <property name="hibernate.connection.username">huage</property>
+    <property name="hibernate.connection.password">autruche</property>
+    
+    <property name="hibernate.default_schema">Huage</property> 
+    
+    <property name="hibernate.show_sql">true</property>
+	<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+	<property name="hibernate.connection.release_mode">after_transaction</property>   
+
+
+	<!--
+    <property name="hibernate.hbm2ddl.auto">update</property>
+	<property name="hibernate.query.substitutions">true 1, false 0</property>
+    <property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>-->
+
+	<!-- logging properties -->
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.use_sql_comments">true</property>
+    
+    <!-- Mapping -->
+    
+    <!-- jBPM -->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.repository.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.execution.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.history.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.task.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.jpdl.hbm.xml" />-->
+<!--    <mapping resource="com/alten/mercato/cfg/hbm/jBPM/jbpm.identity.hbm.xml" />-->
+    
+    <!-- Mercato -->
+    <mapping resource="com/alten/mercato/cfg/hbm/mercato/Departement.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/mercato/Personne.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/mercato/Role.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/mercato/TypePersonne.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/mercato/Util.hbm.xml" />
+    <mapping resource="com/alten/mercato/cfg/hbm/mercato/UtilRole.hbm.xml" />
+	<mapping resource="com/alten/mercato/cfg/hbm/mercato/Transfert.hbm.xml" />
+	
+  </session-factory>
+  
+</hibernate-configuration>

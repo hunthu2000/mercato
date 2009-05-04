@@ -1,0 +1,23 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<Configure class="org.mortbay.jetty.Server">
+	<Set name="UserRealms">
+      <Array type="org.mortbay.jetty.security.UserRealm">
+        <Item>
+          <!-- this realm uses a properties file to store/read the user/password/roles -->
+          <New class="org.mortbay.jetty.security.JDBCUserRealm">
+            <!-- the name of the realm -->
+            <Set name="name">mercatoAuth</Set>
+
+            <!-- the location of the property file to load from -->
+            <Set name="config"><SystemProperty name="jetty.home" default="src/main/webapp/WEB-INF"/>/etc/realm.properties</Set>
+
+            <!-- the interval in seconds to periodically scan for any changes and refresh/reload if changed -->
+            <Set name="refreshInterval">0</Set>
+          </New>
+        </Item>
+      </Array>
+    </Set>
+
+</Configure>

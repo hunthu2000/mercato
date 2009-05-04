@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2009-4-17 15:31:30 by Hibernate Tools 3.2.4.CR1 -->
+<hibernate-mapping>
+    <class name="com.alten.mercato.server.model.UtilRole" table="UTIL_ROLE" schema="HUAGE">
+        <id name="uroId" type="long">
+            <column name="URO_ID" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="role" class="com.alten.mercato.server.model.Role" fetch="select">
+            <column name="URO_ROLE_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="util" class="com.alten.mercato.server.model.Util" fetch="select">
+            <column name="URO_UTIL_ID" precision="10" scale="0" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
