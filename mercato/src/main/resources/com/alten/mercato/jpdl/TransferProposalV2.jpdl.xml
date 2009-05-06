@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process name="TransferProposalV2" xmlns="http://jbpm.org/4/jpdl">
+   <start g="311,23,48,48" name="start">
+      <transition g="-99,-7" name="starting transfer" to="propose consultant transfer"/>
+   </start>
+   <task assignee="#{dd1}" g="241,111,191,52" name="propose consultant transfer">
+      <transition to="wait for validation" />
+   </task>
+   
+   <state g="25,218,92,52" name="HR1 comment">
+      <transition g="131,192;167,190;223,192:" to="wait for validation" />
+   </state>
+   
+   <state g="592,214,92,52" name="HR2 comment">
+      <transition to="wait for validation"  g="596,203;546,195;491,192:"/>
+   </state>
+   
+   <state g="114,350,196,52" name="validateTransferProposal">
+      	<transition g="-115,5" name="validateTransfer" to="end"/>
+      	<transition g="352,485:48,-15" name="cancelTransfer" to="cancel"/>
+   </state>
+   <end g="122,451,48,48" name="end"/>
+   <end-cancel g="641,461,48,48" name="cancel"/>
+   <state g="240,217,206,52" name="wait for validation">
+      <transition g="-157,5" name="to validateTransferProposal" to="validateTransferProposal"/>
+      <transition g="-63,14" name="to HR2 comment" to="HR2 comment"/>
+      <transition g="-47,6" name="to HR1 comment" to="HR1 comment"/>
+      <transition g="11,-21" name="to cancel" to="cancel"/>
+   </state>
+   
+</process>

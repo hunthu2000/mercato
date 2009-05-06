@@ -42,6 +42,8 @@ public class ConstantsMercato {
 	public static final String KEY_UNIQUE = "unique";
 	public static final String KEY_PARENT = "ReportsTo";
 	public static final String KEY_VALIDATION = "validation";
+	public static final String KEY_MY_HR_COMMENT = "comment1";
+	public static final String KEY_OTHER_HR_COMMENT = "comment2";
 
 	// PATH for icons
 	public static final String ICON_ADD = "[SKIN]/actions/add.png";
@@ -55,10 +57,12 @@ public class ConstantsMercato {
 	public static final String ICON_SAVE = "[SKIN]/actions/save.png";
 	public static final String ICON_SEARCH = "[SKIN]/actions/search.png";
 	public static final String ICON_VIEW = "[SKIN]/actions/view.png";
-	public static final String ICON_UNDO = "[SKIN]/actions/undo.png";
+	public static final String ICON_UNDO = "icons/16/undo.png";
 	public static final String ICON_DPMT = "silk/chart_organisation.png";
 	public static final String ICON_USER = "icons/16/person.png";
 	public static final String ICON_USER_BLUE = "icons/16/person_blue.png";
+	public static final String ICON_LEFT = "icons/32/arrow_left.png";
+	public static final String ICON_RIGHT = "icons/32/arrow_right.png";
 	
 	public static Personne getCurrentUser() {
 		return ConstantsMercato.currentUser;

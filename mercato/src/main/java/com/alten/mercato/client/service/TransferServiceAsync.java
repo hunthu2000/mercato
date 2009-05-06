@@ -41,4 +41,41 @@ public interface TransferServiceAsync {
 	 * @param callback
 	 */
 	public void  getConsultantWithTransferInfo(AsyncCallback<List<InfoTransfer>> callback) ;
+	
+	/**
+	 * @param transDepEntrId
+	 * @param transDepConsulId
+	 * @param callback
+	 */
+	public void startAndProposeTransferProcessV2(long transDepEntrId, long transDepConsulId, AsyncCallback<Personne> callback);
+	
+	/**
+	 * @param transfert
+	 * @param comment
+	 * @param callback
+	 */
+	public void signalCommentHR1(Transfert transfert, String comment, AsyncCallback<Boolean> callback);
+	
+	/**
+	 * @param transfert
+	 * @param comment
+	 * @param callback
+	 */
+	public void signalCommentHR2(Transfert transfert, String comment, AsyncCallback<Boolean> callback);
+	
+	/**
+	 * @param transfert
+	 * @param callback
+	 */
+	public void signalCancelTransfer(Transfert transfert, AsyncCallback<Personne> callback);
+	
+	public void signalCancelTransfer(List<Transfert> transfert, AsyncCallback<List<Personne>> callback);
+	
+	/**
+	 * @param transfert
+	 * @param validation
+	 * @param callback
+	 */
+	public void signalValidateTransferProposalV2(Transfert transfert,  String validation, AsyncCallback<Personne> callback);
+	
 }

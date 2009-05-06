@@ -5,5 +5,5 @@
 	<type-mapping>
 		<sql-type jdbc-type="VARCHAR" hibernate-type="string"></sql-type>
 	</type-mapping>
-	<table-filter match-name="TRANSFERT" match-schema="HUAGE"></table-filter>
+	<table-filter match-name="TRANSFERT" match-schema="MERCATO2"></table-filter>
 </hibernate-reverse-engineering>

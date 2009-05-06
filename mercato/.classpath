@@ -4,9 +4,10 @@
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
-  <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1.1/activation-1.1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar" sourcepath="M2_REPO/javax/activation/activation/1.1/activation-1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/security/jacc/1.0/jacc-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/mail/mail/1.4.2/mail-1.4.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar" sourcepath="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/gilead/adapter-core/1.2.2/adapter-core-1.2.2.jar" sourcepath="M2_REPO/net/sf/gilead/adapter-core/1.2.2/adapter-core-1.2.2-sources.jar">
     <attributes>

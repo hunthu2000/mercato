@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
 			//lazy loading
 			user.getPerNom();
 			user.getDepartement().getDepLib();
+			user.getTypePersonne().getTpersLib();
 			logger.info("user information successfully retrieved, returning to the client side of user:" + user.getPerNom());
 			
 			return user;

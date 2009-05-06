@@ -3,9 +3,6 @@
  */
 package com.alten.mercato.server.manager.interf;
 
-import java.util.List;
-
-import com.alten.mercato.server.controller.dto.InfoTransfer;
 import com.alten.mercato.server.exception.MercatoWorkflowException;
 import com.alten.mercato.server.model.Personne;
 import com.alten.mercato.server.model.Transfert;
@@ -67,5 +64,29 @@ public interface TransferManager {
 	 * @throws MercatoWorkflowException
 	 */
 	public Personne signalValidateTransferProposal(Transfert transfert, String assignee,  String validation)  throws MercatoWorkflowException;
+	
+	public Personne startAndProposeTransferProcessV2(long transDepEntrId, long transDepConsulId, String assignee) throws MercatoWorkflowException;
+	
+	public void signalCommentHR1(Transfert transfert, String assignee, String comment) throws MercatoWorkflowException;
+	public void signalCommentHR2(Transfert transfert, String assignee, String comment) throws MercatoWorkflowException;
+	
+	/**
+	 * the transfer is cancelled before the dd2 validates it
+	 * @param transfert
+	 * @param assignee
+	 * @return
+	 * @throws MercatoWorkflowException
+	 */
+	public Personne signalCancelTransfer(Transfert transfert, String assignee) throws MercatoWorkflowException;
+
+	/**
+	 * the transfer is being validated or cancelled
+	 * @param transfert
+	 * @param assignee
+	 * @param validation
+	 * @return
+	 * @throws MercatoWorkflowException
+	 */
+	public Personne signalValidateTransferProposalV2(Transfert transfert, String assignee,  String validation) throws MercatoWorkflowException;
 	
 }

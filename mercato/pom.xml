@@ -317,6 +317,14 @@
     		<artifactId>spring-test</artifactId>
     		<version>${spring.version}</version>
 		</dependency> 
+		
+		<!-- java mail -->
+		<dependency>
+    		<groupId>javax.mail</groupId>
+    		<artifactId>mail</artifactId>
+    		<version>1.4.2</version>
+		</dependency>
+	
 		<!-- jetty -->
 		<dependency>
 			<groupId>jetty</groupId>

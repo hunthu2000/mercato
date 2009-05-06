@@ -90,30 +90,27 @@ public class PersonManagerImpl implements PersonManager {
 
 		logger.info("getting consultants who have a current transfer");
 		List<Personne> lstInTransferConsultants = personneDao.findAllConsultantInTransfer();
-
-		for (Personne personne:lstInTransferConsultants) {
-			//find the execution status for those who have a transfer in process
-			res.add(new InfoTransfer(personne, findExecutionStatus(personne.getTransferCourant().getTransExecId())));
+		if (lstInTransferConsultants != null) {
+			if (lstInTransferConsultants.size() > 0 ) {
+				Execution execution;
+				for (Personne personne:lstInTransferConsultants) {
+					
+					//find the execution status for those who have a transfer in process
+					
+					execution = executionService.findExecution(personne.getTransferCourant().getTransExecId());
+					if (execution != null) {
+						// find the execution status, the comments from HR which are stored in the process variables
+						res.add(new InfoTransfer(personne, execution.getActivityName(),
+										(String) executionService.getVariable(execution.getId(), TransferManagerImpl.CONTEXT_COMMENT_HR1),
+										(String) executionService.getVariable(execution.getId(), TransferManagerImpl.CONTEXT_COMMENT_HR2)));
+					} else {
+						res.add(new InfoTransfer(personne,"","",""));
+					}
+				}
+			}
 		}
 		logger.info("returning the prepared list to the controller");
 		return res;
-	}
-
-	
-
-
-	/**
-	 * @param executionId
-	 * @return
-	 */
-	private String findExecutionStatus(String executionId) {
-		logger.info("finding execution status");
-		String status = "";
-		Execution execution = executionService.findExecution(executionId);
-		if (execution != null) {
-			status = execution.getActivityName();
-		}
-		return status;
 	}
 
 }

@@ -3,6 +3,7 @@
  */
 package com.alten.mercato.server.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.gwtwidgets.server.spring.ServletUtils;
@@ -146,6 +147,122 @@ public class TransferServiceImpl implements TransferService {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see com.alten.mercato.client.service.TransferService#signalACommentHR1(com.alten.mercato.server.model.Transfert, java.lang.String)
+	 */
+	public boolean signalCommentHR1(Transfert transfert, String comment)
+			throws Exception {
+		try {
 
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("Comment HR1");
+			transferManager.signalCommentHR1(transfert, assignee, comment);
+			return true;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return false;
+		}
+	}
+
+
+	public boolean signalCommentHR2(Transfert transfert, String comment)
+			throws Exception {
+		try {
+
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("Comment HR2");
+			transferManager.signalCommentHR2(transfert, assignee, comment);
+			return true;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return false;
+		}
+	}
+
+
+	public Personne signalCancelTransfer(Transfert transfert) throws Exception {
+		try {
+
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("cancelling transfer..");
+			Personne res = transferManager.signalCancelTransfer(transfert, assignee);
+
+			logger.info("lazy loading");
+			// lazy loading
+			res.getDepartement().getDepLib();
+			logger.info("lazy loading finished, returning the transfered consultant  to client side");
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return null;
+		}
+	}
+
+
+	public Personne signalValidateTransferProposalV2(Transfert transfert,
+			String validation) throws Exception {
+		try {
+
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("completing validation");
+			Personne res = transferManager.signalValidateTransferProposalV2(transfert, assignee, validation);
+
+			logger.info("lazy loading");
+			// lazy loading
+			res.getDepartement().getDepLib();
+			logger.info("lazy loading finished, returning the transfered consultant  to client side");
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return null;
+		}
+	}
+
+
+	public Personne startAndProposeTransferProcessV2(long transDepEntrId,
+			long transDepConsulId) throws Exception {
+		try {
+
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("starting transfer proposal");
+			Personne res = transferManager.startAndProposeTransferProcessV2(transDepEntrId, transDepConsulId, assignee);
+
+			logger.info("lazy loading");
+			// lazy loading
+			res.getDepartement().getDepLib();
+			logger.info("lazy loading finished, returning the transfered consultant  to client side");
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return null;
+		}
+	}
+
+
+	public List<Personne> signalCancelTransfer(List<Transfert> transferts)
+			throws Exception {
+		try {
+
+			String assignee = ServletUtils.getRequest().getUserPrincipal().getName();
+			logger.info("cancelling transfer..");
+			
+			List<Personne> res = new ArrayList<Personne>();
+			Personne pers = null; 
+			for (Transfert transfert: transferts) {
+				pers = transferManager.signalCancelTransfer(transfert, assignee);
+				if (pers != null) {
+					logger.info("lazy loading");
+					// lazy loading
+					pers.getDepartement().getDepLib();
+					res.add(pers);
+				}
+			}
+			logger.info("lazy loading finished, returning the transfered consultant  to client side");
+			return res;
+		} catch (Exception e) {
+			logger.error(e.toString());
+			return null;
+		}
+	}
 
 }

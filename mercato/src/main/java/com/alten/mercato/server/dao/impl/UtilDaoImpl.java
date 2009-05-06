@@ -37,7 +37,7 @@ UtilDao {
 	@SuppressWarnings("unchecked")
 	public List<Util> getUserByLogin(String login) {
 		if (log.isDebugEnabled()) {
-			log.debug("finding all root Categories instance");
+			log.debug("finding all root user instance");
 		}
 		try {
 			DetachedCriteria criteria = DetachedCriteria.forClass(Util.class);			
@@ -54,6 +54,32 @@ UtilDao {
 			}
 			
 			return lst;
+		} catch (RuntimeException re) {
+			log.error("finding all root Categories failed", re);
+			throw re;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public Util getUtilByLogin(String login) {
+		if (log.isDebugEnabled()) {
+			log.debug("finding all root user instance");
+		}
+		try {
+			DetachedCriteria criteria = DetachedCriteria.forClass(Util.class);			
+			criteria.add(Restrictions.eq("utilLogin", login));
+			List<Util> lst = getHibernateTemplate().findByCriteria(criteria);
+			if (null==lst||0==lst.size()) {
+				if (log.isDebugEnabled()) {
+					log.debug("No user instance founded");
+				}
+				return null;
+			}
+			if (log.isDebugEnabled()) {
+				log.debug(""+lst.size()+" user instance founded");
+			}
+			
+			return lst.get(0);
 		} catch (RuntimeException re) {
 			log.error("finding all root Categories failed", re);
 			throw re;
