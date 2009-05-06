@@ -20,7 +20,11 @@ public class InfoTransfer extends LightEntity implements java.io.Serializable {
 	
 	private Personne personne;
 	private String transferStatus;
+	private String commentHR1;
+	private String commentHR2;
 	
+
+
 	public InfoTransfer() {
 		super();
 	}
@@ -35,6 +39,15 @@ public class InfoTransfer extends LightEntity implements java.io.Serializable {
 		this.transferStatus = transferStatus;
 	}
 	
+	public InfoTransfer(Personne personne, String transferStatus,
+			String commentHR1, String commentHR2) {
+		super();
+		this.personne = personne;
+		this.transferStatus = transferStatus;
+		this.commentHR1 = commentHR1;
+		this.commentHR2 = commentHR2;
+	}
+
 	/**
 	 * @return the personne
 	 */
@@ -63,7 +76,32 @@ public class InfoTransfer extends LightEntity implements java.io.Serializable {
 		this.transferStatus = transferStatus;
 	}
 
-	
+	/**
+	 * @return the commentHR1
+	 */
+	public String getCommentHR1() {
+		return commentHR1;
+	}
 
-	
+	/**
+	 * @param commentHR1 the commentHR1 to set
+	 */
+	public void setCommentHR1(String commentHR1) {
+		this.commentHR1 = commentHR1;
+	}
+
+	/**
+	 * @return the commentHR2
+	 */
+	public String getCommentHR2() {
+		return commentHR2;
+	}
+
+	/**
+	 * @param commentHR2 the commentHR2 to set
+	 */
+	public void setCommentHR2(String commentHR2) {
+		this.commentHR2 = commentHR2;
+	}	
+
 }

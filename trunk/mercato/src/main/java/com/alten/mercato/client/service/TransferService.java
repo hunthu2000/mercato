@@ -38,4 +38,16 @@ public interface TransferService extends RemoteService{
 	public Personne validateTransferProposalProcess(Transfert transfert, String validation) throws Exception;
 	
 	public List<InfoTransfer> getConsultantWithTransferInfo() throws Exception;
+	
+	public Personne startAndProposeTransferProcessV2(long transDepEntrId, long transDepConsulId) throws Exception;
+	
+	public boolean signalCommentHR1(Transfert transfert, String comment) throws Exception;
+	public boolean signalCommentHR2(Transfert transfert, String comment) throws Exception;
+	
+
+	public Personne signalCancelTransfer(Transfert transfert) throws Exception;
+	
+	public List<Personne> signalCancelTransfer(List<Transfert> transfert) throws Exception;
+
+	public Personne signalValidateTransferProposalV2(Transfert transfert,  String validation) throws Exception;
 }

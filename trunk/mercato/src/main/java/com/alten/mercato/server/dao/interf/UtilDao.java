@@ -27,4 +27,6 @@ public interface UtilDao {
 	public List<Util> findByExample(Util instance);
 	
 	public List<Util> getUserByLogin(String login);
+	
+	public Util getUtilByLogin(String login);
 }
