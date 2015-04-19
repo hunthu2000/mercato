@@ -1,0 +1,1 @@
+SmartGwt is a javascript libary wrapper for the GWT
